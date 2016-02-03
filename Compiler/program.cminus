@@ -1,0 +1,15 @@
+void main () {
+	int i = 0;
+	string b = "ola";
+	/* test de comentário de bloco 
+	na próxima /* linha eu não vou balancear 
+	*/
+	ou será que vou */
+	
+	aqui temos um comentario de linha // /* */ */ /*
+	inti stringui;
+	if (a >= b, b < d) {
+		escopo;		
+	}
+	
+}

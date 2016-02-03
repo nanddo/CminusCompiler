@@ -1,0 +1,65 @@
+Package Cminus;
+
+Helpers
+	digit = ['0'..'9'];
+	
+	lower_letter = ['a'..'z'];
+	upper_letter = ['A'..'Z'];
+	letter = lower_letter | upper_letter;
+	
+	tab = 9;
+	space = ' ';
+	new_line = 10;
+	carriage_return = 13;
+	
+	blank = (tab | space);
+	end_of_line = (new_line | carriage_return | new_line + carriage_return);
+
+Tokens
+	/* KEY-WORDS */
+	else = 'else';
+	if = 'if';
+	int = 'int';
+	string = 'string';
+	return  = 'return';
+	void = 'void';
+	while = 'while';
+	/*key_word = (else | if | int | string | return | void | while);*/
+	
+	/* IDs AND NUMBERS */
+	id = letter+;
+	num = digit+;
+	
+	/* MATH OPERATORS */
+	plus = '+';
+	minus = '-';
+	slash = '/';
+	asterisk = '*';
+	
+	/* LOGICAL OPERATORS */
+	less = '<';
+	less_equal = '<=';
+	great = '>';
+	great_equal = '>=';
+	equal = '==';
+	diff = '!=';
+	attrib = '=';
+	
+	/* PUNCTUATION SIGNS */
+	semicolon = ';';
+	comma = ',';
+	left_par = '(';
+	right_par = ')';
+	left_bracket = '[';
+	right_bracket = ']';
+	left_brace = '{';
+	right_brace = '}';
+	open_comment = '/*';
+	close_comment = '*/';
+	blank = blank;
+	end_of_line = end_of_line;
+	
+	line_comment = '//' [[0 .. 0xffff] - [10 + 13]]* end_of_line;
+	
+Ignored Tokens
+	blank, end_of_line, line_comment;
