@@ -18,10 +18,10 @@ public class Main {
 				Token token;
 				do {
 					token = lexer.next();
-					System.out.print(token.toString());
+					System.out.print(token.getText());
 				} while (!(token instanceof Cminus.node.EOF));
 			} catch (Exception e) { 
-	            System.out.println (e) ; 
+	            System.out.println (e); 
 			} 
 		} else { 
 			System.err.println("No input file given!"); 
