@@ -42,7 +42,7 @@ public interface Analysis extends Switch
     void caseTOpenComment(TOpenComment node);
     void caseTCloseComment(TCloseComment node);
     void caseTBlank(TBlank node);
-    void caseTEndOfLine(TEndOfLine node);
+    void caseTEof(TEof node);
     void caseTLineComment(TLineComment node);
     void caseEOF(EOF node);
     void caseInvalidToken(InvalidToken node);

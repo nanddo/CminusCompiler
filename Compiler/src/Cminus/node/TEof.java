@@ -5,14 +5,14 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TEndOfLine extends Token
+public final class TEof extends Token
 {
-    public TEndOfLine(String text)
+    public TEof(String text)
     {
         setText(text);
     }
 
-    public TEndOfLine(String text, int line, int pos)
+    public TEof(String text, int line, int pos)
     {
         setText(text);
         setLine(line);
@@ -22,12 +22,12 @@ public final class TEndOfLine extends Token
     @Override
     public Object clone()
     {
-      return new TEndOfLine(getText(), getLine(), getPos());
+      return new TEof(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTEndOfLine(this);
+        ((Analysis) sw).caseTEof(this);
     }
 }

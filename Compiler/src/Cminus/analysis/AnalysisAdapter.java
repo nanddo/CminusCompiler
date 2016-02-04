@@ -255,7 +255,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTEndOfLine(TEndOfLine node)
+    public void caseTEof(TEof node)
     {
         defaultCase(node);
     }

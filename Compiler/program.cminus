@@ -1,10 +1,10 @@
 void main () {
 	int i = 0;
-	string b = "ola";
-	/* test de comentário de bloco 
-	na próxima /* linha eu não vou balancear 
+	string b = ola;
+	/* test de comentario de bloco 
+	na proxima /* linha eu nao vou balancear 
 	*/
-	ou será que vou */
+	ou sera que vou */
 	
 	aqui temos um comentario de linha // /* */ */ /*
 	inti stringui;
