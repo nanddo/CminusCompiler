@@ -29,8 +29,8 @@ public interface Analysis extends Switch
     void caseTGreat(TGreat node);
     void caseTGreatEqual(TGreatEqual node);
     void caseTEqual(TEqual node);
-    void caseTDiff(TDiff node);
-    void caseTAttrib(TAttrib node);
+    void caseTDifference(TDifference node);
+    void caseTAttribution(TAttribution node);
     void caseTSemicolon(TSemicolon node);
     void caseTComma(TComma node);
     void caseTLeftPar(TLeftPar node);
@@ -41,8 +41,9 @@ public interface Analysis extends Switch
     void caseTRightBrace(TRightBrace node);
     void caseTOpenComment(TOpenComment node);
     void caseTCloseComment(TCloseComment node);
+    void caseTBlockComment(TBlockComment node);
     void caseTBlank(TBlank node);
-    void caseTEof(TEof node);
+    void caseTEndLine(TEndLine node);
     void caseTLineComment(TLineComment node);
     void caseEOF(EOF node);
     void caseInvalidToken(InvalidToken node);

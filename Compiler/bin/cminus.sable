@@ -1,6 +1,8 @@
 Package Cminus;
 
 Helpers
+	all = [0 .. 0xffff];
+
 	digit = ['0'..'9'];
 	
 	lower_letter = ['a'..'z'];
@@ -13,7 +15,10 @@ Helpers
 	carriage_return = 13;
 	
 	white = tab | space;
-	end_of_line = new_line | carriage_return | new_line carriage_return;
+	line_end = new_line | carriage_return | new_line carriage_return;
+	
+States
+	initial, comment;
 
 Tokens
 	/* KEY-WORDS */
@@ -24,7 +29,6 @@ Tokens
 	return  = 'return';
 	void = 'void';
 	while = 'while';
-	/*key_word = (else | if | int | string | return | void | while);*/
 	
 	/* IDs AND NUMBERS */
 	id = letter+;
@@ -42,8 +46,8 @@ Tokens
 	great = '>';
 	great_equal = '>=';
 	equal = '==';
-	diff = '!=';
-	attrib = '=';
+	difference = '!=';
+	attribution = '=';
 	
 	/* PUNCTUATION SIGNS */
 	semicolon = ';';
@@ -54,12 +58,14 @@ Tokens
 	right_bracket = ']';
 	left_brace = '{';
 	right_brace = '}';
-	open_comment = '/*';
+	{initial->comment, comment} open_comment = '/*';
 	close_comment = '*/';
+	block_comment = '/*' [all - ['*' + '/']]* '*/';
 	
-	blank = (white | end_of_line)+;
-	eof = end_of_line+;
-	line_comment = '//' [[0 .. 0xffff] - [10 + 13]]* end_of_line;
+	/* IGNORED TOKENS */
+	blank = (white | line_end)+;
+	end_line = line_end+;
+	line_comment = '//' [all - [new_line + carriage_return]]* line_end;
 	
 Ignored Tokens
-	blank, eof, line_comment;
+	blank, end_line, line_comment;

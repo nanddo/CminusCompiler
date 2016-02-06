@@ -5,14 +5,14 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TEof extends Token
+public final class TBlockComment extends Token
 {
-    public TEof(String text)
+    public TBlockComment(String text)
     {
         setText(text);
     }
 
-    public TEof(String text, int line, int pos)
+    public TBlockComment(String text, int line, int pos)
     {
         setText(text);
         setLine(line);
@@ -22,12 +22,12 @@ public final class TEof extends Token
     @Override
     public Object clone()
     {
-      return new TEof(getText(), getLine(), getPos());
+      return new TBlockComment(getText(), getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTEof(this);
+        ((Analysis) sw).caseTBlockComment(this);
     }
 }

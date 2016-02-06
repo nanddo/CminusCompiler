@@ -5,16 +5,16 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TAttrib extends Token
+public final class TDifference extends Token
 {
-    public TAttrib()
+    public TDifference()
     {
-        super.setText("=");
+        super.setText("!=");
     }
 
-    public TAttrib(int line, int pos)
+    public TDifference(int line, int pos)
     {
-        super.setText("=");
+        super.setText("!=");
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,18 @@ public final class TAttrib extends Token
     @Override
     public Object clone()
     {
-      return new TAttrib(getLine(), getPos());
+      return new TDifference(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTAttrib(this);
+        ((Analysis) sw).caseTDifference(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TAttrib text.");
+        throw new RuntimeException("Cannot change TDifference text.");
     }
 }

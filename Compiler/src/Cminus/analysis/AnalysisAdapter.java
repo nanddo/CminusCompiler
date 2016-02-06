@@ -177,13 +177,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTDiff(TDiff node)
+    public void caseTDifference(TDifference node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTAttrib(TAttrib node)
+    public void caseTAttribution(TAttribution node)
     {
         defaultCase(node);
     }
@@ -249,13 +249,19 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTBlockComment(TBlockComment node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTBlank(TBlank node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTEof(TEof node)
+    public void caseTEndLine(TEndLine node)
     {
         defaultCase(node);
     }

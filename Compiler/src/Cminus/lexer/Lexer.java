@@ -464,6 +464,11 @@ public class Lexer
                             pushBack(accept_length);
                             this.pos = accept_pos;
                             this.line = accept_line;
+                            switch(state.id())
+                            {
+                                case 1: state = State.COMMENT; break;
+                                case 0: state = State.COMMENT; break;
+                            }
                             return token;
                         }
                     case 29:
@@ -501,6 +506,17 @@ public class Lexer
                     case 32:
                         {
                             @SuppressWarnings("hiding") Token token = new32(
+                                getText(accept_length),
+                                start_line + 1,
+                                start_pos + 1);
+                            pushBack(accept_length);
+                            this.pos = accept_pos;
+                            this.line = accept_line;
+                            return token;
+                        }
+                    case 33:
+                        {
+                            @SuppressWarnings("hiding") Token token = new33(
                                 getText(accept_length),
                                 start_line + 1,
                                 start_pos + 1);
@@ -548,8 +564,8 @@ public class Lexer
     Token new15(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TGreat(line, pos); }
     Token new16(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TGreatEqual(line, pos); }
     Token new17(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TEqual(line, pos); }
-    Token new18(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TDiff(line, pos); }
-    Token new19(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TAttrib(line, pos); }
+    Token new18(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TDifference(line, pos); }
+    Token new19(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TAttribution(line, pos); }
     Token new20(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TSemicolon(line, pos); }
     Token new21(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TComma(line, pos); }
     Token new22(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TLeftPar(line, pos); }
@@ -560,9 +576,10 @@ public class Lexer
     Token new27(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TRightBrace(line, pos); }
     Token new28(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TOpenComment(line, pos); }
     Token new29(@SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TCloseComment(line, pos); }
-    Token new30(@SuppressWarnings("hiding") String text, @SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TBlank(text, line, pos); }
-    Token new31(@SuppressWarnings("hiding") String text, @SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TEof(text, line, pos); }
-    Token new32(@SuppressWarnings("hiding") String text, @SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TLineComment(text, line, pos); }
+    Token new30(@SuppressWarnings("hiding") String text, @SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TBlockComment(text, line, pos); }
+    Token new31(@SuppressWarnings("hiding") String text, @SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TBlank(text, line, pos); }
+    Token new32(@SuppressWarnings("hiding") String text, @SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TEndLine(text, line, pos); }
+    Token new33(@SuppressWarnings("hiding") String text, @SuppressWarnings("hiding") int line, @SuppressWarnings("hiding") int pos) { return new TLineComment(text, line, pos); }
 
     private int getChar() throws IOException
     {
@@ -657,36 +674,112 @@ public class Lexer
             {{9, 32, -2}, },
             {},
             {},
+            {{0, 41, 48}, {42, 42, 49}, {43, 46, 48}, {48, 65535, 48}, },
+            {{0, 9, 50}, {10, 10, 51}, {11, 12, 50}, {13, 13, 52}, {14, 65535, 50}, },
             {},
-            {{0, 9, 48}, {10, 10, 49}, {11, 12, 48}, {13, 13, 50}, {14, 65535, 48}, },
             {},
             {},
-            {},
-            {{65, 90, 18}, {97, 114, 21}, {115, 115, 51}, {116, 122, 21}, },
+            {{65, 90, 18}, {97, 114, 21}, {115, 115, 53}, {116, 122, 21}, },
             {{65, 122, -20}, },
-            {{65, 115, -27}, {116, 116, 52}, {117, 122, 21}, },
-            {{65, 115, -27}, {116, 116, 53}, {117, 122, 21}, },
-            {{65, 90, 18}, {97, 113, 21}, {114, 114, 54}, {115, 122, 21}, },
-            {{65, 90, 18}, {97, 104, 21}, {105, 105, 55}, {106, 122, 21}, },
-            {{65, 104, -47}, {105, 105, 56}, {106, 122, 21}, },
+            {{65, 115, -27}, {116, 116, 54}, {117, 122, 21}, },
+            {{65, 115, -27}, {116, 116, 55}, {117, 122, 21}, },
+            {{65, 90, 18}, {97, 113, 21}, {114, 114, 56}, {115, 122, 21}, },
+            {{65, 90, 18}, {97, 104, 21}, {105, 105, 57}, {106, 122, 21}, },
+            {{65, 104, -47}, {105, 105, 58}, {106, 122, 21}, },
             {{9, 32, -3}, },
+            {{0, 65535, -37}, },
+            {{47, 47, 59}, },
             {{0, 65535, -38}, },
-            {{13, 13, 57}, },
+            {{13, 13, 60}, },
             {},
-            {{65, 100, -26}, {101, 101, 58}, {102, 122, 21}, },
+            {{65, 100, -26}, {101, 101, 61}, {102, 122, 21}, },
             {{65, 122, -20}, },
-            {{65, 90, 18}, {97, 116, 21}, {117, 117, 59}, {118, 122, 21}, },
-            {{65, 104, -47}, {105, 105, 60}, {106, 122, 21}, },
-            {{65, 90, 18}, {97, 99, 21}, {100, 100, 61}, {101, 122, 21}, },
-            {{65, 107, -24}, {108, 108, 62}, {109, 122, 21}, },
+            {{65, 90, 18}, {97, 116, 21}, {117, 117, 62}, {118, 122, 21}, },
+            {{65, 104, -47}, {105, 105, 63}, {106, 122, 21}, },
+            {{65, 90, 18}, {97, 99, 21}, {100, 100, 64}, {101, 122, 21}, },
+            {{65, 107, -24}, {108, 108, 65}, {109, 122, 21}, },
+            {},
             {},
             {{65, 122, -20}, },
-            {{65, 113, -46}, {114, 114, 63}, {115, 122, 21}, },
-            {{65, 90, 18}, {97, 109, 21}, {110, 110, 64}, {111, 122, 21}, },
+            {{65, 113, -46}, {114, 114, 66}, {115, 122, 21}, },
+            {{65, 90, 18}, {97, 109, 21}, {110, 110, 67}, {111, 122, 21}, },
             {{65, 122, -20}, },
-            {{65, 100, -26}, {101, 101, 65}, {102, 122, 21}, },
-            {{65, 109, -62}, {110, 110, 66}, {111, 122, 21}, },
-            {{65, 90, 18}, {97, 102, 21}, {103, 103, 67}, {104, 122, 21}, },
+            {{65, 100, -26}, {101, 101, 68}, {102, 122, 21}, },
+            {{65, 109, -65}, {110, 110, 69}, {111, 122, 21}, },
+            {{65, 90, 18}, {97, 102, 21}, {103, 103, 70}, {104, 122, 21}, },
+            {{65, 122, -20}, },
+            {{65, 122, -20}, },
+            {{65, 122, -20}, },
+        }
+        { // COMMENT
+            {{9, 9, 1}, {10, 10, 2}, {13, 13, 3}, {32, 32, 4}, {33, 33, 5}, {40, 40, 6}, {41, 41, 7}, {42, 42, 8}, {43, 43, 9}, {44, 44, 10}, {45, 45, 11}, {47, 47, 12}, {48, 57, 13}, {59, 59, 14}, {60, 60, 15}, {61, 61, 16}, {62, 62, 17}, {65, 90, 18}, {91, 91, 19}, {93, 93, 20}, {97, 100, 21}, {101, 101, 22}, {102, 104, 21}, {105, 105, 23}, {106, 113, 21}, {114, 114, 24}, {115, 115, 25}, {116, 117, 21}, {118, 118, 26}, {119, 119, 27}, {120, 122, 21}, {123, 123, 28}, {125, 125, 29}, },
+            {{9, 9, 1}, {10, 10, 30}, {13, 13, 31}, {32, 32, 4}, },
+            {{9, 10, -2}, {13, 13, 32}, {32, 32, 4}, },
+            {{9, 32, -2}, },
+            {{9, 32, -3}, },
+            {{61, 61, 33}, },
+            {},
+            {},
+            {{47, 47, 34}, },
+            {},
+            {},
+            {},
+            {{42, 42, 35}, {47, 47, 36}, },
+            {{48, 57, 13}, },
+            {},
+            {{61, 61, 37}, },
+            {{61, 61, 38}, },
+            {{61, 61, 39}, },
+            {{65, 90, 18}, {97, 122, 21}, },
+            {},
+            {},
+            {{65, 122, -20}, },
+            {{65, 90, 18}, {97, 107, 21}, {108, 108, 40}, {109, 122, 21}, },
+            {{65, 90, 18}, {97, 101, 21}, {102, 102, 41}, {103, 109, 21}, {110, 110, 42}, {111, 122, 21}, },
+            {{65, 90, 18}, {97, 100, 21}, {101, 101, 43}, {102, 122, 21}, },
+            {{65, 90, 18}, {97, 115, 21}, {116, 116, 44}, {117, 122, 21}, },
+            {{65, 90, 18}, {97, 110, 21}, {111, 111, 45}, {112, 122, 21}, },
+            {{65, 90, 18}, {97, 103, 21}, {104, 104, 46}, {105, 122, 21}, },
+            {},
+            {},
+            {{9, 10, -3}, {13, 13, 47}, {32, 32, 4}, },
+            {{9, 32, -3}, },
+            {{9, 32, -2}, },
+            {},
+            {},
+            {{0, 41, 48}, {42, 42, 49}, {43, 46, 48}, {48, 65535, 48}, },
+            {{0, 9, 50}, {10, 10, 51}, {11, 12, 50}, {13, 13, 52}, {14, 65535, 50}, },
+            {},
+            {},
+            {},
+            {{65, 90, 18}, {97, 114, 21}, {115, 115, 53}, {116, 122, 21}, },
+            {{65, 122, -20}, },
+            {{65, 115, -27}, {116, 116, 54}, {117, 122, 21}, },
+            {{65, 115, -27}, {116, 116, 55}, {117, 122, 21}, },
+            {{65, 90, 18}, {97, 113, 21}, {114, 114, 56}, {115, 122, 21}, },
+            {{65, 90, 18}, {97, 104, 21}, {105, 105, 57}, {106, 122, 21}, },
+            {{65, 104, -47}, {105, 105, 58}, {106, 122, 21}, },
+            {{9, 32, -3}, },
+            {{0, 65535, -37}, },
+            {{47, 47, 59}, },
+            {{0, 65535, -38}, },
+            {{13, 13, 60}, },
+            {},
+            {{65, 100, -26}, {101, 101, 61}, {102, 122, 21}, },
+            {{65, 122, -20}, },
+            {{65, 90, 18}, {97, 116, 21}, {117, 117, 62}, {118, 122, 21}, },
+            {{65, 104, -47}, {105, 105, 63}, {106, 122, 21}, },
+            {{65, 90, 18}, {97, 99, 21}, {100, 100, 64}, {101, 122, 21}, },
+            {{65, 107, -24}, {108, 108, 65}, {109, 122, 21}, },
+            {},
+            {},
+            {{65, 122, -20}, },
+            {{65, 113, -46}, {114, 114, 66}, {115, 122, 21}, },
+            {{65, 90, 18}, {97, 109, 21}, {110, 110, 67}, {111, 122, 21}, },
+            {{65, 122, -20}, },
+            {{65, 100, -26}, {101, 101, 68}, {102, 122, 21}, },
+            {{65, 109, -65}, {110, 110, 69}, {111, 122, 21}, },
+            {{65, 90, 18}, {97, 102, 21}, {103, 103, 70}, {104, 122, 21}, },
             {{65, 122, -20}, },
             {{65, 122, -20}, },
             {{65, 122, -20}, },
@@ -696,13 +789,16 @@ public class Lexer
     private static int[][] accept;
 /*  {
         // INITIAL
-        {-1, 30, 30, 30, 30, -1, 22, 23, 12, 9, 21, 10, 11, 8, 20, 13, 19, 15, 7, 24, 25, 7, 7, 7, 7, 7, 7, 7, 26, 27, 30, 30, 30, 18, 29, 28, -1, 14, 17, 16, 7, 1, 7, 7, 7, 7, 7, 30, -1, 32, 32, 7, 2, 7, 7, 7, 7, 32, 0, 7, 7, 5, 7, 7, 7, 6, 4, 3, },
+        {-1, 31, 31, 31, 31, -1, 22, 23, 12, 9, 21, 10, 11, 8, 20, 13, 19, 15, 7, 24, 25, 7, 7, 7, 7, 7, 7, 7, 26, 27, 31, 31, 31, 18, 29, 28, -1, 14, 17, 16, 7, 1, 7, 7, 7, 7, 7, 31, -1, -1, -1, 33, 33, 7, 2, 7, 7, 7, 7, 30, 33, 0, 7, 7, 5, 7, 7, 7, 6, 4, 3, },
+        // COMMENT
+        {-1, 31, 31, 31, 31, -1, 22, 23, 12, 9, 21, 10, 11, 8, 20, 13, 19, 15, 7, 24, 25, 7, 7, 7, 7, 7, 7, 7, 26, 27, 31, 31, 31, 18, 29, 28, -1, 14, 17, 16, 7, 1, 7, 7, 7, 7, 7, 31, -1, -1, -1, 33, 33, 7, 2, 7, 7, 7, 7, 30, 33, 0, 7, 7, 5, 7, 7, 7, 6, 4, 3, },
 
     };*/
 
     public static class State
     {
         public final static State INITIAL = new State(0);
+        public final static State COMMENT = new State(1);
 
         private int id;
 
