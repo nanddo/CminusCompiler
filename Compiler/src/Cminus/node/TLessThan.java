@@ -5,16 +5,16 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class TDifference extends Token
+public final class TLessThan extends Token
 {
-    public TDifference()
+    public TLessThan()
     {
-        super.setText("!=");
+        super.setText("<");
     }
 
-    public TDifference(int line, int pos)
+    public TLessThan(int line, int pos)
     {
-        super.setText("!=");
+        super.setText("<");
         setLine(line);
         setPos(pos);
     }
@@ -22,18 +22,18 @@ public final class TDifference extends Token
     @Override
     public Object clone()
     {
-      return new TDifference(getLine(), getPos());
+      return new TLessThan(getLine(), getPos());
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseTDifference(this);
+        ((Analysis) sw).caseTLessThan(this);
     }
 
     @Override
     public void setText(@SuppressWarnings("unused") String text)
     {
-        throw new RuntimeException("Cannot change TDifference text.");
+        throw new RuntimeException("Cannot change TLessThan text.");
     }
 }

@@ -123,6 +123,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTStringValue(TStringValue node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTPlus(TPlus node)
     {
         defaultCase(node);
@@ -147,7 +153,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTLess(TLess node)
+    public void caseTLessThan(TLessThan node)
     {
         defaultCase(node);
     }
@@ -159,7 +165,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTGreat(TGreat node)
+    public void caseTGreatThan(TGreatThan node)
     {
         defaultCase(node);
     }
@@ -177,7 +183,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTDifference(TDifference node)
+    public void caseTDifferent(TDifferent node)
     {
         defaultCase(node);
     }
@@ -250,6 +256,12 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTBlockComment(TBlockComment node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTInvCommas(TInvCommas node)
     {
         defaultCase(node);
     }

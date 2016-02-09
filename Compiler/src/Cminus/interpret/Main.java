@@ -19,7 +19,7 @@ public class Main {
 				do {
 					token = lexer.next();
 					if (!(token instanceof TBlank) && !(token instanceof TEndLine)) {
-						System.out.print(token.getClass().toString().replace("class Cminus.node.T", ""));
+						System.out.print("<" + token.getClass().toString().replace("class Cminus.node.T", "") + ">");
 						System.out.print("(" + token.getText() + ")");
 					} else {
 						System.out.print(token.getText());

@@ -8,17 +8,15 @@ Helpers
 	lower_letter = ['a'..'z'];
 	upper_letter = ['A'..'Z'];
 	letter = lower_letter | upper_letter;
-	
-	tab = 9;
-	space = ' ';
-	new_line = 10;
-	carriage_return = 13;
-	
-	white = tab | space;
-	line_end = new_line | carriage_return | new_line carriage_return;
+
+	white = 9 | ' ';
+	line_end = 10 | 13 | 10 13;
 	
 States
-	initial, comment;
+	normal,
+	comment,
+	string,
+	lex_error;
 
 Tokens
 	/* KEY-WORDS */
@@ -33,6 +31,7 @@ Tokens
 	/* IDs AND NUMBERS */
 	id = letter+;
 	num = digit+;
+	{string} string_value = [all - '"']*;
 	
 	/* MATH OPERATORS */
 	plus = '+';
@@ -41,12 +40,12 @@ Tokens
 	asterisk = '*';
 	
 	/* LOGICAL OPERATORS */
-	less = '<';
+	less_than = '<';
 	less_equal = '<=';
-	great = '>';
+	great_than = '>';
 	great_equal = '>=';
 	equal = '==';
-	difference = '!=';
+	different = '!=';
 	attribution = '=';
 	
 	/* PUNCTUATION SIGNS */
@@ -58,14 +57,15 @@ Tokens
 	right_bracket = ']';
 	left_brace = '{';
 	right_brace = '}';
-	{initial->comment, comment} open_comment = '/*';
+	{normal->comment, comment} open_comment = '/*';
 	close_comment = '*/';
 	block_comment = '/*' [all - ['*' + '/']]* '*/';
+	{normal->string, string} inv_commas = '"';
 	
 	/* IGNORED TOKENS */
 	blank = (white | line_end)+;
 	end_line = line_end+;
-	line_comment = '//' [all - [new_line + carriage_return]]* line_end;
+	line_comment = '//' [all - [10 + 13]]* line_end;
 	
 Ignored Tokens
 	blank, end_line, line_comment;

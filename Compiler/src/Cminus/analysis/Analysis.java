@@ -20,16 +20,17 @@ public interface Analysis extends Switch
     void caseTWhile(TWhile node);
     void caseTId(TId node);
     void caseTNum(TNum node);
+    void caseTStringValue(TStringValue node);
     void caseTPlus(TPlus node);
     void caseTMinus(TMinus node);
     void caseTSlash(TSlash node);
     void caseTAsterisk(TAsterisk node);
-    void caseTLess(TLess node);
+    void caseTLessThan(TLessThan node);
     void caseTLessEqual(TLessEqual node);
-    void caseTGreat(TGreat node);
+    void caseTGreatThan(TGreatThan node);
     void caseTGreatEqual(TGreatEqual node);
     void caseTEqual(TEqual node);
-    void caseTDifference(TDifference node);
+    void caseTDifferent(TDifferent node);
     void caseTAttribution(TAttribution node);
     void caseTSemicolon(TSemicolon node);
     void caseTComma(TComma node);
@@ -42,6 +43,7 @@ public interface Analysis extends Switch
     void caseTOpenComment(TOpenComment node);
     void caseTCloseComment(TCloseComment node);
     void caseTBlockComment(TBlockComment node);
+    void caseTInvCommas(TInvCommas node);
     void caseTBlank(TBlank node);
     void caseTEndLine(TEndLine node);
     void caseTLineComment(TLineComment node);
