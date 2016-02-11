@@ -4,11 +4,7 @@ import java.io.FileReader;
 import java.io.PushbackReader;
 
 import Cminus.lexer.Lexer;
-import Cminus.node.EOF;
-import Cminus.node.TBlank;
-import Cminus.node.TBlockComment;
-import Cminus.node.TEndLine;
-import Cminus.node.Token;
+import Cminus.node.*;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
@@ -19,18 +15,17 @@ public class Main {
 				do {
 					token = lexer.next();
 					if (!(token instanceof TBlank) && !(token instanceof TEndLine)) {
-						System.out.print("<" + token.getClass().toString().replace("class Cminus.node.T", "") + ">");
-						System.out.print("(" + token.getText() + ")");
+						String fisrtPattern = "class Cminus.node.";
+						String secondPattern = fisrtPattern + "T";
+						System.out.print("<" + token.getClass().toString().replace(secondPattern, "").replace(fisrtPattern, "") + ">");
+						//System.out.print("(" + token.getText() + ")");
 					} else {
 						System.out.print(token.getText());
 					}
-					/*if (token instanceof TBlockComment) {
-						System.out.print(token.getText());
-					}*/
 				} while (!(token instanceof EOF));
 			} catch (Exception e) { 
-	            System.out.println (e);
-	            e.printStackTrace();
+	            System.out.println ("\n" + e);
+	            //e.printStackTrace();
 			} 
 		} else { 
 			System.err.println("No input file given!"); 

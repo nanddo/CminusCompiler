@@ -195,13 +195,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTSemicolon(TSemicolon node)
+    public void caseTComma(TComma node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTComma(TComma node)
+    public void caseTSemicolon(TSemicolon node)
     {
         defaultCase(node);
     }

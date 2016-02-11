@@ -1,70 +1,69 @@
 Package Cminus;
 
 Helpers
-	all = [0 .. 0xffff];
+	all          = [0 .. 0xffff];
 
-	digit = ['0'..'9'];
+	digit        = ['0'..'9'];
 	
 	lower_letter = ['a'..'z'];
 	upper_letter = ['A'..'Z'];
-	letter = lower_letter | upper_letter;
+	letter       = lower_letter | upper_letter;
 
-	white = 9 | ' ';
-	line_end = 10 | 13 | 10 13;
+	white        = 9 | ' ';
+	line_end     = 10 | 13 | 10 13;
 	
 States
 	normal,
 	comment,
-	string,
-	lex_error;
+	string;
 
 Tokens
 	/* KEY-WORDS */
-	else = 'else';
-	if = 'if';
-	int = 'int';
+	else   = 'else';
+	if     = 'if';
+	int    = 'int';
 	string = 'string';
-	return  = 'return';
-	void = 'void';
-	while = 'while';
+	return = 'return';
+	void   = 'void';
+	while  = 'while';
 	
 	/* IDs AND NUMBERS */
-	id = letter+;
-	num = digit+;
+	id                    = letter+;
+	num                   = digit+;
 	{string} string_value = [all - '"']*;
 	
 	/* MATH OPERATORS */
-	plus = '+';
-	minus = '-';
-	slash = '/';
+	plus     = '+';
+	minus    = '-';
+	slash    = '/';
 	asterisk = '*';
 	
 	/* LOGICAL OPERATORS */
-	less_than = '<';
-	less_equal = '<=';
-	great_than = '>';
+	less_than   = '<';
+	less_equal  = '<=';
+	great_than  = '>';
 	great_equal = '>=';
-	equal = '==';
-	different = '!=';
+	equal       = '==';
+	different   = '!=';
 	attribution = '=';
 	
 	/* PUNCTUATION SIGNS */
-	semicolon = ';';
-	comma = ',';
-	left_par = '(';
-	right_par = ')';
-	left_bracket = '[';
+	comma         = ',';
+	semicolon     = ';';
+	left_par      = '(';
+	right_par     = ')';
+	left_bracket  = '[';
 	right_bracket = ']';
-	left_brace = '{';
-	right_brace = '}';
+	left_brace    = '{';
+	right_brace   = '}';
 	{normal->comment, comment} open_comment = '/*';
 	close_comment = '*/';
 	block_comment = '/*' [all - ['*' + '/']]* '*/';
 	{normal->string, string} inv_commas = '"';
 	
 	/* IGNORED TOKENS */
-	blank = (white | line_end)+;
-	end_line = line_end+;
+	blank        = (white | line_end)+;
+	end_line     = line_end+;
 	line_comment = '//' [all - [10 + 13]]* line_end;
 	
 Ignored Tokens

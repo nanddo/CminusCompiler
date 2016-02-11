@@ -32,8 +32,8 @@ public interface Analysis extends Switch
     void caseTEqual(TEqual node);
     void caseTDifferent(TDifferent node);
     void caseTAttribution(TAttribution node);
-    void caseTSemicolon(TSemicolon node);
     void caseTComma(TComma node);
+    void caseTSemicolon(TSemicolon node);
     void caseTLeftPar(TLeftPar node);
     void caseTRightPar(TRightPar node);
     void caseTLeftBracket(TLeftBracket node);
