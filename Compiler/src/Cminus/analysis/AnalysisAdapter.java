@@ -261,12 +261,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTInvCommas(TInvCommas node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseTBlank(TBlank node)
     {
         defaultCase(node);

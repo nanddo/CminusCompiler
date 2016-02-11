@@ -28,9 +28,9 @@ Tokens
 	while  = 'while';
 	
 	/* IDs AND NUMBERS */
-	id                    = letter+;
-	num                   = digit+;
-	{string} string_value = [all - '"']*;
+	id           = letter+;
+	num          = digit+;
+	string_value = '"' ('\"' | [all - '"'])* '"';
 	
 	/* MATH OPERATORS */
 	plus     = '+';
@@ -59,7 +59,7 @@ Tokens
 	{normal->comment, comment} open_comment = '/*';
 	close_comment = '*/';
 	block_comment = '/*' [all - ['*' + '/']]* '*/';
-	{normal->string, string} inv_commas = '"';
+	/*{normal->string, string} inv_commas = '"';*/
 	
 	/* IGNORED TOKENS */
 	blank        = (white | line_end)+;

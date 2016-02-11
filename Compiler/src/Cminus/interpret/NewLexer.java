@@ -3,19 +3,17 @@ package Cminus.interpret;
 import java.io.IOException;
 import java.io.PushbackReader;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 import Cminus.lexer.*;
 import Cminus.node.*;
 
 public class NewLexer extends Lexer {
-
+	
+	private final String ENDED_WITH_EXCEPTIONS = "ENDED_FILE_WITH_EXCEPTIONS";
+	
 	private int counter;
 	private TOpenComment comment;
-	private TInvCommas inverseCommas;
+	//private TInvCommas inverseCommas;
 	private StringBuffer text;
 	private ArrayList<LexerException> exceptions;
 	
@@ -30,42 +28,47 @@ public class NewLexer extends Lexer {
 	}
 	
 	protected void filter() throws LexerException, IOException { 
-		// if we are in the comment state
 		if (state.equals(State.COMMENT)) {
-			// if we are just entering this state
+			/* This is the first OpenComment token */
 			if (this.comment == null) {
-				// The token is supposed to be a comment.
-				// We keep a reference to it and set the count to one
+				/* Keep a reference to this token and set the count to one */
 				this.comment = (TOpenComment) token;
-				this.text = new StringBuffer(comment.getText());
 				this.counter = 1;
-				token = null; // continue to scan the input.
+				/* Variable text stores the content of the whole block comment */
+				this.text = new StringBuffer(comment.getText());
+				/* Keep scanning the input by setting token to null*/
+				token = null;
 			} else { 
-				// we were already in the comment state
+				/* Already inside block comment */
 				this.text.append(token.getText());
-				
+				/* Update counter value */
 				if (token instanceof TOpenComment) {
 					this.counter++;
 				} else if (token instanceof TCloseComment) {
 					this.counter--;
 				}
 				
-				if (this.counter != 0) {
-					token = null; // continue to scan the input.
+				/* If there is an unclosed OpenComment keep scanning the input */
+				if (this.counter > 0) {
+					token = null;
 				} else {
+					/* Create a block comment with whole comment text */
 					token = new TBlockComment(text.toString(), comment.getLine(), comment.getPos());
-					state = State.NORMAL; //go back to normal.
-					this.comment = null; // We release this reference.
+					/* Leave COMMENT state*/
+					state = State.NORMAL;
+					/* Free the saved reference to first OpenComment */
+					this.comment = null;
 				}
 			}
 		} else if (state.equals(State.NORMAL) && (token instanceof TCloseComment)) {
+			/* Throw exception if find an unopened CloseComment */
 			this.exceptions.add(
 				new LexerException(
 					null, 
 					"[" + token.getLine() + ", " + token.getPos() + "] Closed a block comment before opened it: */"
 				)
 			);
-		} else if (state.equals(State.STRING)) {
+		} /*else if (state.equals(State.STRING)) {
 			if (this.inverseCommas == null) {
 				this.inverseCommas = (TInvCommas) token;
 				this.text = new StringBuffer();
@@ -80,22 +83,28 @@ public class NewLexer extends Lexer {
 					this.inverseCommas = null;
 				}
 			}
-		}
+		}*/
 	}
 
 	protected Token getToken() throws IOException, LexerException{
 		try {
+			/* Get the token using Lexer class' implementation */
 			Token token = super.getToken();
+			/* If scanning reached end of file and an exception was thrown */
 			if ((token instanceof EOF) && (!this.exceptions.isEmpty())) {
+				/* Get all exceptions text */
 				String exceptionsText = getExceptionsText();
-				throw new LexerException(new InvalidToken("EOF"), exceptionsText);
+				/* Throw a new exception with all previous exceptions' texts */
+				throw new LexerException(new InvalidToken(ENDED_WITH_EXCEPTIONS), exceptionsText);
 			} else {
 				return token;
 			}
 		} catch (LexerException e) {
-			if (e.getToken().getText().compareTo("EOF") != 0) {
+			/* Accumulate all "normal" exceptions and return token to keep scanning the input */
+			if (e.getToken().getText().compareTo(ENDED_WITH_EXCEPTIONS) != 0) {
 				this.exceptions.add(e);
 				return e.getToken();
+			/* Exception with all others exception is (unfortunately) catch and (inevitablely) thrown here */
 			} else {
 				throw e;
 			}
@@ -104,9 +113,21 @@ public class NewLexer extends Lexer {
 	
 	private String getExceptionsText() {
 		StringBuffer exceptionsText = new StringBuffer();
+		/* Get text of all exceptions into exceptionsText */
 		for (int i = 0; i < this.exceptions.size(); i++) {
 			LexerException e = this.exceptions.get(i);
-			exceptionsText.append(e.getMessage() + "\n");
+			String exceptionMessage;
+			Token exceptionToken = e.getToken();
+			/* Set the message of InvalidToken's exceptions */
+			if (exceptionToken instanceof InvalidToken) {
+				exceptionMessage = 
+					"[" + exceptionToken.getLine() + 
+					", " + exceptionToken.getPos() + 
+					"] Found an invalid token: " + exceptionToken.getText() + "\n";
+			} else {
+				exceptionMessage = e.getMessage() + "\n";
+			}
+			exceptionsText.append(exceptionMessage);
 		}
 		return exceptionsText.toString();
 	}

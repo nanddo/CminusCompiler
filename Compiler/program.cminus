@@ -1,13 +1,12 @@
 void main () {
 	á
 	int i = 0;
-	string b = ola;
+	string b = "ol\"a";
 	int j = i;
 	/* test de comentario de bloco
 	na proxima /* linha eu nao vou balancear 
 	*/
 	ou sera que vou */*/
-	/*comentario /* aninhado*/ /*do capeta */*/
 	aqui temos um comentario de linha // /* */ */ /*
 	// outro comentario de linha
 	int stringg;

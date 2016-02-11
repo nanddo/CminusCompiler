@@ -43,7 +43,6 @@ public interface Analysis extends Switch
     void caseTOpenComment(TOpenComment node);
     void caseTCloseComment(TCloseComment node);
     void caseTBlockComment(TBlockComment node);
-    void caseTInvCommas(TInvCommas node);
     void caseTBlank(TBlank node);
     void caseTEndLine(TEndLine node);
     void caseTLineComment(TLineComment node);
