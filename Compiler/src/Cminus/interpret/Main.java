@@ -1,34 +1,28 @@
 package Cminus.interpret;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PushbackReader;
 
+import Cminus.lexer.Lexer;
+import Cminus.lexer.LexerException;
 import Cminus.node.*;
+import Cminus.parser.Parser;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0) { 
 			try {
 				NewLexer lexer = new NewLexer (new PushbackReader(new FileReader(args[0]), 1024));
-				Token token;
-				do {
-					/* Read the next token from input */ 
-					token = lexer.next();
-					/* Print token if it is not a blank */
-					if (!(token instanceof TBlank) && !(token instanceof TEndLine)) {
-						String fisrtPattern = "class Cminus.node.";
-						String secondPattern = fisrtPattern + "T";
-						System.out.print("<" + token.getClass().toString().replace(secondPattern, "").replace(fisrtPattern, "") + ">");
-						/* Uncomment to print the lexema */
-						if (token instanceof TStringValue) {
-							System.out.print("(" + token.getText() + ")");
-						}
-					} else {
-						System.out.print(token.getText());
-					}
-				} while (!(token instanceof EOF));
+				
+				PrintTokens(lexer);
+				
+				Parser parser = new Parser((Lexer)lexer);
+				
+	            Start ast = parser.parse();
+	            
 			} catch (Exception e) {
-				/* Print exceptions */
+				// Print exceptions
 	            System.out.println ("\n" + e);
 	            //e.printStackTrace();
 			} 
@@ -36,5 +30,23 @@ public class Main {
 			System.err.println("No input file given!"); 
 			System.exit(1); 
 		} 
+	}
+	
+	private static void PrintTokens(NewLexer lexer) throws LexerException, IOException {
+		Token token;
+		do {
+			/* Read the next token from input */  
+			token = lexer.next();
+			/* Print token if it is not a blank */ 
+			if (!(token instanceof TBlank) && !(token instanceof TEndLine)) {
+				System.out.print("<" + token.getClass().getSimpleName() + ">");
+				/* Uncomment to print the lexema */
+				if (token instanceof TStringValue) {
+					System.out.print("(" + token.getText() + ")");
+				}
+			} else {
+				System.out.print(token.getText());
+			}
+		} while (!(token instanceof EOF));
 	}
 }

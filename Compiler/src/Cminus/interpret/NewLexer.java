@@ -13,7 +13,6 @@ public class NewLexer extends Lexer {
 	
 	private int counter;
 	private TOpenComment comment;
-	//private TInvCommas inverseCommas;
 	private StringBuffer text;
 	private ArrayList<LexerException> exceptions;
 	
@@ -68,22 +67,7 @@ public class NewLexer extends Lexer {
 					"[" + token.getLine() + ", " + token.getPos() + "] Closed a block comment before opened it: */"
 				)
 			);
-		} /*else if (state.equals(State.STRING)) {
-			if (this.inverseCommas == null) {
-				this.inverseCommas = (TInvCommas) token;
-				this.text = new StringBuffer();
-				token = null;
-			} else {
-				if (!(token instanceof TInvCommas)) {
-					this.text.append(token.getText());
-					token = null;
-				} else {
-					token = new TStringValue(text.toString(), inverseCommas.getLine(), inverseCommas.getPos());
-					state = State.NORMAL;
-					this.inverseCommas = null;
-				}
-			}
-		}*/
+		}
 	}
 
 	protected Token getToken() throws IOException, LexerException{

@@ -45,6 +45,7 @@ Tokens
 	great_equal = '>=';
 	equal       = '==';
 	different   = '!=';
+
 	attribution = '=';
 	
 	/* PUNCTUATION SIGNS */
@@ -59,7 +60,6 @@ Tokens
 	{normal->comment, comment} open_comment = '/*';
 	close_comment = '*/';
 	block_comment = '/*' [all - ['*' + '/']]* '*/';
-	/*{normal->string, string} inv_commas = '"';*/
 	
 	/* IGNORED TOKENS */
 	blank        = (white | line_end)+;
@@ -67,5 +67,37 @@ Tokens
 	line_comment = '//' [all - [10 + 13]]* line_end;
 	
 Ignored Tokens
-	blank, end_line, line_comment;
+	blank, end_line, line_comment, block_comment;
 	
+Productions
+	program              = declaration_list;
+	declaration_list     = {a} declaration_list declaration | {b} declaration;
+	declaration          = {a} var_declaration | {b} func_declaration;
+	var_declaration      = {a} type_specifier id semicolon | {b} type_specifier id left_bracket num right_bracket semicolon;
+	type_specifier       = {a} int | {b} void | {c} string;
+	func_declaration     = type_specifier id left_par params right_par compound_statement;
+	params               = {a} param_list | {b} void;
+	param_list           = {a} param_list comma param | {b} param;
+	param                = {a} type_specifier id | {b} type_specifier id left_bracket right_bracket;
+	compound_statement   = left_brace local_declarations statement_list right_brace;
+	local_declarations   = {a} local_declarations var_declaration | {b} epsilon;
+	statement_list       = {a} statement_list statement | {b} epsilon;
+	statement            = {a} expression_statement | {b} compound_statement | {c} selection_statement | {d} iteration_statement | {e} return_statement;
+	expression_statement = {a} expression semicolon | {b} semicolon;
+	selection_statement  = if left_par expression right_par statement;// pending_else;
+	//pending_else         = {a} else statement | {b} epsilon;
+	iteration_statement  = while left_par expression right_par statement;
+	return_statement     = {a} return semicolon | {b} return expression semicolon;
+	expression           = {a} var attribution expression | {b} simple_expression;
+	var                  = {a} id | {b} id left_bracket expression right_bracket;
+	simple_expression    = {a} simple_expression relop additive_expression | {b} additive_expression;
+	relop                = {a} less_than | {b} less_equal | {c} great_than | {d} great_equal | {e} equal | {f} different;
+	additive_expression  = {a} additive_expression addop term | {b} term;
+	addop                = {a} plus | {b} minus;
+	term                 = {a} term mulop factor | {b} factor;
+	mulop                = {a} asterisk | {b} slash;
+	factor               = {a} left_par expression right_par | {b} var | {c} call | {d} num;
+	call                 = id left_par args right_par;
+	args                 = {a} args_list | {b} epsilon;
+	args_list            = {a} args_list comma expression | {b} expression;
+	epsilon              = ;
