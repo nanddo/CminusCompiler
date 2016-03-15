@@ -17,8 +17,10 @@ public interface Analysis extends Switch
     void caseABDeclarationList(ABDeclarationList node);
     void caseAADeclaration(AADeclaration node);
     void caseABDeclaration(ABDeclaration node);
-    void caseAVariableDeclaration(AVariableDeclaration node);
-    void caseAArrayDeclaration(AArrayDeclaration node);
+    void caseAAVariableDeclaration(AAVariableDeclaration node);
+    void caseABVariableDeclaration(ABVariableDeclaration node);
+    void caseAAArrayDeclaration(AAArrayDeclaration node);
+    void caseABArrayDeclaration(ABArrayDeclaration node);
     void caseAATypeSpecifier(AATypeSpecifier node);
     void caseABTypeSpecifier(ABTypeSpecifier node);
     void caseACTypeSpecifier(ACTypeSpecifier node);
@@ -27,8 +29,10 @@ public interface Analysis extends Switch
     void caseABParameters(ABParameters node);
     void caseAAParametersList(AAParametersList node);
     void caseABParametersList(ABParametersList node);
-    void caseASingleParameter(ASingleParameter node);
-    void caseAArrayParameter(AArrayParameter node);
+    void caseAASingleParameter(AASingleParameter node);
+    void caseABSingleParameter(ABSingleParameter node);
+    void caseAAArrayParameter(AAArrayParameter node);
+    void caseABArrayParameter(ABArrayParameter node);
     void caseAAStatementList(AAStatementList node);
     void caseABStatementList(ABStatementList node);
     void caseAAStatement(AAStatement node);
@@ -59,7 +63,9 @@ public interface Analysis extends Switch
     void caseAAOutputFunctions(AAOutputFunctions node);
     void caseABOutputFunctions(ABOutputFunctions node);
     void caseAAVariable(AAVariable node);
-    void caseAArrayExpression(AArrayExpression node);
+    void caseABVariable(ABVariable node);
+    void caseAAArrayExpression(AAArrayExpression node);
+    void caseABArrayExpression(ABArrayExpression node);
     void caseAAExpression(AAExpression node);
     void caseABExpression(ABExpression node);
     void caseACExpression(ACExpression node);

@@ -20,9 +20,6 @@ public class Main {
 				Parser parser = new Parser((Lexer)lexer);
 				
 	            Start abstractSintaxTree = parser.parse();
-	            
-	            System.out.println(abstractSintaxTree.getPProgram());
-	            
 			} catch (Exception e) {
 				// Print exceptions
 	            System.out.println ("\n" + e);

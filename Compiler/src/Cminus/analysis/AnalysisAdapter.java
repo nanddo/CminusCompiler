@@ -105,13 +105,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAVariableDeclaration(AVariableDeclaration node)
+    public void caseAAVariableDeclaration(AAVariableDeclaration node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAArrayDeclaration(AArrayDeclaration node)
+    public void caseABVariableDeclaration(ABVariableDeclaration node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAArrayDeclaration(AAArrayDeclaration node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABArrayDeclaration(ABArrayDeclaration node)
     {
         defaultCase(node);
     }
@@ -165,13 +177,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseASingleParameter(ASingleParameter node)
+    public void caseAASingleParameter(AASingleParameter node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAArrayParameter(AArrayParameter node)
+    public void caseABSingleParameter(ABSingleParameter node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAArrayParameter(AAArrayParameter node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABArrayParameter(ABArrayParameter node)
     {
         defaultCase(node);
     }
@@ -357,7 +381,19 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAArrayExpression(AArrayExpression node)
+    public void caseABVariable(ABVariable node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAArrayExpression(AAArrayExpression node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABArrayExpression(ABArrayExpression node)
     {
         defaultCase(node);
     }
