@@ -8,7 +8,7 @@ import Cminus.analysis.*;
 public final class AALocalDeclarations extends PLocalDeclarations
 {
     private PLocalDeclarations _localDeclarations_;
-    private PVarDeclaration _varDeclaration_;
+    private PVariableDeclaration _variableDeclaration_;
 
     public AALocalDeclarations()
     {
@@ -17,12 +17,12 @@ public final class AALocalDeclarations extends PLocalDeclarations
 
     public AALocalDeclarations(
         @SuppressWarnings("hiding") PLocalDeclarations _localDeclarations_,
-        @SuppressWarnings("hiding") PVarDeclaration _varDeclaration_)
+        @SuppressWarnings("hiding") PVariableDeclaration _variableDeclaration_)
     {
         // Constructor
         setLocalDeclarations(_localDeclarations_);
 
-        setVarDeclaration(_varDeclaration_);
+        setVariableDeclaration(_variableDeclaration_);
 
     }
 
@@ -31,7 +31,7 @@ public final class AALocalDeclarations extends PLocalDeclarations
     {
         return new AALocalDeclarations(
             cloneNode(this._localDeclarations_),
-            cloneNode(this._varDeclaration_));
+            cloneNode(this._variableDeclaration_));
     }
 
     @Override
@@ -65,16 +65,16 @@ public final class AALocalDeclarations extends PLocalDeclarations
         this._localDeclarations_ = node;
     }
 
-    public PVarDeclaration getVarDeclaration()
+    public PVariableDeclaration getVariableDeclaration()
     {
-        return this._varDeclaration_;
+        return this._variableDeclaration_;
     }
 
-    public void setVarDeclaration(PVarDeclaration node)
+    public void setVariableDeclaration(PVariableDeclaration node)
     {
-        if(this._varDeclaration_ != null)
+        if(this._variableDeclaration_ != null)
         {
-            this._varDeclaration_.parent(null);
+            this._variableDeclaration_.parent(null);
         }
 
         if(node != null)
@@ -87,7 +87,7 @@ public final class AALocalDeclarations extends PLocalDeclarations
             node.parent(this);
         }
 
-        this._varDeclaration_ = node;
+        this._variableDeclaration_ = node;
     }
 
     @Override
@@ -95,7 +95,7 @@ public final class AALocalDeclarations extends PLocalDeclarations
     {
         return ""
             + toString(this._localDeclarations_)
-            + toString(this._varDeclaration_);
+            + toString(this._variableDeclaration_);
     }
 
     @Override
@@ -108,9 +108,9 @@ public final class AALocalDeclarations extends PLocalDeclarations
             return;
         }
 
-        if(this._varDeclaration_ == child)
+        if(this._variableDeclaration_ == child)
         {
-            this._varDeclaration_ = null;
+            this._variableDeclaration_ = null;
             return;
         }
 
@@ -127,9 +127,9 @@ public final class AALocalDeclarations extends PLocalDeclarations
             return;
         }
 
-        if(this._varDeclaration_ == oldChild)
+        if(this._variableDeclaration_ == oldChild)
         {
-            setVarDeclaration((PVarDeclaration) newChild);
+            setVariableDeclaration((PVariableDeclaration) newChild);
             return;
         }
 

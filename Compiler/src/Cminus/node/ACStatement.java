@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class ACStatement extends PStatement
 {
-    private PSelectionStatement _selectionStatement_;
+    private PReturnStatement _returnStatement_;
 
     public ACStatement()
     {
@@ -15,10 +15,10 @@ public final class ACStatement extends PStatement
     }
 
     public ACStatement(
-        @SuppressWarnings("hiding") PSelectionStatement _selectionStatement_)
+        @SuppressWarnings("hiding") PReturnStatement _returnStatement_)
     {
         // Constructor
-        setSelectionStatement(_selectionStatement_);
+        setReturnStatement(_returnStatement_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ACStatement extends PStatement
     public Object clone()
     {
         return new ACStatement(
-            cloneNode(this._selectionStatement_));
+            cloneNode(this._returnStatement_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ACStatement extends PStatement
         ((Analysis) sw).caseACStatement(this);
     }
 
-    public PSelectionStatement getSelectionStatement()
+    public PReturnStatement getReturnStatement()
     {
-        return this._selectionStatement_;
+        return this._returnStatement_;
     }
 
-    public void setSelectionStatement(PSelectionStatement node)
+    public void setReturnStatement(PReturnStatement node)
     {
-        if(this._selectionStatement_ != null)
+        if(this._returnStatement_ != null)
         {
-            this._selectionStatement_.parent(null);
+            this._returnStatement_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ACStatement extends PStatement
             node.parent(this);
         }
 
-        this._selectionStatement_ = node;
+        this._returnStatement_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._selectionStatement_);
+            + toString(this._returnStatement_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._selectionStatement_ == child)
+        if(this._returnStatement_ == child)
         {
-            this._selectionStatement_ = null;
+            this._returnStatement_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ACStatement extends PStatement
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._selectionStatement_ == oldChild)
+        if(this._returnStatement_ == oldChild)
         {
-            setSelectionStatement((PSelectionStatement) newChild);
+            setReturnStatement((PReturnStatement) newChild);
             return;
         }
 

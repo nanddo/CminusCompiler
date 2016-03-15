@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class ABDeclaration extends PDeclaration
 {
-    private PFuncDeclaration _funcDeclaration_;
+    private PFunctionDeclaration _functionDeclaration_;
 
     public ABDeclaration()
     {
@@ -15,10 +15,10 @@ public final class ABDeclaration extends PDeclaration
     }
 
     public ABDeclaration(
-        @SuppressWarnings("hiding") PFuncDeclaration _funcDeclaration_)
+        @SuppressWarnings("hiding") PFunctionDeclaration _functionDeclaration_)
     {
         // Constructor
-        setFuncDeclaration(_funcDeclaration_);
+        setFunctionDeclaration(_functionDeclaration_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ABDeclaration extends PDeclaration
     public Object clone()
     {
         return new ABDeclaration(
-            cloneNode(this._funcDeclaration_));
+            cloneNode(this._functionDeclaration_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ABDeclaration extends PDeclaration
         ((Analysis) sw).caseABDeclaration(this);
     }
 
-    public PFuncDeclaration getFuncDeclaration()
+    public PFunctionDeclaration getFunctionDeclaration()
     {
-        return this._funcDeclaration_;
+        return this._functionDeclaration_;
     }
 
-    public void setFuncDeclaration(PFuncDeclaration node)
+    public void setFunctionDeclaration(PFunctionDeclaration node)
     {
-        if(this._funcDeclaration_ != null)
+        if(this._functionDeclaration_ != null)
         {
-            this._funcDeclaration_.parent(null);
+            this._functionDeclaration_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ABDeclaration extends PDeclaration
             node.parent(this);
         }
 
-        this._funcDeclaration_ = node;
+        this._functionDeclaration_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._funcDeclaration_);
+            + toString(this._functionDeclaration_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._funcDeclaration_ == child)
+        if(this._functionDeclaration_ == child)
         {
-            this._funcDeclaration_ = null;
+            this._functionDeclaration_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ABDeclaration extends PDeclaration
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._funcDeclaration_ == oldChild)
+        if(this._functionDeclaration_ == oldChild)
         {
-            setFuncDeclaration((PFuncDeclaration) newChild);
+            setFunctionDeclaration((PFunctionDeclaration) newChild);
             return;
         }
 

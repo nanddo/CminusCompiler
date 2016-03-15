@@ -8,7 +8,7 @@ import Cminus.analysis.*;
 public final class AAAdditiveExpression extends PAdditiveExpression
 {
     private PAdditiveExpression _additiveExpression_;
-    private PAddop _addop_;
+    private PAdditionOperator _additionOperator_;
     private PTerm _term_;
 
     public AAAdditiveExpression()
@@ -18,13 +18,13 @@ public final class AAAdditiveExpression extends PAdditiveExpression
 
     public AAAdditiveExpression(
         @SuppressWarnings("hiding") PAdditiveExpression _additiveExpression_,
-        @SuppressWarnings("hiding") PAddop _addop_,
+        @SuppressWarnings("hiding") PAdditionOperator _additionOperator_,
         @SuppressWarnings("hiding") PTerm _term_)
     {
         // Constructor
         setAdditiveExpression(_additiveExpression_);
 
-        setAddop(_addop_);
+        setAdditionOperator(_additionOperator_);
 
         setTerm(_term_);
 
@@ -35,7 +35,7 @@ public final class AAAdditiveExpression extends PAdditiveExpression
     {
         return new AAAdditiveExpression(
             cloneNode(this._additiveExpression_),
-            cloneNode(this._addop_),
+            cloneNode(this._additionOperator_),
             cloneNode(this._term_));
     }
 
@@ -70,16 +70,16 @@ public final class AAAdditiveExpression extends PAdditiveExpression
         this._additiveExpression_ = node;
     }
 
-    public PAddop getAddop()
+    public PAdditionOperator getAdditionOperator()
     {
-        return this._addop_;
+        return this._additionOperator_;
     }
 
-    public void setAddop(PAddop node)
+    public void setAdditionOperator(PAdditionOperator node)
     {
-        if(this._addop_ != null)
+        if(this._additionOperator_ != null)
         {
-            this._addop_.parent(null);
+            this._additionOperator_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AAAdditiveExpression extends PAdditiveExpression
             node.parent(this);
         }
 
-        this._addop_ = node;
+        this._additionOperator_ = node;
     }
 
     public PTerm getTerm()
@@ -125,7 +125,7 @@ public final class AAAdditiveExpression extends PAdditiveExpression
     {
         return ""
             + toString(this._additiveExpression_)
-            + toString(this._addop_)
+            + toString(this._additionOperator_)
             + toString(this._term_);
     }
 
@@ -139,9 +139,9 @@ public final class AAAdditiveExpression extends PAdditiveExpression
             return;
         }
 
-        if(this._addop_ == child)
+        if(this._additionOperator_ == child)
         {
-            this._addop_ = null;
+            this._additionOperator_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class AAAdditiveExpression extends PAdditiveExpression
             return;
         }
 
-        if(this._addop_ == oldChild)
+        if(this._additionOperator_ == oldChild)
         {
-            setAddop((PAddop) newChild);
+            setAdditionOperator((PAdditionOperator) newChild);
             return;
         }
 

@@ -8,7 +8,7 @@ import Cminus.analysis.*;
 public final class AASimpleExpression extends PSimpleExpression
 {
     private PSimpleExpression _simpleExpression_;
-    private PRelop _relop_;
+    private PRelationalOperator _relationalOperator_;
     private PAdditiveExpression _additiveExpression_;
 
     public AASimpleExpression()
@@ -18,13 +18,13 @@ public final class AASimpleExpression extends PSimpleExpression
 
     public AASimpleExpression(
         @SuppressWarnings("hiding") PSimpleExpression _simpleExpression_,
-        @SuppressWarnings("hiding") PRelop _relop_,
+        @SuppressWarnings("hiding") PRelationalOperator _relationalOperator_,
         @SuppressWarnings("hiding") PAdditiveExpression _additiveExpression_)
     {
         // Constructor
         setSimpleExpression(_simpleExpression_);
 
-        setRelop(_relop_);
+        setRelationalOperator(_relationalOperator_);
 
         setAdditiveExpression(_additiveExpression_);
 
@@ -35,7 +35,7 @@ public final class AASimpleExpression extends PSimpleExpression
     {
         return new AASimpleExpression(
             cloneNode(this._simpleExpression_),
-            cloneNode(this._relop_),
+            cloneNode(this._relationalOperator_),
             cloneNode(this._additiveExpression_));
     }
 
@@ -70,16 +70,16 @@ public final class AASimpleExpression extends PSimpleExpression
         this._simpleExpression_ = node;
     }
 
-    public PRelop getRelop()
+    public PRelationalOperator getRelationalOperator()
     {
-        return this._relop_;
+        return this._relationalOperator_;
     }
 
-    public void setRelop(PRelop node)
+    public void setRelationalOperator(PRelationalOperator node)
     {
-        if(this._relop_ != null)
+        if(this._relationalOperator_ != null)
         {
-            this._relop_.parent(null);
+            this._relationalOperator_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AASimpleExpression extends PSimpleExpression
             node.parent(this);
         }
 
-        this._relop_ = node;
+        this._relationalOperator_ = node;
     }
 
     public PAdditiveExpression getAdditiveExpression()
@@ -125,7 +125,7 @@ public final class AASimpleExpression extends PSimpleExpression
     {
         return ""
             + toString(this._simpleExpression_)
-            + toString(this._relop_)
+            + toString(this._relationalOperator_)
             + toString(this._additiveExpression_);
     }
 
@@ -139,9 +139,9 @@ public final class AASimpleExpression extends PSimpleExpression
             return;
         }
 
-        if(this._relop_ == child)
+        if(this._relationalOperator_ == child)
         {
-            this._relop_ = null;
+            this._relationalOperator_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class AASimpleExpression extends PSimpleExpression
             return;
         }
 
-        if(this._relop_ == oldChild)
+        if(this._relationalOperator_ == oldChild)
         {
-            setRelop((PRelop) newChild);
+            setRelationalOperator((PRelationalOperator) newChild);
             return;
         }
 

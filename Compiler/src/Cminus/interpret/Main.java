@@ -15,11 +15,13 @@ public class Main {
 			try {
 				NewLexer lexer = new NewLexer (new PushbackReader(new FileReader(args[0]), 1024));
 				
-				PrintTokens(lexer);
+				printTokens(lexer);
 				
 				Parser parser = new Parser((Lexer)lexer);
 				
-	            Start ast = parser.parse();
+	            Start abstractSintaxTree = parser.parse();
+	            
+	            System.out.println(abstractSintaxTree.getPProgram());
 	            
 			} catch (Exception e) {
 				// Print exceptions
@@ -32,7 +34,7 @@ public class Main {
 		} 
 	}
 	
-	private static void PrintTokens(NewLexer lexer) throws LexerException, IOException {
+	private static void printTokens(NewLexer lexer) throws LexerException, IOException {
 		Token token;
 		do {
 			/* Read the next token from input */  

@@ -1,18 +1,1 @@
-void main () {
-	á
-	int i = 0;
-	string b = "ol\"a";
-	int j = i;
-	/* test de comentario de bloco
-	na proxima /* linha eu nao vou balancear 
-	*/
-	ou sera que vou */*/
-	aqui temos um comentario de linha // /* */ */ /*
-	// outro comentario de linha
-	int stringg;
-	/* so um teste */
-	if (a >= b, b < d) {
-		escopo;		
-	}
-	string a = "Teste de string";
-}
+int a;

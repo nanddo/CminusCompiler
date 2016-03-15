@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class AADeclaration extends PDeclaration
 {
-    private PVarDeclaration _varDeclaration_;
+    private PVariableDeclaration _variableDeclaration_;
 
     public AADeclaration()
     {
@@ -15,10 +15,10 @@ public final class AADeclaration extends PDeclaration
     }
 
     public AADeclaration(
-        @SuppressWarnings("hiding") PVarDeclaration _varDeclaration_)
+        @SuppressWarnings("hiding") PVariableDeclaration _variableDeclaration_)
     {
         // Constructor
-        setVarDeclaration(_varDeclaration_);
+        setVariableDeclaration(_variableDeclaration_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AADeclaration extends PDeclaration
     public Object clone()
     {
         return new AADeclaration(
-            cloneNode(this._varDeclaration_));
+            cloneNode(this._variableDeclaration_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AADeclaration extends PDeclaration
         ((Analysis) sw).caseAADeclaration(this);
     }
 
-    public PVarDeclaration getVarDeclaration()
+    public PVariableDeclaration getVariableDeclaration()
     {
-        return this._varDeclaration_;
+        return this._variableDeclaration_;
     }
 
-    public void setVarDeclaration(PVarDeclaration node)
+    public void setVariableDeclaration(PVariableDeclaration node)
     {
-        if(this._varDeclaration_ != null)
+        if(this._variableDeclaration_ != null)
         {
-            this._varDeclaration_.parent(null);
+            this._variableDeclaration_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AADeclaration extends PDeclaration
             node.parent(this);
         }
 
-        this._varDeclaration_ = node;
+        this._variableDeclaration_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._varDeclaration_);
+            + toString(this._variableDeclaration_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._varDeclaration_ == child)
+        if(this._variableDeclaration_ == child)
         {
-            this._varDeclaration_ = null;
+            this._variableDeclaration_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AADeclaration extends PDeclaration
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._varDeclaration_ == oldChild)
+        if(this._variableDeclaration_ == oldChild)
         {
-            setVarDeclaration((PVarDeclaration) newChild);
+            setVariableDeclaration((PVariableDeclaration) newChild);
             return;
         }
 

@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class AEStatement extends PStatement
 {
-    private PReturnStatement _returnStatement_;
+    private PIfElseStatement _ifElseStatement_;
 
     public AEStatement()
     {
@@ -15,10 +15,10 @@ public final class AEStatement extends PStatement
     }
 
     public AEStatement(
-        @SuppressWarnings("hiding") PReturnStatement _returnStatement_)
+        @SuppressWarnings("hiding") PIfElseStatement _ifElseStatement_)
     {
         // Constructor
-        setReturnStatement(_returnStatement_);
+        setIfElseStatement(_ifElseStatement_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AEStatement extends PStatement
     public Object clone()
     {
         return new AEStatement(
-            cloneNode(this._returnStatement_));
+            cloneNode(this._ifElseStatement_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AEStatement extends PStatement
         ((Analysis) sw).caseAEStatement(this);
     }
 
-    public PReturnStatement getReturnStatement()
+    public PIfElseStatement getIfElseStatement()
     {
-        return this._returnStatement_;
+        return this._ifElseStatement_;
     }
 
-    public void setReturnStatement(PReturnStatement node)
+    public void setIfElseStatement(PIfElseStatement node)
     {
-        if(this._returnStatement_ != null)
+        if(this._ifElseStatement_ != null)
         {
-            this._returnStatement_.parent(null);
+            this._ifElseStatement_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AEStatement extends PStatement
             node.parent(this);
         }
 
-        this._returnStatement_ = node;
+        this._ifElseStatement_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._returnStatement_);
+            + toString(this._ifElseStatement_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._returnStatement_ == child)
+        if(this._ifElseStatement_ == child)
         {
-            this._returnStatement_ = null;
+            this._ifElseStatement_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AEStatement extends PStatement
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._returnStatement_ == oldChild)
+        if(this._ifElseStatement_ == oldChild)
         {
-            setReturnStatement((PReturnStatement) newChild);
+            setIfElseStatement((PIfElseStatement) newChild);
             return;
         }
 

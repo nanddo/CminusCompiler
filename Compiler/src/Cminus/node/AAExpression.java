@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class AAExpression extends PExpression
 {
-    private PVar _var_;
+    private PVariable _variable_;
     private TAttribution _attribution_;
     private PExpression _expression_;
 
@@ -17,12 +17,12 @@ public final class AAExpression extends PExpression
     }
 
     public AAExpression(
-        @SuppressWarnings("hiding") PVar _var_,
+        @SuppressWarnings("hiding") PVariable _variable_,
         @SuppressWarnings("hiding") TAttribution _attribution_,
         @SuppressWarnings("hiding") PExpression _expression_)
     {
         // Constructor
-        setVar(_var_);
+        setVariable(_variable_);
 
         setAttribution(_attribution_);
 
@@ -34,7 +34,7 @@ public final class AAExpression extends PExpression
     public Object clone()
     {
         return new AAExpression(
-            cloneNode(this._var_),
+            cloneNode(this._variable_),
             cloneNode(this._attribution_),
             cloneNode(this._expression_));
     }
@@ -45,16 +45,16 @@ public final class AAExpression extends PExpression
         ((Analysis) sw).caseAAExpression(this);
     }
 
-    public PVar getVar()
+    public PVariable getVariable()
     {
-        return this._var_;
+        return this._variable_;
     }
 
-    public void setVar(PVar node)
+    public void setVariable(PVariable node)
     {
-        if(this._var_ != null)
+        if(this._variable_ != null)
         {
-            this._var_.parent(null);
+            this._variable_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class AAExpression extends PExpression
             node.parent(this);
         }
 
-        this._var_ = node;
+        this._variable_ = node;
     }
 
     public TAttribution getAttribution()
@@ -124,7 +124,7 @@ public final class AAExpression extends PExpression
     public String toString()
     {
         return ""
-            + toString(this._var_)
+            + toString(this._variable_)
             + toString(this._attribution_)
             + toString(this._expression_);
     }
@@ -133,9 +133,9 @@ public final class AAExpression extends PExpression
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._var_ == child)
+        if(this._variable_ == child)
         {
-            this._var_ = null;
+            this._variable_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AAExpression extends PExpression
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._var_ == oldChild)
+        if(this._variable_ == oldChild)
         {
-            setVar((PVar) newChild);
+            setVariable((PVariable) newChild);
             return;
         }
 

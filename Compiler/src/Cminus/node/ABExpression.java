@@ -7,7 +7,9 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class ABExpression extends PExpression
 {
-    private PSimpleExpression _simpleExpression_;
+    private PVariable _variable_;
+    private TAttribution _attribution_;
+    private PInputFunctions _inputFunctions_;
 
     public ABExpression()
     {
@@ -15,10 +17,16 @@ public final class ABExpression extends PExpression
     }
 
     public ABExpression(
-        @SuppressWarnings("hiding") PSimpleExpression _simpleExpression_)
+        @SuppressWarnings("hiding") PVariable _variable_,
+        @SuppressWarnings("hiding") TAttribution _attribution_,
+        @SuppressWarnings("hiding") PInputFunctions _inputFunctions_)
     {
         // Constructor
-        setSimpleExpression(_simpleExpression_);
+        setVariable(_variable_);
+
+        setAttribution(_attribution_);
+
+        setInputFunctions(_inputFunctions_);
 
     }
 
@@ -26,7 +34,9 @@ public final class ABExpression extends PExpression
     public Object clone()
     {
         return new ABExpression(
-            cloneNode(this._simpleExpression_));
+            cloneNode(this._variable_),
+            cloneNode(this._attribution_),
+            cloneNode(this._inputFunctions_));
     }
 
     @Override
@@ -35,16 +45,16 @@ public final class ABExpression extends PExpression
         ((Analysis) sw).caseABExpression(this);
     }
 
-    public PSimpleExpression getSimpleExpression()
+    public PVariable getVariable()
     {
-        return this._simpleExpression_;
+        return this._variable_;
     }
 
-    public void setSimpleExpression(PSimpleExpression node)
+    public void setVariable(PVariable node)
     {
-        if(this._simpleExpression_ != null)
+        if(this._variable_ != null)
         {
-            this._simpleExpression_.parent(null);
+            this._variable_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +67,87 @@ public final class ABExpression extends PExpression
             node.parent(this);
         }
 
-        this._simpleExpression_ = node;
+        this._variable_ = node;
+    }
+
+    public TAttribution getAttribution()
+    {
+        return this._attribution_;
+    }
+
+    public void setAttribution(TAttribution node)
+    {
+        if(this._attribution_ != null)
+        {
+            this._attribution_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._attribution_ = node;
+    }
+
+    public PInputFunctions getInputFunctions()
+    {
+        return this._inputFunctions_;
+    }
+
+    public void setInputFunctions(PInputFunctions node)
+    {
+        if(this._inputFunctions_ != null)
+        {
+            this._inputFunctions_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._inputFunctions_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._simpleExpression_);
+            + toString(this._variable_)
+            + toString(this._attribution_)
+            + toString(this._inputFunctions_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._simpleExpression_ == child)
+        if(this._variable_ == child)
         {
-            this._simpleExpression_ = null;
+            this._variable_ = null;
+            return;
+        }
+
+        if(this._attribution_ == child)
+        {
+            this._attribution_ = null;
+            return;
+        }
+
+        if(this._inputFunctions_ == child)
+        {
+            this._inputFunctions_ = null;
             return;
         }
 
@@ -84,9 +158,21 @@ public final class ABExpression extends PExpression
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._simpleExpression_ == oldChild)
+        if(this._variable_ == oldChild)
         {
-            setSimpleExpression((PSimpleExpression) newChild);
+            setVariable((PVariable) newChild);
+            return;
+        }
+
+        if(this._attribution_ == oldChild)
+        {
+            setAttribution((TAttribution) newChild);
+            return;
+        }
+
+        if(this._inputFunctions_ == oldChild)
+        {
+            setInputFunctions((PInputFunctions) newChild);
             return;
         }
 

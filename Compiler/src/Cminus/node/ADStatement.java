@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class ADStatement extends PStatement
 {
-    private PIterationStatement _iterationStatement_;
+    private PIfStatement _ifStatement_;
 
     public ADStatement()
     {
@@ -15,10 +15,10 @@ public final class ADStatement extends PStatement
     }
 
     public ADStatement(
-        @SuppressWarnings("hiding") PIterationStatement _iterationStatement_)
+        @SuppressWarnings("hiding") PIfStatement _ifStatement_)
     {
         // Constructor
-        setIterationStatement(_iterationStatement_);
+        setIfStatement(_ifStatement_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ADStatement extends PStatement
     public Object clone()
     {
         return new ADStatement(
-            cloneNode(this._iterationStatement_));
+            cloneNode(this._ifStatement_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ADStatement extends PStatement
         ((Analysis) sw).caseADStatement(this);
     }
 
-    public PIterationStatement getIterationStatement()
+    public PIfStatement getIfStatement()
     {
-        return this._iterationStatement_;
+        return this._ifStatement_;
     }
 
-    public void setIterationStatement(PIterationStatement node)
+    public void setIfStatement(PIfStatement node)
     {
-        if(this._iterationStatement_ != null)
+        if(this._ifStatement_ != null)
         {
-            this._iterationStatement_.parent(null);
+            this._ifStatement_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ADStatement extends PStatement
             node.parent(this);
         }
 
-        this._iterationStatement_ = node;
+        this._ifStatement_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._iterationStatement_);
+            + toString(this._ifStatement_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._iterationStatement_ == child)
+        if(this._ifStatement_ == child)
         {
-            this._iterationStatement_ = null;
+            this._ifStatement_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ADStatement extends PStatement
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._iterationStatement_ == oldChild)
+        if(this._ifStatement_ == oldChild)
         {
-            setIterationStatement((PIterationStatement) newChild);
+            setIfStatement((PIfStatement) newChild);
             return;
         }
 

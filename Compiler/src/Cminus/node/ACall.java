@@ -9,7 +9,7 @@ public final class ACall extends PCall
 {
     private TId _id_;
     private TLeftPar _leftPar_;
-    private PArgs _args_;
+    private PArguments _arguments_;
     private TRightPar _rightPar_;
 
     public ACall()
@@ -20,7 +20,7 @@ public final class ACall extends PCall
     public ACall(
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TLeftPar _leftPar_,
-        @SuppressWarnings("hiding") PArgs _args_,
+        @SuppressWarnings("hiding") PArguments _arguments_,
         @SuppressWarnings("hiding") TRightPar _rightPar_)
     {
         // Constructor
@@ -28,7 +28,7 @@ public final class ACall extends PCall
 
         setLeftPar(_leftPar_);
 
-        setArgs(_args_);
+        setArguments(_arguments_);
 
         setRightPar(_rightPar_);
 
@@ -40,7 +40,7 @@ public final class ACall extends PCall
         return new ACall(
             cloneNode(this._id_),
             cloneNode(this._leftPar_),
-            cloneNode(this._args_),
+            cloneNode(this._arguments_),
             cloneNode(this._rightPar_));
     }
 
@@ -100,16 +100,16 @@ public final class ACall extends PCall
         this._leftPar_ = node;
     }
 
-    public PArgs getArgs()
+    public PArguments getArguments()
     {
-        return this._args_;
+        return this._arguments_;
     }
 
-    public void setArgs(PArgs node)
+    public void setArguments(PArguments node)
     {
-        if(this._args_ != null)
+        if(this._arguments_ != null)
         {
-            this._args_.parent(null);
+            this._arguments_.parent(null);
         }
 
         if(node != null)
@@ -122,7 +122,7 @@ public final class ACall extends PCall
             node.parent(this);
         }
 
-        this._args_ = node;
+        this._arguments_ = node;
     }
 
     public TRightPar getRightPar()
@@ -156,7 +156,7 @@ public final class ACall extends PCall
         return ""
             + toString(this._id_)
             + toString(this._leftPar_)
-            + toString(this._args_)
+            + toString(this._arguments_)
             + toString(this._rightPar_);
     }
 
@@ -176,9 +176,9 @@ public final class ACall extends PCall
             return;
         }
 
-        if(this._args_ == child)
+        if(this._arguments_ == child)
         {
-            this._args_ = null;
+            this._arguments_ = null;
             return;
         }
 
@@ -207,9 +207,9 @@ public final class ACall extends PCall
             return;
         }
 
-        if(this._args_ == oldChild)
+        if(this._arguments_ == oldChild)
         {
-            setArgs((PArgs) newChild);
+            setArguments((PArguments) newChild);
             return;
         }
 
