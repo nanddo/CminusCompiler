@@ -192,6 +192,35 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getSemicolon().apply(this);
         }
+        if(node.getArrayDeclaration() != null)
+        {
+            node.getArrayDeclaration().apply(this);
+        }
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        if(node.getTypeSpecifier() != null)
+        {
+            node.getTypeSpecifier().apply(this);
+        }
+        outABVariableDeclaration(node);
+    }
+
+    public void inAAArrayDeclaration(AAArrayDeclaration node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAArrayDeclaration(AAArrayDeclaration node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAArrayDeclaration(AAArrayDeclaration node)
+    {
+        inAAArrayDeclaration(node);
         if(node.getRightBracket() != null)
         {
             node.getRightBracket().apply(this);
@@ -204,15 +233,40 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getLeftBracket().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getArrayDeclaration() != null)
         {
-            node.getId().apply(this);
+            node.getArrayDeclaration().apply(this);
         }
-        if(node.getTypeSpecifier() != null)
+        outAAArrayDeclaration(node);
+    }
+
+    public void inABArrayDeclaration(ABArrayDeclaration node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABArrayDeclaration(ABArrayDeclaration node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABArrayDeclaration(ABArrayDeclaration node)
+    {
+        inABArrayDeclaration(node);
+        if(node.getRightBracket() != null)
         {
-            node.getTypeSpecifier().apply(this);
+            node.getRightBracket().apply(this);
         }
-        outABVariableDeclaration(node);
+        if(node.getNum() != null)
+        {
+            node.getNum().apply(this);
+        }
+        if(node.getLeftBracket() != null)
+        {
+            node.getLeftBracket().apply(this);
+        }
+        outABArrayDeclaration(node);
     }
 
     public void inAATypeSpecifier(AATypeSpecifier node)
@@ -450,13 +504,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseABSingleParameter(ABSingleParameter node)
     {
         inABSingleParameter(node);
-        if(node.getRightBracket() != null)
+        if(node.getArrayParameter() != null)
         {
-            node.getRightBracket().apply(this);
-        }
-        if(node.getLeftBracket() != null)
-        {
-            node.getLeftBracket().apply(this);
+            node.getArrayParameter().apply(this);
         }
         if(node.getId() != null)
         {
@@ -467,6 +517,60 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
             node.getTypeSpecifier().apply(this);
         }
         outABSingleParameter(node);
+    }
+
+    public void inAAArrayParameter(AAArrayParameter node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAArrayParameter(AAArrayParameter node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAArrayParameter(AAArrayParameter node)
+    {
+        inAAArrayParameter(node);
+        if(node.getRightBracket() != null)
+        {
+            node.getRightBracket().apply(this);
+        }
+        if(node.getLeftBracket() != null)
+        {
+            node.getLeftBracket().apply(this);
+        }
+        if(node.getArrayParameter() != null)
+        {
+            node.getArrayParameter().apply(this);
+        }
+        outAAArrayParameter(node);
+    }
+
+    public void inABArrayParameter(ABArrayParameter node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABArrayParameter(ABArrayParameter node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABArrayParameter(ABArrayParameter node)
+    {
+        inABArrayParameter(node);
+        if(node.getRightBracket() != null)
+        {
+            node.getRightBracket().apply(this);
+        }
+        if(node.getLeftBracket() != null)
+        {
+            node.getLeftBracket().apply(this);
+        }
+        outABArrayParameter(node);
     }
 
     public void inAAStatementList(AAStatementList node)
@@ -1161,6 +1265,31 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseABVariable(ABVariable node)
     {
         inABVariable(node);
+        if(node.getArrayExpression() != null)
+        {
+            node.getArrayExpression().apply(this);
+        }
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        outABVariable(node);
+    }
+
+    public void inAAArrayExpression(AAArrayExpression node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAAArrayExpression(AAArrayExpression node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAAArrayExpression(AAArrayExpression node)
+    {
+        inAAArrayExpression(node);
         if(node.getRightBracket() != null)
         {
             node.getRightBracket().apply(this);
@@ -1173,11 +1302,40 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getLeftBracket().apply(this);
         }
-        if(node.getId() != null)
+        if(node.getArrayExpression() != null)
         {
-            node.getId().apply(this);
+            node.getArrayExpression().apply(this);
         }
-        outABVariable(node);
+        outAAArrayExpression(node);
+    }
+
+    public void inABArrayExpression(ABArrayExpression node)
+    {
+        defaultIn(node);
+    }
+
+    public void outABArrayExpression(ABArrayExpression node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseABArrayExpression(ABArrayExpression node)
+    {
+        inABArrayExpression(node);
+        if(node.getRightBracket() != null)
+        {
+            node.getRightBracket().apply(this);
+        }
+        if(node.getExpression() != null)
+        {
+            node.getExpression().apply(this);
+        }
+        if(node.getLeftBracket() != null)
+        {
+            node.getLeftBracket().apply(this);
+        }
+        outABArrayExpression(node);
     }
 
     public void inAAExpression(AAExpression node)

@@ -3,4 +3,7 @@ int main (void) {
 	a = 2;
 	print (a);
 	return 0;
+	// teste de ignored
+	/* */
 }
+

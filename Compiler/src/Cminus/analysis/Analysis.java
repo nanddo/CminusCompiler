@@ -19,6 +19,8 @@ public interface Analysis extends Switch
     void caseABDeclaration(ABDeclaration node);
     void caseAAVariableDeclaration(AAVariableDeclaration node);
     void caseABVariableDeclaration(ABVariableDeclaration node);
+    void caseAAArrayDeclaration(AAArrayDeclaration node);
+    void caseABArrayDeclaration(ABArrayDeclaration node);
     void caseAATypeSpecifier(AATypeSpecifier node);
     void caseABTypeSpecifier(ABTypeSpecifier node);
     void caseACTypeSpecifier(ACTypeSpecifier node);
@@ -29,6 +31,8 @@ public interface Analysis extends Switch
     void caseABParametersList(ABParametersList node);
     void caseAASingleParameter(AASingleParameter node);
     void caseABSingleParameter(ABSingleParameter node);
+    void caseAAArrayParameter(AAArrayParameter node);
+    void caseABArrayParameter(ABArrayParameter node);
     void caseAAStatementList(AAStatementList node);
     void caseABStatementList(ABStatementList node);
     void caseAAStatement(AAStatement node);
@@ -56,6 +60,8 @@ public interface Analysis extends Switch
     void caseABReturnStatement(ABReturnStatement node);
     void caseAAVariable(AAVariable node);
     void caseABVariable(ABVariable node);
+    void caseAAArrayExpression(AAArrayExpression node);
+    void caseABArrayExpression(ABArrayExpression node);
     void caseAAExpression(AAExpression node);
     void caseABExpression(ABExpression node);
     void caseACExpression(ACExpression node);

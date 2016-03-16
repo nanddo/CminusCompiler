@@ -15,11 +15,13 @@ public class Main {
 			try {
 				NewLexer lexer = new NewLexer (new PushbackReader(new FileReader(args[0]), 1024));
 				
-				printTokens(lexer);
+				//printTokens(lexer);
 				
 				NewParser parser = new NewParser(lexer);
 				
 	            Start abstractSintaxTree = parser.parse();
+	            
+	            System.out.println("Accepted!");
 			} catch (Exception e) {
 				// Print exceptions
 	            System.out.println ("\n" + e);
