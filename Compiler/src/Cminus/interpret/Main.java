@@ -17,7 +17,7 @@ public class Main {
 				
 				printTokens(lexer);
 				
-				Parser parser = new Parser((Lexer)lexer);
+				NewParser parser = new NewParser(lexer);
 				
 	            Start abstractSintaxTree = parser.parse();
 			} catch (Exception e) {
@@ -37,7 +37,7 @@ public class Main {
 			/* Read the next token from input */  
 			token = lexer.next();
 			/* Print token if it is not a blank */ 
-			if (!(token instanceof TBlank) && !(token instanceof TEndLine)) {
+			if (!(token instanceof TSpace) && !(token instanceof TEndLine)) {
 				System.out.print("<" + token.getClass().getSimpleName() + ">");
 				/* Uncomment to print the lexema */
 				if (token instanceof TStringValue) {

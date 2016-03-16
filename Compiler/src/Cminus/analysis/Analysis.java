@@ -19,8 +19,6 @@ public interface Analysis extends Switch
     void caseABDeclaration(ABDeclaration node);
     void caseAAVariableDeclaration(AAVariableDeclaration node);
     void caseABVariableDeclaration(ABVariableDeclaration node);
-    void caseAAArrayDeclaration(AAArrayDeclaration node);
-    void caseABArrayDeclaration(ABArrayDeclaration node);
     void caseAATypeSpecifier(AATypeSpecifier node);
     void caseABTypeSpecifier(ABTypeSpecifier node);
     void caseACTypeSpecifier(ACTypeSpecifier node);
@@ -31,8 +29,6 @@ public interface Analysis extends Switch
     void caseABParametersList(ABParametersList node);
     void caseAASingleParameter(AASingleParameter node);
     void caseABSingleParameter(ABSingleParameter node);
-    void caseAAArrayParameter(AAArrayParameter node);
-    void caseABArrayParameter(ABArrayParameter node);
     void caseAAStatementList(AAStatementList node);
     void caseABStatementList(ABStatementList node);
     void caseAAStatement(AAStatement node);
@@ -58,14 +54,8 @@ public interface Analysis extends Switch
     void caseAIterationStatementElse(AIterationStatementElse node);
     void caseAAReturnStatement(AAReturnStatement node);
     void caseABReturnStatement(ABReturnStatement node);
-    void caseAAInputFunctions(AAInputFunctions node);
-    void caseABInputFunctions(ABInputFunctions node);
-    void caseAAOutputFunctions(AAOutputFunctions node);
-    void caseABOutputFunctions(ABOutputFunctions node);
     void caseAAVariable(AAVariable node);
     void caseABVariable(ABVariable node);
-    void caseAAArrayExpression(AAArrayExpression node);
-    void caseABArrayExpression(ABArrayExpression node);
     void caseAAExpression(AAExpression node);
     void caseABExpression(ABExpression node);
     void caseACExpression(ACExpression node);
@@ -103,8 +93,6 @@ public interface Analysis extends Switch
     void caseTReturn(TReturn node);
     void caseTVoid(TVoid node);
     void caseTWhile(TWhile node);
-    void caseTInput(TInput node);
-    void caseTOutput(TOutput node);
     void caseTId(TId node);
     void caseTNum(TNum node);
     void caseTStringValue(TStringValue node);
@@ -130,7 +118,7 @@ public interface Analysis extends Switch
     void caseTOpenComment(TOpenComment node);
     void caseTCloseComment(TCloseComment node);
     void caseTBlockComment(TBlockComment node);
-    void caseTBlank(TBlank node);
+    void caseTSpace(TSpace node);
     void caseTEndLine(TEndLine node);
     void caseTLineComment(TLineComment node);
     void caseEOF(EOF node);

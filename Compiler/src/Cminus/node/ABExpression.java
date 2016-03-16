@@ -9,7 +9,7 @@ public final class ABExpression extends PExpression
 {
     private PVariable _variable_;
     private TAttribution _attribution_;
-    private PInputFunctions _inputFunctions_;
+    private TStringValue _stringValue_;
 
     public ABExpression()
     {
@@ -19,14 +19,14 @@ public final class ABExpression extends PExpression
     public ABExpression(
         @SuppressWarnings("hiding") PVariable _variable_,
         @SuppressWarnings("hiding") TAttribution _attribution_,
-        @SuppressWarnings("hiding") PInputFunctions _inputFunctions_)
+        @SuppressWarnings("hiding") TStringValue _stringValue_)
     {
         // Constructor
         setVariable(_variable_);
 
         setAttribution(_attribution_);
 
-        setInputFunctions(_inputFunctions_);
+        setStringValue(_stringValue_);
 
     }
 
@@ -36,7 +36,7 @@ public final class ABExpression extends PExpression
         return new ABExpression(
             cloneNode(this._variable_),
             cloneNode(this._attribution_),
-            cloneNode(this._inputFunctions_));
+            cloneNode(this._stringValue_));
     }
 
     @Override
@@ -95,16 +95,16 @@ public final class ABExpression extends PExpression
         this._attribution_ = node;
     }
 
-    public PInputFunctions getInputFunctions()
+    public TStringValue getStringValue()
     {
-        return this._inputFunctions_;
+        return this._stringValue_;
     }
 
-    public void setInputFunctions(PInputFunctions node)
+    public void setStringValue(TStringValue node)
     {
-        if(this._inputFunctions_ != null)
+        if(this._stringValue_ != null)
         {
-            this._inputFunctions_.parent(null);
+            this._stringValue_.parent(null);
         }
 
         if(node != null)
@@ -117,7 +117,7 @@ public final class ABExpression extends PExpression
             node.parent(this);
         }
 
-        this._inputFunctions_ = node;
+        this._stringValue_ = node;
     }
 
     @Override
@@ -126,7 +126,7 @@ public final class ABExpression extends PExpression
         return ""
             + toString(this._variable_)
             + toString(this._attribution_)
-            + toString(this._inputFunctions_);
+            + toString(this._stringValue_);
     }
 
     @Override
@@ -145,9 +145,9 @@ public final class ABExpression extends PExpression
             return;
         }
 
-        if(this._inputFunctions_ == child)
+        if(this._stringValue_ == child)
         {
-            this._inputFunctions_ = null;
+            this._stringValue_ = null;
             return;
         }
 
@@ -170,9 +170,9 @@ public final class ABExpression extends PExpression
             return;
         }
 
-        if(this._inputFunctions_ == oldChild)
+        if(this._stringValue_ == oldChild)
         {
-            setInputFunctions((PInputFunctions) newChild);
+            setStringValue((TStringValue) newChild);
             return;
         }
 

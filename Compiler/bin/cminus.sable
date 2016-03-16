@@ -1,16 +1,9 @@
 Package Cminus;
 
 Helpers
-	all          = [0 .. 0xffff];
-
-	digit        = ['0'..'9'];
-	
-	lower_letter = ['a'..'z'];
-	upper_letter = ['A'..'Z'];
-	letter       = lower_letter | upper_letter;
-
-	white        = 9 | ' ';
-	line_end     = 10 | 13 | 10 13;
+	digit    = ['0'..'9'];
+	letter   = [['a' .. 'z']+['A' .. 'Z']];
+	line_end = 10 | 13 | 10 13;
 
 
 
@@ -30,13 +23,13 @@ Tokens
 	return = 'return';
 	void   = 'void';
 	while  = 'while';
-	input  = 'input';
-	output = 'output';
+	//input  = 'input';
+	//output = 'output';
 	
 	/* IDs AND NUMBERS */
 	id           = letter+;
 	num          = digit+;
-	string_value = '"' ('\"' | [all - '"'])* '"';
+	string_value = '"' ('\"' | [[0 .. 0xffff] - '"'])* '"';
 	
 	/* MATH OPERATORS */
 	plus     = '+';
@@ -44,7 +37,7 @@ Tokens
 	slash    = '/';
 	asterisk = '*';
 	
-	/* LOGICAL OPERATORS */
+	/* RELATIONAL OPERATORS */
 	less_than   = '<';
 	less_equal  = '<=';
 	great_than  = '>';
@@ -63,19 +56,21 @@ Tokens
 	right_bracket = ']';
 	left_brace    = '{';
 	right_brace   = '}';
+	
+	/* COMMENT SIGNS */
 	{normal->comment, comment} open_comment = '/*';
 	close_comment = '*/';
-	block_comment = '/*' [all - ['*' + '/']]* '*/';
+	block_comment = '/*' [[0 .. 0xffff] - ['*' + '/']]* '*/';
 	
 	/* IGNORED TOKENS */
-	blank        = (white | line_end)+;
+	space        = (9 | ' ')+;
 	end_line     = line_end+;
-	line_comment = '//' [all - [10 + 13]]* line_end;
+	line_comment = '//' [[0 .. 0xffff] - [10 + 13]]* line_end;
 
 
 	
 Ignored Tokens
-	blank, end_line, line_comment, block_comment;
+	space, end_line, line_comment, open_comment, close_comment, block_comment;
 	
 
 	
@@ -84,15 +79,15 @@ Productions
 	declaration_list             = {a} declaration_list declaration | {b} declaration;
 	declaration                  = {a} variable_declaration | {b} function_declaration;
 	
-		variable_declaration     = {a} type_specifier id semicolon | {b} type_specifier id array_declaration semicolon;
-		array_declaration        = {a} array_declaration left_bracket num right_bracket | {b} left_bracket num right_bracket;
+		variable_declaration     = {a} type_specifier id semicolon | {b} type_specifier id left_bracket num right_bracket semicolon;
+		//array_declaration        = {a} array_declaration left_bracket num right_bracket | {b} left_bracket num right_bracket;
 		type_specifier           = {a} int | {b} void | {c} string;
 	
 		function_declaration     = type_specifier id left_par parameters right_par compound_statement;
 		parameters               = {a} parameters_list | {b} void;
 		parameters_list          = {a} parameters_list comma single_parameter | {b} single_parameter;
-		single_parameter         = {a} type_specifier id | {b} type_specifier id array_parameter;
-		array_parameter          = {a} array_parameter left_bracket right_bracket | {b} left_bracket right_bracket;
+		single_parameter         = {a} type_specifier id | {b} type_specifier id left_bracket right_bracket;
+		//array_parameter          = {a} array_parameter left_bracket right_bracket | {b} left_bracket right_bracket;
 
 	/* Based on p.69 of Appel - Modern Compiler Implementation in Java - 2nd Edition*/		
 	statement_list               = {a} statement_list statement | {b} epsilon;
@@ -113,13 +108,13 @@ Productions
 		
 		return_statement         = {a} return semicolon | {b} return expression semicolon;
 
-	input_functions              = {a} int input left_par void right_par | {b} string input left_par void right_par;
-	output_functions             = {a} void output left_par int id right_par | {b} void output left_par string id right_par;
+	//input_functions              = {a} int input left_par void right_par | {b} string input left_par void right_par;
+	//output_functions             = {a} void output left_par int id right_par | {b} void output left_par string id right_par;
 	
-	variable                     = {a} id | {b} id array_expression;
-	array_expression             = {a} array_expression left_bracket expression right_bracket | {b} left_bracket expression right_bracket;
+	variable                     = {a} id | {b} id left_bracket expression right_bracket;
+	//array_expression             = {a} array_expression left_bracket expression right_bracket | {b} left_bracket expression right_bracket;
 	
-	expression                   = {a} variable attribution expression | {b} variable attribution input_functions | {c} simple_expression;
+	expression                   = {a} variable attribution expression | {b} variable attribution string_value | {c} simple_expression;
 	
 	simple_expression            = {a} simple_expression relational_operator additive_expression | {b} additive_expression;
 	relational_operator          = {a} less_than | {b} less_equal | {c} great_than | {d} great_equal | {e} equal | {f} different;

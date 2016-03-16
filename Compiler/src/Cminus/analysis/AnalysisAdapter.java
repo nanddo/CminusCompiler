@@ -117,18 +117,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAArrayDeclaration(AAArrayDeclaration node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABArrayDeclaration(ABArrayDeclaration node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAATypeSpecifier(AATypeSpecifier node)
     {
         defaultCase(node);
@@ -184,18 +172,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseABSingleParameter(ABSingleParameter node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAArrayParameter(AAArrayParameter node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABArrayParameter(ABArrayParameter node)
     {
         defaultCase(node);
     }
@@ -351,30 +327,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAInputFunctions(AAInputFunctions node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABInputFunctions(ABInputFunctions node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAOutputFunctions(AAOutputFunctions node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABOutputFunctions(ABOutputFunctions node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAAVariable(AAVariable node)
     {
         defaultCase(node);
@@ -382,18 +334,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseABVariable(ABVariable node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAArrayExpression(AAArrayExpression node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABArrayExpression(ABArrayExpression node)
     {
         defaultCase(node);
     }
@@ -615,18 +555,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTInput(TInput node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTOutput(TOutput node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseTId(TId node)
     {
         defaultCase(node);
@@ -777,7 +705,7 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTBlank(TBlank node)
+    public void caseTSpace(TSpace node)
     {
         defaultCase(node);
     }
