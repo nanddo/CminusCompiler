@@ -5,46 +5,46 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABDeclarationList extends PDeclarationList
+public final class AFRelationalOperator extends PRelationalOperator
 {
-    private PDeclaration _declaration_;
+    private TDifferent _different_;
 
-    public ABDeclarationList()
+    public AFRelationalOperator()
     {
         // Constructor
     }
 
-    public ABDeclarationList(
-        @SuppressWarnings("hiding") PDeclaration _declaration_)
+    public AFRelationalOperator(
+        @SuppressWarnings("hiding") TDifferent _different_)
     {
         // Constructor
-        setDeclaration(_declaration_);
+        setDifferent(_different_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ABDeclarationList(
-            cloneNode(this._declaration_));
+        return new AFRelationalOperator(
+            cloneNode(this._different_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseABDeclarationList(this);
+        ((Analysis) sw).caseAFRelationalOperator(this);
     }
 
-    public PDeclaration getDeclaration()
+    public TDifferent getDifferent()
     {
-        return this._declaration_;
+        return this._different_;
     }
 
-    public void setDeclaration(PDeclaration node)
+    public void setDifferent(TDifferent node)
     {
-        if(this._declaration_ != null)
+        if(this._different_ != null)
         {
-            this._declaration_.parent(null);
+            this._different_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ABDeclarationList extends PDeclarationList
             node.parent(this);
         }
 
-        this._declaration_ = node;
+        this._different_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._declaration_);
+            + toString(this._different_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._declaration_ == child)
+        if(this._different_ == child)
         {
-            this._declaration_ = null;
+            this._different_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ABDeclarationList extends PDeclarationList
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._declaration_ == oldChild)
+        if(this._different_ == oldChild)
         {
-            setDeclaration((PDeclaration) newChild);
+            setDifferent((TDifferent) newChild);
             return;
         }
 

@@ -75,19 +75,18 @@ Ignored Tokens
 
 	
 Productions
-	program                      = declaration_list;
-	declaration_list             = {a} declaration_list declaration | {b} declaration;
+	program                      = declaration+;
 	declaration                  = {a} variable_declaration | {b} function_declaration;
 	
-		variable_declaration     = {a} type_specifier id semicolon | {b} type_specifier id array_declaration semicolon;
-		array_declaration        = {a} array_declaration left_bracket num right_bracket | {b} left_bracket num right_bracket;
+		variable_declaration     = type_specifier id array_declaration* semicolon;
+		array_declaration        = left_bracket num right_bracket;
 		type_specifier           = {a} int | {b} void | {c} string;
 	
 		function_declaration     = type_specifier id left_par parameters right_par compound_statement;
 		parameters               = {a} parameters_list | {b} void;
 		parameters_list          = {a} parameters_list comma single_parameter | {b} single_parameter;
-		single_parameter         = {a} type_specifier id | {b} type_specifier id array_parameter;
-		array_parameter          = {a} array_parameter left_bracket right_bracket | {b} left_bracket right_bracket;
+		single_parameter         = type_specifier id array_parameter*;
+		array_parameter          = left_bracket right_bracket;
 
 	/* Based on p.69 of Appel - Modern Compiler Implementation in Java - 2nd Edition*/		
 	statement_list               = {a} statement_list statement | {b} epsilon;
@@ -111,14 +110,15 @@ Productions
 	//input_functions              = {a} int input left_par void right_par | {b} string input left_par void right_par;
 	//output_functions             = {a} void output left_par int id right_par | {b} void output left_par string id right_par;
 	
-	variable                     = {a} id | {b} id array_expression;
-	array_expression             = {a} array_expression left_bracket expression right_bracket | {b} left_bracket expression right_bracket;
+	variable                     = id array_expression*;
+	array_expression             = left_bracket expression right_bracket;
 	
 	expression                   = {a} variable attribution expression | {b} variable attribution string_value | {c} simple_expression;
 	
 	simple_expression            = {a} simple_expression relational_operator additive_expression | {b} additive_expression;
 	relational_operator          = {a} less_than | {b} less_equal | {c} great_than | {d} great_equal | {e} equal | {f} different;
 	
+	/* Expression, Term, Factor grammar */
 	additive_expression          = {a} additive_expression addition_operator term | {b} term;
 	addition_operator            = {a} plus | {b} minus;
 	term                         = {a} term multiplicative_operator factor | {b} factor;

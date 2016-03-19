@@ -21,7 +21,7 @@ public class Main {
 				
 	            Start abstractSintaxTree = parser.parse();
 	            
-	            System.out.println("Accepted!");
+	            System.out.println("Input syntactically accepted!");
 			} catch (Exception e) {
 				// Print exceptions
 	            System.out.println ("\n" + e);

@@ -81,18 +81,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAADeclarationList(AADeclarationList node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABDeclarationList(ABDeclarationList node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAADeclaration(AADeclaration node)
     {
         defaultCase(node);
@@ -105,25 +93,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAVariableDeclaration(AAVariableDeclaration node)
+    public void caseAVariableDeclaration(AVariableDeclaration node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABVariableDeclaration(ABVariableDeclaration node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAArrayDeclaration(AAArrayDeclaration node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABArrayDeclaration(ABArrayDeclaration node)
+    public void caseAArrayDeclaration(AArrayDeclaration node)
     {
         defaultCase(node);
     }
@@ -177,25 +153,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAASingleParameter(AASingleParameter node)
+    public void caseASingleParameter(ASingleParameter node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABSingleParameter(ABSingleParameter node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAArrayParameter(AAArrayParameter node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABArrayParameter(ABArrayParameter node)
+    public void caseAArrayParameter(AArrayParameter node)
     {
         defaultCase(node);
     }
@@ -351,25 +315,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAVariable(AAVariable node)
+    public void caseAVariable(AVariable node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABVariable(ABVariable node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAArrayExpression(AAArrayExpression node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABArrayExpression(ABArrayExpression node)
+    public void caseAArrayExpression(AArrayExpression node)
     {
         defaultCase(node);
     }

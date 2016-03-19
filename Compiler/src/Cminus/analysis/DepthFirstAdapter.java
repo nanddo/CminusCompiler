@@ -50,57 +50,14 @@ public class DepthFirstAdapter extends AnalysisAdapter
     public void caseAProgram(AProgram node)
     {
         inAProgram(node);
-        if(node.getDeclarationList() != null)
         {
-            node.getDeclarationList().apply(this);
+            List<PDeclaration> copy = new ArrayList<PDeclaration>(node.getDeclaration());
+            for(PDeclaration e : copy)
+            {
+                e.apply(this);
+            }
         }
         outAProgram(node);
-    }
-
-    public void inAADeclarationList(AADeclarationList node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAADeclarationList(AADeclarationList node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAADeclarationList(AADeclarationList node)
-    {
-        inAADeclarationList(node);
-        if(node.getDeclarationList() != null)
-        {
-            node.getDeclarationList().apply(this);
-        }
-        if(node.getDeclaration() != null)
-        {
-            node.getDeclaration().apply(this);
-        }
-        outAADeclarationList(node);
-    }
-
-    public void inABDeclarationList(ABDeclarationList node)
-    {
-        defaultIn(node);
-    }
-
-    public void outABDeclarationList(ABDeclarationList node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseABDeclarationList(ABDeclarationList node)
-    {
-        inABDeclarationList(node);
-        if(node.getDeclaration() != null)
-        {
-            node.getDeclaration().apply(this);
-        }
-        outABDeclarationList(node);
     }
 
     public void inAADeclaration(AADeclaration node)
@@ -145,20 +102,20 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outABDeclaration(node);
     }
 
-    public void inAAVariableDeclaration(AAVariableDeclaration node)
+    public void inAVariableDeclaration(AVariableDeclaration node)
     {
         defaultIn(node);
     }
 
-    public void outAAVariableDeclaration(AAVariableDeclaration node)
+    public void outAVariableDeclaration(AVariableDeclaration node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAVariableDeclaration(AAVariableDeclaration node)
+    public void caseAVariableDeclaration(AVariableDeclaration node)
     {
-        inAAVariableDeclaration(node);
+        inAVariableDeclaration(node);
         if(node.getTypeSpecifier() != null)
         {
             node.getTypeSpecifier().apply(this);
@@ -167,64 +124,34 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getId().apply(this);
         }
-        if(node.getSemicolon() != null)
         {
-            node.getSemicolon().apply(this);
-        }
-        outAAVariableDeclaration(node);
-    }
-
-    public void inABVariableDeclaration(ABVariableDeclaration node)
-    {
-        defaultIn(node);
-    }
-
-    public void outABVariableDeclaration(ABVariableDeclaration node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseABVariableDeclaration(ABVariableDeclaration node)
-    {
-        inABVariableDeclaration(node);
-        if(node.getTypeSpecifier() != null)
-        {
-            node.getTypeSpecifier().apply(this);
-        }
-        if(node.getId() != null)
-        {
-            node.getId().apply(this);
-        }
-        if(node.getArrayDeclaration() != null)
-        {
-            node.getArrayDeclaration().apply(this);
+            List<PArrayDeclaration> copy = new ArrayList<PArrayDeclaration>(node.getArrayDeclaration());
+            for(PArrayDeclaration e : copy)
+            {
+                e.apply(this);
+            }
         }
         if(node.getSemicolon() != null)
         {
             node.getSemicolon().apply(this);
         }
-        outABVariableDeclaration(node);
+        outAVariableDeclaration(node);
     }
 
-    public void inAAArrayDeclaration(AAArrayDeclaration node)
+    public void inAArrayDeclaration(AArrayDeclaration node)
     {
         defaultIn(node);
     }
 
-    public void outAAArrayDeclaration(AAArrayDeclaration node)
+    public void outAArrayDeclaration(AArrayDeclaration node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAArrayDeclaration(AAArrayDeclaration node)
+    public void caseAArrayDeclaration(AArrayDeclaration node)
     {
-        inAAArrayDeclaration(node);
-        if(node.getArrayDeclaration() != null)
-        {
-            node.getArrayDeclaration().apply(this);
-        }
+        inAArrayDeclaration(node);
         if(node.getLeftBracket() != null)
         {
             node.getLeftBracket().apply(this);
@@ -237,36 +164,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRightBracket().apply(this);
         }
-        outAAArrayDeclaration(node);
-    }
-
-    public void inABArrayDeclaration(ABArrayDeclaration node)
-    {
-        defaultIn(node);
-    }
-
-    public void outABArrayDeclaration(ABArrayDeclaration node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseABArrayDeclaration(ABArrayDeclaration node)
-    {
-        inABArrayDeclaration(node);
-        if(node.getLeftBracket() != null)
-        {
-            node.getLeftBracket().apply(this);
-        }
-        if(node.getNum() != null)
-        {
-            node.getNum().apply(this);
-        }
-        if(node.getRightBracket() != null)
-        {
-            node.getRightBracket().apply(this);
-        }
-        outABArrayDeclaration(node);
+        outAArrayDeclaration(node);
     }
 
     public void inAATypeSpecifier(AATypeSpecifier node)
@@ -465,20 +363,20 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outABParametersList(node);
     }
 
-    public void inAASingleParameter(AASingleParameter node)
+    public void inASingleParameter(ASingleParameter node)
     {
         defaultIn(node);
     }
 
-    public void outAASingleParameter(AASingleParameter node)
+    public void outASingleParameter(ASingleParameter node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAASingleParameter(AASingleParameter node)
+    public void caseASingleParameter(ASingleParameter node)
     {
-        inAASingleParameter(node);
+        inASingleParameter(node);
         if(node.getTypeSpecifier() != null)
         {
             node.getTypeSpecifier().apply(this);
@@ -487,56 +385,30 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getId().apply(this);
         }
-        outAASingleParameter(node);
+        {
+            List<PArrayParameter> copy = new ArrayList<PArrayParameter>(node.getArrayParameter());
+            for(PArrayParameter e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outASingleParameter(node);
     }
 
-    public void inABSingleParameter(ABSingleParameter node)
+    public void inAArrayParameter(AArrayParameter node)
     {
         defaultIn(node);
     }
 
-    public void outABSingleParameter(ABSingleParameter node)
+    public void outAArrayParameter(AArrayParameter node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseABSingleParameter(ABSingleParameter node)
+    public void caseAArrayParameter(AArrayParameter node)
     {
-        inABSingleParameter(node);
-        if(node.getTypeSpecifier() != null)
-        {
-            node.getTypeSpecifier().apply(this);
-        }
-        if(node.getId() != null)
-        {
-            node.getId().apply(this);
-        }
-        if(node.getArrayParameter() != null)
-        {
-            node.getArrayParameter().apply(this);
-        }
-        outABSingleParameter(node);
-    }
-
-    public void inAAArrayParameter(AAArrayParameter node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAAArrayParameter(AAArrayParameter node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAAArrayParameter(AAArrayParameter node)
-    {
-        inAAArrayParameter(node);
-        if(node.getArrayParameter() != null)
-        {
-            node.getArrayParameter().apply(this);
-        }
+        inAArrayParameter(node);
         if(node.getLeftBracket() != null)
         {
             node.getLeftBracket().apply(this);
@@ -545,32 +417,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRightBracket().apply(this);
         }
-        outAAArrayParameter(node);
-    }
-
-    public void inABArrayParameter(ABArrayParameter node)
-    {
-        defaultIn(node);
-    }
-
-    public void outABArrayParameter(ABArrayParameter node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseABArrayParameter(ABArrayParameter node)
-    {
-        inABArrayParameter(node);
-        if(node.getLeftBracket() != null)
-        {
-            node.getLeftBracket().apply(this);
-        }
-        if(node.getRightBracket() != null)
-        {
-            node.getRightBracket().apply(this);
-        }
-        outABArrayParameter(node);
+        outAArrayParameter(node);
     }
 
     public void inAAStatementList(AAStatementList node)
@@ -1230,70 +1077,48 @@ public class DepthFirstAdapter extends AnalysisAdapter
         outABReturnStatement(node);
     }
 
-    public void inAAVariable(AAVariable node)
+    public void inAVariable(AVariable node)
     {
         defaultIn(node);
     }
 
-    public void outAAVariable(AAVariable node)
+    public void outAVariable(AVariable node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAVariable(AAVariable node)
+    public void caseAVariable(AVariable node)
     {
-        inAAVariable(node);
+        inAVariable(node);
         if(node.getId() != null)
         {
             node.getId().apply(this);
         }
-        outAAVariable(node);
+        {
+            List<PArrayExpression> copy = new ArrayList<PArrayExpression>(node.getArrayExpression());
+            for(PArrayExpression e : copy)
+            {
+                e.apply(this);
+            }
+        }
+        outAVariable(node);
     }
 
-    public void inABVariable(ABVariable node)
+    public void inAArrayExpression(AArrayExpression node)
     {
         defaultIn(node);
     }
 
-    public void outABVariable(ABVariable node)
+    public void outAArrayExpression(AArrayExpression node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseABVariable(ABVariable node)
+    public void caseAArrayExpression(AArrayExpression node)
     {
-        inABVariable(node);
-        if(node.getId() != null)
-        {
-            node.getId().apply(this);
-        }
-        if(node.getArrayExpression() != null)
-        {
-            node.getArrayExpression().apply(this);
-        }
-        outABVariable(node);
-    }
-
-    public void inAAArrayExpression(AAArrayExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAAArrayExpression(AAArrayExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAAArrayExpression(AAArrayExpression node)
-    {
-        inAAArrayExpression(node);
-        if(node.getArrayExpression() != null)
-        {
-            node.getArrayExpression().apply(this);
-        }
+        inAArrayExpression(node);
         if(node.getLeftBracket() != null)
         {
             node.getLeftBracket().apply(this);
@@ -1306,36 +1131,7 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getRightBracket().apply(this);
         }
-        outAAArrayExpression(node);
-    }
-
-    public void inABArrayExpression(ABArrayExpression node)
-    {
-        defaultIn(node);
-    }
-
-    public void outABArrayExpression(ABArrayExpression node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseABArrayExpression(ABArrayExpression node)
-    {
-        inABArrayExpression(node);
-        if(node.getLeftBracket() != null)
-        {
-            node.getLeftBracket().apply(this);
-        }
-        if(node.getExpression() != null)
-        {
-            node.getExpression().apply(this);
-        }
-        if(node.getRightBracket() != null)
-        {
-            node.getRightBracket().apply(this);
-        }
-        outABArrayExpression(node);
+        outAArrayExpression(node);
     }
 
     public void inAAExpression(AAExpression node)

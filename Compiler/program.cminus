@@ -1,9 +1,20 @@
+void teste(void) {
+	string t;
+	t = "Atribuicao de string";
+	print(t);
+	return;
+}
+
 int main (void) {
-	int a;
-	a = 2;
-	print (a);
+	int a[52][10];
+	a[52-50][1*5-2] = 2;
+	teste();
+	print(a);
 	return 0;
-	// teste de ignored
-	/* */
+	// comentario de linha
+	/* 
+	 * comentario de bloco
+	 * /**/
+	 */
 }
 

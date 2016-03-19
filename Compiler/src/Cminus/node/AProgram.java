@@ -2,12 +2,13 @@
 
 package Cminus.node;
 
+import java.util.*;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
 public final class AProgram extends PProgram
 {
-    private PDeclarationList _declarationList_;
+    private final LinkedList<PDeclaration> _declaration_ = new LinkedList<PDeclaration>();
 
     public AProgram()
     {
@@ -15,10 +16,10 @@ public final class AProgram extends PProgram
     }
 
     public AProgram(
-        @SuppressWarnings("hiding") PDeclarationList _declarationList_)
+        @SuppressWarnings("hiding") List<?> _declaration_)
     {
         // Constructor
-        setDeclarationList(_declarationList_);
+        setDeclaration(_declaration_);
 
     }
 
@@ -26,7 +27,7 @@ public final class AProgram extends PProgram
     public Object clone()
     {
         return new AProgram(
-            cloneNode(this._declarationList_));
+            cloneList(this._declaration_));
     }
 
     @Override
@@ -35,45 +36,45 @@ public final class AProgram extends PProgram
         ((Analysis) sw).caseAProgram(this);
     }
 
-    public PDeclarationList getDeclarationList()
+    public LinkedList<PDeclaration> getDeclaration()
     {
-        return this._declarationList_;
+        return this._declaration_;
     }
 
-    public void setDeclarationList(PDeclarationList node)
+    public void setDeclaration(List<?> list)
     {
-        if(this._declarationList_ != null)
+        for(PDeclaration e : this._declaration_)
         {
-            this._declarationList_.parent(null);
+            e.parent(null);
         }
+        this._declaration_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PDeclaration e = (PDeclaration) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._declaration_.add(e);
         }
-
-        this._declarationList_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._declarationList_);
+            + toString(this._declaration_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._declarationList_ == child)
+        if(this._declaration_.remove(child))
         {
-            this._declarationList_ = null;
             return;
         }
 
@@ -84,10 +85,22 @@ public final class AProgram extends PProgram
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._declarationList_ == oldChild)
+        for(ListIterator<PDeclaration> i = this._declaration_.listIterator(); i.hasNext();)
         {
-            setDeclarationList((PDeclarationList) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PDeclaration) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         throw new RuntimeException("Not a child.");
