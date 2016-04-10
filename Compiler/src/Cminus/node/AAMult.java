@@ -5,46 +5,46 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABMultiplicativeOperator extends PMultiplicativeOperator
+public final class AAMult extends PMult
 {
-    private TSlash _slash_;
+    private TAsterisk _asterisk_;
 
-    public ABMultiplicativeOperator()
+    public AAMult()
     {
         // Constructor
     }
 
-    public ABMultiplicativeOperator(
-        @SuppressWarnings("hiding") TSlash _slash_)
+    public AAMult(
+        @SuppressWarnings("hiding") TAsterisk _asterisk_)
     {
         // Constructor
-        setSlash(_slash_);
+        setAsterisk(_asterisk_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ABMultiplicativeOperator(
-            cloneNode(this._slash_));
+        return new AAMult(
+            cloneNode(this._asterisk_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseABMultiplicativeOperator(this);
+        ((Analysis) sw).caseAAMult(this);
     }
 
-    public TSlash getSlash()
+    public TAsterisk getAsterisk()
     {
-        return this._slash_;
+        return this._asterisk_;
     }
 
-    public void setSlash(TSlash node)
+    public void setAsterisk(TAsterisk node)
     {
-        if(this._slash_ != null)
+        if(this._asterisk_ != null)
         {
-            this._slash_.parent(null);
+            this._asterisk_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ABMultiplicativeOperator extends PMultiplicativeOperator
             node.parent(this);
         }
 
-        this._slash_ = node;
+        this._asterisk_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._slash_);
+            + toString(this._asterisk_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._slash_ == child)
+        if(this._asterisk_ == child)
         {
-            this._slash_ = null;
+            this._asterisk_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ABMultiplicativeOperator extends PMultiplicativeOperator
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._slash_ == oldChild)
+        if(this._asterisk_ == oldChild)
         {
-            setSlash((TSlash) newChild);
+            setAsterisk((TAsterisk) newChild);
             return;
         }
 

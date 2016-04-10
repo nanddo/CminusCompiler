@@ -2,7 +2,7 @@
 
 package Cminus.node;
 
-public abstract class PMultiplicativeOperator extends Node
+public abstract class PExp extends Node
 {
     // Empty body
 }

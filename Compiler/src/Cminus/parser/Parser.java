@@ -534,25 +534,25 @@ public class Parser
                 push(goTo(26), list, false);
             }
             break;
-            case 56: /* reduce AAAdditiveExpression */
+            case 56: /* reduce AAExp */
             {
                 ArrayList<Object> list = new56();
                 push(goTo(27), list, false);
             }
             break;
-            case 57: /* reduce ABAdditiveExpression */
+            case 57: /* reduce ABExp */
             {
                 ArrayList<Object> list = new57();
                 push(goTo(27), list, false);
             }
             break;
-            case 58: /* reduce AAAdditionOperator */
+            case 58: /* reduce AAAdd */
             {
                 ArrayList<Object> list = new58();
                 push(goTo(28), list, false);
             }
             break;
-            case 59: /* reduce ABAdditionOperator */
+            case 59: /* reduce ABAdd */
             {
                 ArrayList<Object> list = new59();
                 push(goTo(28), list, false);
@@ -570,13 +570,13 @@ public class Parser
                 push(goTo(29), list, false);
             }
             break;
-            case 62: /* reduce AAMultiplicativeOperator */
+            case 62: /* reduce AAMult */
             {
                 ArrayList<Object> list = new62();
                 push(goTo(30), list, false);
             }
             break;
-            case 63: /* reduce ABMultiplicativeOperator */
+            case 63: /* reduce ABMult */
             {
                 ArrayList<Object> list = new63();
                 push(goTo(30), list, false);
@@ -885,10 +885,10 @@ public class Parser
         PTypeSpecifier ptypespecifierNode1;
         {
             // Block
-        TVoid tvoidNode2;
-        tvoidNode2 = (TVoid)nodeArrayList1.get(0);
+        TString tstringNode2;
+        tstringNode2 = (TString)nodeArrayList1.get(0);
 
-        ptypespecifierNode1 = new ABTypeSpecifier(tvoidNode2);
+        ptypespecifierNode1 = new ABTypeSpecifier(tstringNode2);
         }
 	nodeList.add(ptypespecifierNode1);
         return nodeList;
@@ -905,10 +905,10 @@ public class Parser
         PTypeSpecifier ptypespecifierNode1;
         {
             // Block
-        TString tstringNode2;
-        tstringNode2 = (TString)nodeArrayList1.get(0);
+        TVoid tvoidNode2;
+        tvoidNode2 = (TVoid)nodeArrayList1.get(0);
 
-        ptypespecifierNode1 = new ACTypeSpecifier(tstringNode2);
+        ptypespecifierNode1 = new ACTypeSpecifier(tvoidNode2);
         }
 	nodeList.add(ptypespecifierNode1);
         return nodeList;
@@ -1886,12 +1886,12 @@ public class Parser
             // Block
         PSimpleExpression psimpleexpressionNode2;
         PRelationalOperator prelationaloperatorNode3;
-        PAdditiveExpression padditiveexpressionNode4;
+        PExp pexpNode4;
         psimpleexpressionNode2 = (PSimpleExpression)nodeArrayList1.get(0);
         prelationaloperatorNode3 = (PRelationalOperator)nodeArrayList2.get(0);
-        padditiveexpressionNode4 = (PAdditiveExpression)nodeArrayList3.get(0);
+        pexpNode4 = (PExp)nodeArrayList3.get(0);
 
-        psimpleexpressionNode1 = new AASimpleExpression(psimpleexpressionNode2, prelationaloperatorNode3, padditiveexpressionNode4);
+        psimpleexpressionNode1 = new AASimpleExpression(psimpleexpressionNode2, prelationaloperatorNode3, pexpNode4);
         }
 	nodeList.add(psimpleexpressionNode1);
         return nodeList;
@@ -1908,10 +1908,10 @@ public class Parser
         PSimpleExpression psimpleexpressionNode1;
         {
             // Block
-        PAdditiveExpression padditiveexpressionNode2;
-        padditiveexpressionNode2 = (PAdditiveExpression)nodeArrayList1.get(0);
+        PExp pexpNode2;
+        pexpNode2 = (PExp)nodeArrayList1.get(0);
 
-        psimpleexpressionNode1 = new ABSimpleExpression(padditiveexpressionNode2);
+        psimpleexpressionNode1 = new ABSimpleExpression(pexpNode2);
         }
 	nodeList.add(psimpleexpressionNode1);
         return nodeList;
@@ -2040,86 +2040,86 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new56() /* reduce AAAdditiveExpression */
+    ArrayList<Object> new56() /* reduce AAExp */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList3 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList2 = pop();
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAdditiveExpression padditiveexpressionNode1;
+        PExp pexpNode1;
         {
             // Block
-        PAdditiveExpression padditiveexpressionNode2;
-        PAdditionOperator padditionoperatorNode3;
+        PExp pexpNode2;
+        PAdd paddNode3;
         PTerm ptermNode4;
-        padditiveexpressionNode2 = (PAdditiveExpression)nodeArrayList1.get(0);
-        padditionoperatorNode3 = (PAdditionOperator)nodeArrayList2.get(0);
+        pexpNode2 = (PExp)nodeArrayList1.get(0);
+        paddNode3 = (PAdd)nodeArrayList2.get(0);
         ptermNode4 = (PTerm)nodeArrayList3.get(0);
 
-        padditiveexpressionNode1 = new AAAdditiveExpression(padditiveexpressionNode2, padditionoperatorNode3, ptermNode4);
+        pexpNode1 = new AAExp(pexpNode2, paddNode3, ptermNode4);
         }
-	nodeList.add(padditiveexpressionNode1);
+	nodeList.add(pexpNode1);
         return nodeList;
     }
 
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new57() /* reduce ABAdditiveExpression */
+    ArrayList<Object> new57() /* reduce ABExp */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAdditiveExpression padditiveexpressionNode1;
+        PExp pexpNode1;
         {
             // Block
         PTerm ptermNode2;
         ptermNode2 = (PTerm)nodeArrayList1.get(0);
 
-        padditiveexpressionNode1 = new ABAdditiveExpression(ptermNode2);
+        pexpNode1 = new ABExp(ptermNode2);
         }
-	nodeList.add(padditiveexpressionNode1);
+	nodeList.add(pexpNode1);
         return nodeList;
     }
 
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new58() /* reduce AAAdditionOperator */
+    ArrayList<Object> new58() /* reduce AAAdd */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAdditionOperator padditionoperatorNode1;
+        PAdd paddNode1;
         {
             // Block
         TPlus tplusNode2;
         tplusNode2 = (TPlus)nodeArrayList1.get(0);
 
-        padditionoperatorNode1 = new AAAdditionOperator(tplusNode2);
+        paddNode1 = new AAAdd(tplusNode2);
         }
-	nodeList.add(padditionoperatorNode1);
+	nodeList.add(paddNode1);
         return nodeList;
     }
 
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new59() /* reduce ABAdditionOperator */
+    ArrayList<Object> new59() /* reduce ABAdd */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PAdditionOperator padditionoperatorNode1;
+        PAdd paddNode1;
         {
             // Block
         TMinus tminusNode2;
         tminusNode2 = (TMinus)nodeArrayList1.get(0);
 
-        padditionoperatorNode1 = new ABAdditionOperator(tminusNode2);
+        paddNode1 = new ABAdd(tminusNode2);
         }
-	nodeList.add(padditionoperatorNode1);
+	nodeList.add(paddNode1);
         return nodeList;
     }
 
@@ -2137,13 +2137,13 @@ public class Parser
         {
             // Block
         PTerm ptermNode2;
-        PMultiplicativeOperator pmultiplicativeoperatorNode3;
+        PMult pmultNode3;
         PFactor pfactorNode4;
         ptermNode2 = (PTerm)nodeArrayList1.get(0);
-        pmultiplicativeoperatorNode3 = (PMultiplicativeOperator)nodeArrayList2.get(0);
+        pmultNode3 = (PMult)nodeArrayList2.get(0);
         pfactorNode4 = (PFactor)nodeArrayList3.get(0);
 
-        ptermNode1 = new AATerm(ptermNode2, pmultiplicativeoperatorNode3, pfactorNode4);
+        ptermNode1 = new AATerm(ptermNode2, pmultNode3, pfactorNode4);
         }
 	nodeList.add(ptermNode1);
         return nodeList;
@@ -2172,40 +2172,40 @@ public class Parser
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new62() /* reduce AAMultiplicativeOperator */
+    ArrayList<Object> new62() /* reduce AAMult */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PMultiplicativeOperator pmultiplicativeoperatorNode1;
+        PMult pmultNode1;
         {
             // Block
         TAsterisk tasteriskNode2;
         tasteriskNode2 = (TAsterisk)nodeArrayList1.get(0);
 
-        pmultiplicativeoperatorNode1 = new AAMultiplicativeOperator(tasteriskNode2);
+        pmultNode1 = new AAMult(tasteriskNode2);
         }
-	nodeList.add(pmultiplicativeoperatorNode1);
+	nodeList.add(pmultNode1);
         return nodeList;
     }
 
 
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    ArrayList<Object> new63() /* reduce ABMultiplicativeOperator */
+    ArrayList<Object> new63() /* reduce ABMult */
     {
         @SuppressWarnings("hiding") ArrayList<Object> nodeList = new ArrayList<Object>();
 
         @SuppressWarnings("unused") ArrayList<Object> nodeArrayList1 = pop();
-        PMultiplicativeOperator pmultiplicativeoperatorNode1;
+        PMult pmultNode1;
         {
             // Block
         TSlash tslashNode2;
         tslashNode2 = (TSlash)nodeArrayList1.get(0);
 
-        pmultiplicativeoperatorNode1 = new ABMultiplicativeOperator(tslashNode2);
+        pmultNode1 = new ABMult(tslashNode2);
         }
-	nodeList.add(pmultiplicativeoperatorNode1);
+	nodeList.add(pmultNode1);
         return nodeList;
     }
 
@@ -2637,8 +2637,8 @@ public class Parser
 /*      {
 			{{-1, ERROR, 0}, {2, SHIFT, 1}, {3, SHIFT, 2}, {5, SHIFT, 3}, },
 			{{-1, REDUCE, 6}, },
-			{{-1, REDUCE, 8}, },
 			{{-1, REDUCE, 7}, },
+			{{-1, REDUCE, 8}, },
 			{{-1, ERROR, 4}, {29, ACCEPT, -1}, },
 			{{-1, REDUCE, 74}, },
 			{{-1, REDUCE, 1}, },
@@ -2652,7 +2652,7 @@ public class Parser
 			{{-1, ERROR, 14}, {8, SHIFT, 22}, },
 			{{-1, REDUCE, 76}, },
 			{{-1, ERROR, 16}, {22, SHIFT, 23}, {25, SHIFT, 14}, },
-			{{-1, REDUCE, 7}, {24, REDUCE, 11}, },
+			{{-1, REDUCE, 8}, {24, REDUCE, 11}, },
 			{{-1, ERROR, 18}, {7, SHIFT, 25}, },
 			{{-1, ERROR, 19}, {24, SHIFT, 26}, },
 			{{-1, REDUCE, 10}, {21, SHIFT, 27}, },

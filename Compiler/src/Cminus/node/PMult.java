@@ -2,7 +2,7 @@
 
 package Cminus.node;
 
-public abstract class PAdditiveExpression extends Node
+public abstract class PMult extends Node
 {
     // Empty body
 }

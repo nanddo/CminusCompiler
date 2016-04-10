@@ -5,46 +5,46 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAMultiplicativeOperator extends PMultiplicativeOperator
+public final class AAAdd extends PAdd
 {
-    private TAsterisk _asterisk_;
+    private TPlus _plus_;
 
-    public AAMultiplicativeOperator()
+    public AAAdd()
     {
         // Constructor
     }
 
-    public AAMultiplicativeOperator(
-        @SuppressWarnings("hiding") TAsterisk _asterisk_)
+    public AAAdd(
+        @SuppressWarnings("hiding") TPlus _plus_)
     {
         // Constructor
-        setAsterisk(_asterisk_);
+        setPlus(_plus_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AAMultiplicativeOperator(
-            cloneNode(this._asterisk_));
+        return new AAAdd(
+            cloneNode(this._plus_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAMultiplicativeOperator(this);
+        ((Analysis) sw).caseAAAdd(this);
     }
 
-    public TAsterisk getAsterisk()
+    public TPlus getPlus()
     {
-        return this._asterisk_;
+        return this._plus_;
     }
 
-    public void setAsterisk(TAsterisk node)
+    public void setPlus(TPlus node)
     {
-        if(this._asterisk_ != null)
+        if(this._plus_ != null)
         {
-            this._asterisk_.parent(null);
+            this._plus_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AAMultiplicativeOperator extends PMultiplicativeOperator
             node.parent(this);
         }
 
-        this._asterisk_ = node;
+        this._plus_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._asterisk_);
+            + toString(this._plus_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._asterisk_ == child)
+        if(this._plus_ == child)
         {
-            this._asterisk_ = null;
+            this._plus_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AAMultiplicativeOperator extends PMultiplicativeOperator
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._asterisk_ == oldChild)
+        if(this._plus_ == oldChild)
         {
-            setAsterisk((TAsterisk) newChild);
+            setPlus((TPlus) newChild);
             return;
         }
 

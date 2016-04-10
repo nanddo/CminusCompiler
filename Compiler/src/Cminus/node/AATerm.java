@@ -8,7 +8,7 @@ import Cminus.analysis.*;
 public final class AATerm extends PTerm
 {
     private PTerm _term_;
-    private PMultiplicativeOperator _multiplicativeOperator_;
+    private PMult _mult_;
     private PFactor _factor_;
 
     public AATerm()
@@ -18,13 +18,13 @@ public final class AATerm extends PTerm
 
     public AATerm(
         @SuppressWarnings("hiding") PTerm _term_,
-        @SuppressWarnings("hiding") PMultiplicativeOperator _multiplicativeOperator_,
+        @SuppressWarnings("hiding") PMult _mult_,
         @SuppressWarnings("hiding") PFactor _factor_)
     {
         // Constructor
         setTerm(_term_);
 
-        setMultiplicativeOperator(_multiplicativeOperator_);
+        setMult(_mult_);
 
         setFactor(_factor_);
 
@@ -35,7 +35,7 @@ public final class AATerm extends PTerm
     {
         return new AATerm(
             cloneNode(this._term_),
-            cloneNode(this._multiplicativeOperator_),
+            cloneNode(this._mult_),
             cloneNode(this._factor_));
     }
 
@@ -70,16 +70,16 @@ public final class AATerm extends PTerm
         this._term_ = node;
     }
 
-    public PMultiplicativeOperator getMultiplicativeOperator()
+    public PMult getMult()
     {
-        return this._multiplicativeOperator_;
+        return this._mult_;
     }
 
-    public void setMultiplicativeOperator(PMultiplicativeOperator node)
+    public void setMult(PMult node)
     {
-        if(this._multiplicativeOperator_ != null)
+        if(this._mult_ != null)
         {
-            this._multiplicativeOperator_.parent(null);
+            this._mult_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AATerm extends PTerm
             node.parent(this);
         }
 
-        this._multiplicativeOperator_ = node;
+        this._mult_ = node;
     }
 
     public PFactor getFactor()
@@ -125,7 +125,7 @@ public final class AATerm extends PTerm
     {
         return ""
             + toString(this._term_)
-            + toString(this._multiplicativeOperator_)
+            + toString(this._mult_)
             + toString(this._factor_);
     }
 
@@ -139,9 +139,9 @@ public final class AATerm extends PTerm
             return;
         }
 
-        if(this._multiplicativeOperator_ == child)
+        if(this._mult_ == child)
         {
-            this._multiplicativeOperator_ = null;
+            this._mult_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class AATerm extends PTerm
             return;
         }
 
-        if(this._multiplicativeOperator_ == oldChild)
+        if(this._mult_ == oldChild)
         {
-            setMultiplicativeOperator((PMultiplicativeOperator) newChild);
+            setMult((PMult) newChild);
             return;
         }
 

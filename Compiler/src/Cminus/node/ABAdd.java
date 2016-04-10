@@ -5,16 +5,16 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABAdditionOperator extends PAdditionOperator
+public final class ABAdd extends PAdd
 {
     private TMinus _minus_;
 
-    public ABAdditionOperator()
+    public ABAdd()
     {
         // Constructor
     }
 
-    public ABAdditionOperator(
+    public ABAdd(
         @SuppressWarnings("hiding") TMinus _minus_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class ABAdditionOperator extends PAdditionOperator
     @Override
     public Object clone()
     {
-        return new ABAdditionOperator(
+        return new ABAdd(
             cloneNode(this._minus_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseABAdditionOperator(this);
+        ((Analysis) sw).caseABAdd(this);
     }
 
     public TMinus getMinus()

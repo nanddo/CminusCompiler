@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class ABSimpleExpression extends PSimpleExpression
 {
-    private PAdditiveExpression _additiveExpression_;
+    private PExp _exp_;
 
     public ABSimpleExpression()
     {
@@ -15,10 +15,10 @@ public final class ABSimpleExpression extends PSimpleExpression
     }
 
     public ABSimpleExpression(
-        @SuppressWarnings("hiding") PAdditiveExpression _additiveExpression_)
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
-        setAdditiveExpression(_additiveExpression_);
+        setExp(_exp_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ABSimpleExpression extends PSimpleExpression
     public Object clone()
     {
         return new ABSimpleExpression(
-            cloneNode(this._additiveExpression_));
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ABSimpleExpression extends PSimpleExpression
         ((Analysis) sw).caseABSimpleExpression(this);
     }
 
-    public PAdditiveExpression getAdditiveExpression()
+    public PExp getExp()
     {
-        return this._additiveExpression_;
+        return this._exp_;
     }
 
-    public void setAdditiveExpression(PAdditiveExpression node)
+    public void setExp(PExp node)
     {
-        if(this._additiveExpression_ != null)
+        if(this._exp_ != null)
         {
-            this._additiveExpression_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ABSimpleExpression extends PSimpleExpression
             node.parent(this);
         }
 
-        this._additiveExpression_ = node;
+        this._exp_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._additiveExpression_);
+            + toString(this._exp_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._additiveExpression_ == child)
+        if(this._exp_ == child)
         {
-            this._additiveExpression_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ABSimpleExpression extends PSimpleExpression
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._additiveExpression_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setAdditiveExpression((PAdditiveExpression) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

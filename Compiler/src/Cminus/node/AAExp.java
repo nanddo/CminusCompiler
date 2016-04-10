@@ -5,26 +5,26 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAAdditiveExpression extends PAdditiveExpression
+public final class AAExp extends PExp
 {
-    private PAdditiveExpression _additiveExpression_;
-    private PAdditionOperator _additionOperator_;
+    private PExp _exp_;
+    private PAdd _add_;
     private PTerm _term_;
 
-    public AAAdditiveExpression()
+    public AAExp()
     {
         // Constructor
     }
 
-    public AAAdditiveExpression(
-        @SuppressWarnings("hiding") PAdditiveExpression _additiveExpression_,
-        @SuppressWarnings("hiding") PAdditionOperator _additionOperator_,
+    public AAExp(
+        @SuppressWarnings("hiding") PExp _exp_,
+        @SuppressWarnings("hiding") PAdd _add_,
         @SuppressWarnings("hiding") PTerm _term_)
     {
         // Constructor
-        setAdditiveExpression(_additiveExpression_);
+        setExp(_exp_);
 
-        setAdditionOperator(_additionOperator_);
+        setAdd(_add_);
 
         setTerm(_term_);
 
@@ -33,28 +33,28 @@ public final class AAAdditiveExpression extends PAdditiveExpression
     @Override
     public Object clone()
     {
-        return new AAAdditiveExpression(
-            cloneNode(this._additiveExpression_),
-            cloneNode(this._additionOperator_),
+        return new AAExp(
+            cloneNode(this._exp_),
+            cloneNode(this._add_),
             cloneNode(this._term_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAAdditiveExpression(this);
+        ((Analysis) sw).caseAAExp(this);
     }
 
-    public PAdditiveExpression getAdditiveExpression()
+    public PExp getExp()
     {
-        return this._additiveExpression_;
+        return this._exp_;
     }
 
-    public void setAdditiveExpression(PAdditiveExpression node)
+    public void setExp(PExp node)
     {
-        if(this._additiveExpression_ != null)
+        if(this._exp_ != null)
         {
-            this._additiveExpression_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -67,19 +67,19 @@ public final class AAAdditiveExpression extends PAdditiveExpression
             node.parent(this);
         }
 
-        this._additiveExpression_ = node;
+        this._exp_ = node;
     }
 
-    public PAdditionOperator getAdditionOperator()
+    public PAdd getAdd()
     {
-        return this._additionOperator_;
+        return this._add_;
     }
 
-    public void setAdditionOperator(PAdditionOperator node)
+    public void setAdd(PAdd node)
     {
-        if(this._additionOperator_ != null)
+        if(this._add_ != null)
         {
-            this._additionOperator_.parent(null);
+            this._add_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AAAdditiveExpression extends PAdditiveExpression
             node.parent(this);
         }
 
-        this._additionOperator_ = node;
+        this._add_ = node;
     }
 
     public PTerm getTerm()
@@ -124,8 +124,8 @@ public final class AAAdditiveExpression extends PAdditiveExpression
     public String toString()
     {
         return ""
-            + toString(this._additiveExpression_)
-            + toString(this._additionOperator_)
+            + toString(this._exp_)
+            + toString(this._add_)
             + toString(this._term_);
     }
 
@@ -133,15 +133,15 @@ public final class AAAdditiveExpression extends PAdditiveExpression
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._additiveExpression_ == child)
+        if(this._exp_ == child)
         {
-            this._additiveExpression_ = null;
+            this._exp_ = null;
             return;
         }
 
-        if(this._additionOperator_ == child)
+        if(this._add_ == child)
         {
-            this._additionOperator_ = null;
+            this._add_ = null;
             return;
         }
 
@@ -158,15 +158,15 @@ public final class AAAdditiveExpression extends PAdditiveExpression
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._additiveExpression_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setAdditiveExpression((PAdditiveExpression) newChild);
+            setExp((PExp) newChild);
             return;
         }
 
-        if(this._additionOperator_ == oldChild)
+        if(this._add_ == oldChild)
         {
-            setAdditionOperator((PAdditionOperator) newChild);
+            setAdd((PAdd) newChild);
             return;
         }
 

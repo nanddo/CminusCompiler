@@ -393,25 +393,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAAdditiveExpression(AAAdditiveExpression node)
+    public void caseAAExp(AAExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABAdditiveExpression(ABAdditiveExpression node)
+    public void caseABExp(ABExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAAdditionOperator(AAAdditionOperator node)
+    public void caseAAAdd(AAAdd node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABAdditionOperator(ABAdditionOperator node)
+    public void caseABAdd(ABAdd node)
     {
         defaultCase(node);
     }
@@ -429,13 +429,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAMultiplicativeOperator(AAMultiplicativeOperator node)
+    public void caseAAMult(AAMult node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABMultiplicativeOperator(ABMultiplicativeOperator node)
+    public void caseABMult(ABMult node)
     {
         defaultCase(node);
     }

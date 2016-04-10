@@ -75,57 +75,62 @@ Ignored Tokens
 
 	
 Productions
-	program                      = declaration+;
-	declaration                  = {a} variable_declaration | {b} function_declaration;
+	program                  = declaration+;
+	declaration              = {a} variable_declaration | {b} function_declaration;
 	
-		variable_declaration     = type_specifier id array_declaration* semicolon;
-		array_declaration        = left_bracket num right_bracket;
-		type_specifier           = {a} int | {b} void | {c} string;
-	
-		function_declaration     = type_specifier id left_par parameters right_par compound_statement;
-		parameters               = {a} parameters_list | {b} void;
-		parameters_list          = {a} parameters_list comma single_parameter | {b} single_parameter;
-		single_parameter         = type_specifier id array_parameter*;
-		array_parameter          = left_bracket right_bracket;
+	variable_declaration     = type_specifier id array_declaration* semicolon;
+	array_declaration        = left_bracket num right_bracket;
+	type_specifier           = {a} int | {b} string | {c} void;
 
-	/* Based on p.69 of Appel - Modern Compiler Implementation in Java - 2nd Edition*/		
-	statement_list               = {a} statement_list statement | {b} epsilon;
-	statement                    = {a} expression_statement | {b} compound_statement | {c} return_statement | {d} if_statement | {e} if_else_statement | {f} iteration_statement;
-	statement_with_else          = {a} expression_statement | {b} compound_statement | {c} return_statement | {d} if_else_statement2 | {e} iteration_statement_else;
-	
-		expression_statement     = {a} expression semicolon | {b} semicolon;
-		
-		compound_statement       = left_brace local_declarations statement_list right_brace;
-		local_declarations       = {a} local_declarations variable_declaration | {b} epsilon;
-		
-		if_statement             = if left_par expression right_par statement;
-		if_else_statement        = if left_par expression right_par [true]:statement_with_else else [false]:statement;
-		if_else_statement2       = if left_par expression right_par [true]:statement_with_else else [false]:statement_with_else;
-		
-		iteration_statement      = while left_par expression right_par statement;
-		iteration_statement_else = while left_par expression right_par statement_with_else;
-		
-		return_statement         = {a} return semicolon | {b} return expression semicolon;
+	function_declaration     = type_specifier id left_par parameters right_par compound_statement;
+	parameters               = {a} parameters_list | {b} void;
+	parameters_list          = {a} parameters_list comma single_parameter | {b} single_parameter;
+	single_parameter         = type_specifier id array_parameter*;
+	array_parameter          = left_bracket right_bracket;
 
-	//input_functions              = {a} int input left_par void right_par | {b} string input left_par void right_par;
-	//output_functions             = {a} void output left_par int id right_par | {b} void output left_par string id right_par;
+	/* Based on p.69 of Appel - Modern Compiler Implementation in Java - 2nd Edition*/
+	statement_list           = {a} statement_list statement | {b} epsilon;
+	statement                = {a} expression_statement | {b} compound_statement | {c} return_statement | {d} if_statement | {e} if_else_statement | {f} iteration_statement;
+	statement_with_else      = {a} expression_statement | {b} compound_statement | {c} return_statement | {d} if_else_statement2 | {e} iteration_statement_else;
 	
-	variable                     = id array_expression*;
-	array_expression             = left_bracket expression right_bracket;
+	expression_statement     = {a} expression semicolon | {b} semicolon;
 	
-	expression                   = {a} variable attribution expression | {b} variable attribution string_value | {c} simple_expression;
+	compound_statement       = left_brace local_declarations statement_list right_brace;
+	local_declarations       = {a} local_declarations variable_declaration | {b} epsilon;
 	
-	simple_expression            = {a} simple_expression relational_operator additive_expression | {b} additive_expression;
-	relational_operator          = {a} less_than | {b} less_equal | {c} great_than | {d} great_equal | {e} equal | {f} different;
+	if_statement             = if left_par expression right_par statement;
+	if_else_statement        = if left_par expression right_par [true]:statement_with_else else [false]:statement;
+	if_else_statement2       = if left_par expression right_par [true]:statement_with_else else [false]:statement_with_else;
+	
+	iteration_statement      = while left_par expression right_par statement;
+	iteration_statement_else = while left_par expression right_par statement_with_else;
+	
+	return_statement         = {a} return semicolon | {b} return expression semicolon;
+
+	//input_functions          = {a} int input left_par void right_par | {b} string input left_par void right_par;
+	//output_functions         = {a} void output left_par int id right_par | {b} void output left_par string id right_par;
+	
+	variable                 = id array_expression*;
+	array_expression         = left_bracket expression right_bracket;
+	
+	expression               = {a} variable attribution expression | {b} variable attribution string_value | {c} simple_expression;
+	
+	simple_expression        = {a} simple_expression relational_operator exp | {b} exp;
+	relational_operator      = {a} less_than | {b} less_equal | {c} great_than | {d} great_equal | {e} equal | {f} different;
 	
 	/* Expression, Term, Factor grammar */
-	additive_expression          = {a} additive_expression addition_operator term | {b} term;
-	addition_operator            = {a} plus | {b} minus;
-	term                         = {a} term multiplicative_operator factor | {b} factor;
-	multiplicative_operator      = {a} asterisk | {b} slash;
-	factor                       = {a} left_par expression right_par | {b} variable | {c} call | {d} num;
+	exp                      = {a} exp add term | {b} term;
+	add                      = {a} plus | {b} minus;
+	term                     = {a} term mult factor | {b} factor;
+	mult                     = {a} asterisk | {b} slash;
+	factor                   = {a} left_par expression right_par | {b} variable | {c} call | {d} num;
 	
-	call                         = id left_par arguments right_par;
-	arguments_list               = {a} arguments_list comma expression | {b} expression;
-	arguments                    = {a} arguments_list | {b} epsilon;
-	epsilon                      = ;
+	call                     = id left_par arguments right_par;
+	arguments_list           = {a} arguments_list comma expression | {b} expression;
+	arguments                = {a} arguments_list | {b} epsilon;
+	epsilon                  = ;
+
+
+
+//Abstract Syntax Tree
+	

@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class ACTypeSpecifier extends PTypeSpecifier
 {
-    private TString _string_;
+    private TVoid _void_;
 
     public ACTypeSpecifier()
     {
@@ -15,10 +15,10 @@ public final class ACTypeSpecifier extends PTypeSpecifier
     }
 
     public ACTypeSpecifier(
-        @SuppressWarnings("hiding") TString _string_)
+        @SuppressWarnings("hiding") TVoid _void_)
     {
         // Constructor
-        setString(_string_);
+        setVoid(_void_);
 
     }
 
@@ -26,7 +26,7 @@ public final class ACTypeSpecifier extends PTypeSpecifier
     public Object clone()
     {
         return new ACTypeSpecifier(
-            cloneNode(this._string_));
+            cloneNode(this._void_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class ACTypeSpecifier extends PTypeSpecifier
         ((Analysis) sw).caseACTypeSpecifier(this);
     }
 
-    public TString getString()
+    public TVoid getVoid()
     {
-        return this._string_;
+        return this._void_;
     }
 
-    public void setString(TString node)
+    public void setVoid(TVoid node)
     {
-        if(this._string_ != null)
+        if(this._void_ != null)
         {
-            this._string_.parent(null);
+            this._void_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ACTypeSpecifier extends PTypeSpecifier
             node.parent(this);
         }
 
-        this._string_ = node;
+        this._void_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._string_);
+            + toString(this._void_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._string_ == child)
+        if(this._void_ == child)
         {
-            this._string_ = null;
+            this._void_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ACTypeSpecifier extends PTypeSpecifier
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._string_ == oldChild)
+        if(this._void_ == oldChild)
         {
-            setString((TString) newChild);
+            setVoid((TVoid) newChild);
             return;
         }
 

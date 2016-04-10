@@ -5,46 +5,46 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAAdditionOperator extends PAdditionOperator
+public final class ABMult extends PMult
 {
-    private TPlus _plus_;
+    private TSlash _slash_;
 
-    public AAAdditionOperator()
+    public ABMult()
     {
         // Constructor
     }
 
-    public AAAdditionOperator(
-        @SuppressWarnings("hiding") TPlus _plus_)
+    public ABMult(
+        @SuppressWarnings("hiding") TSlash _slash_)
     {
         // Constructor
-        setPlus(_plus_);
+        setSlash(_slash_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AAAdditionOperator(
-            cloneNode(this._plus_));
+        return new ABMult(
+            cloneNode(this._slash_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAAdditionOperator(this);
+        ((Analysis) sw).caseABMult(this);
     }
 
-    public TPlus getPlus()
+    public TSlash getSlash()
     {
-        return this._plus_;
+        return this._slash_;
     }
 
-    public void setPlus(TPlus node)
+    public void setSlash(TSlash node)
     {
-        if(this._plus_ != null)
+        if(this._slash_ != null)
         {
-            this._plus_.parent(null);
+            this._slash_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AAAdditionOperator extends PAdditionOperator
             node.parent(this);
         }
 
-        this._plus_ = node;
+        this._slash_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._plus_);
+            + toString(this._slash_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._plus_ == child)
+        if(this._slash_ == child)
         {
-            this._plus_ = null;
+            this._slash_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AAAdditionOperator extends PAdditionOperator
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._plus_ == oldChild)
+        if(this._slash_ == oldChild)
         {
-            setPlus((TPlus) newChild);
+            setSlash((TSlash) newChild);
             return;
         }
 

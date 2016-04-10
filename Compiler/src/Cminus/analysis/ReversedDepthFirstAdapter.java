@@ -204,9 +204,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseABTypeSpecifier(ABTypeSpecifier node)
     {
         inABTypeSpecifier(node);
-        if(node.getVoid() != null)
+        if(node.getString() != null)
         {
-            node.getVoid().apply(this);
+            node.getString().apply(this);
         }
         outABTypeSpecifier(node);
     }
@@ -225,9 +225,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseACTypeSpecifier(ACTypeSpecifier node)
     {
         inACTypeSpecifier(node);
-        if(node.getString() != null)
+        if(node.getVoid() != null)
         {
-            node.getString().apply(this);
+            node.getVoid().apply(this);
         }
         outACTypeSpecifier(node);
     }
@@ -1231,9 +1231,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAASimpleExpression(AASimpleExpression node)
     {
         inAASimpleExpression(node);
-        if(node.getAdditiveExpression() != null)
+        if(node.getExp() != null)
         {
-            node.getAdditiveExpression().apply(this);
+            node.getExp().apply(this);
         }
         if(node.getRelationalOperator() != null)
         {
@@ -1260,9 +1260,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseABSimpleExpression(ABSimpleExpression node)
     {
         inABSimpleExpression(node);
-        if(node.getAdditiveExpression() != null)
+        if(node.getExp() != null)
         {
-            node.getAdditiveExpression().apply(this);
+            node.getExp().apply(this);
         }
         outABSimpleExpression(node);
     }
@@ -1393,96 +1393,96 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAFRelationalOperator(node);
     }
 
-    public void inAAAdditiveExpression(AAAdditiveExpression node)
+    public void inAAExp(AAExp node)
     {
         defaultIn(node);
     }
 
-    public void outAAAdditiveExpression(AAAdditiveExpression node)
+    public void outAAExp(AAExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAAdditiveExpression(AAAdditiveExpression node)
+    public void caseAAExp(AAExp node)
     {
-        inAAAdditiveExpression(node);
+        inAAExp(node);
         if(node.getTerm() != null)
         {
             node.getTerm().apply(this);
         }
-        if(node.getAdditionOperator() != null)
+        if(node.getAdd() != null)
         {
-            node.getAdditionOperator().apply(this);
+            node.getAdd().apply(this);
         }
-        if(node.getAdditiveExpression() != null)
+        if(node.getExp() != null)
         {
-            node.getAdditiveExpression().apply(this);
+            node.getExp().apply(this);
         }
-        outAAAdditiveExpression(node);
+        outAAExp(node);
     }
 
-    public void inABAdditiveExpression(ABAdditiveExpression node)
+    public void inABExp(ABExp node)
     {
         defaultIn(node);
     }
 
-    public void outABAdditiveExpression(ABAdditiveExpression node)
+    public void outABExp(ABExp node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseABAdditiveExpression(ABAdditiveExpression node)
+    public void caseABExp(ABExp node)
     {
-        inABAdditiveExpression(node);
+        inABExp(node);
         if(node.getTerm() != null)
         {
             node.getTerm().apply(this);
         }
-        outABAdditiveExpression(node);
+        outABExp(node);
     }
 
-    public void inAAAdditionOperator(AAAdditionOperator node)
+    public void inAAAdd(AAAdd node)
     {
         defaultIn(node);
     }
 
-    public void outAAAdditionOperator(AAAdditionOperator node)
+    public void outAAAdd(AAAdd node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAAdditionOperator(AAAdditionOperator node)
+    public void caseAAAdd(AAAdd node)
     {
-        inAAAdditionOperator(node);
+        inAAAdd(node);
         if(node.getPlus() != null)
         {
             node.getPlus().apply(this);
         }
-        outAAAdditionOperator(node);
+        outAAAdd(node);
     }
 
-    public void inABAdditionOperator(ABAdditionOperator node)
+    public void inABAdd(ABAdd node)
     {
         defaultIn(node);
     }
 
-    public void outABAdditionOperator(ABAdditionOperator node)
+    public void outABAdd(ABAdd node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseABAdditionOperator(ABAdditionOperator node)
+    public void caseABAdd(ABAdd node)
     {
-        inABAdditionOperator(node);
+        inABAdd(node);
         if(node.getMinus() != null)
         {
             node.getMinus().apply(this);
         }
-        outABAdditionOperator(node);
+        outABAdd(node);
     }
 
     public void inAATerm(AATerm node)
@@ -1503,9 +1503,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getFactor().apply(this);
         }
-        if(node.getMultiplicativeOperator() != null)
+        if(node.getMult() != null)
         {
-            node.getMultiplicativeOperator().apply(this);
+            node.getMult().apply(this);
         }
         if(node.getTerm() != null)
         {
@@ -1535,46 +1535,46 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outABTerm(node);
     }
 
-    public void inAAMultiplicativeOperator(AAMultiplicativeOperator node)
+    public void inAAMult(AAMult node)
     {
         defaultIn(node);
     }
 
-    public void outAAMultiplicativeOperator(AAMultiplicativeOperator node)
+    public void outAAMult(AAMult node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAAMultiplicativeOperator(AAMultiplicativeOperator node)
+    public void caseAAMult(AAMult node)
     {
-        inAAMultiplicativeOperator(node);
+        inAAMult(node);
         if(node.getAsterisk() != null)
         {
             node.getAsterisk().apply(this);
         }
-        outAAMultiplicativeOperator(node);
+        outAAMult(node);
     }
 
-    public void inABMultiplicativeOperator(ABMultiplicativeOperator node)
+    public void inABMult(ABMult node)
     {
         defaultIn(node);
     }
 
-    public void outABMultiplicativeOperator(ABMultiplicativeOperator node)
+    public void outABMult(ABMult node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseABMultiplicativeOperator(ABMultiplicativeOperator node)
+    public void caseABMult(ABMult node)
     {
-        inABMultiplicativeOperator(node);
+        inABMult(node);
         if(node.getSlash() != null)
         {
             node.getSlash().apply(this);
         }
-        outABMultiplicativeOperator(node);
+        outABMult(node);
     }
 
     public void inAAFactor(AAFactor node)

@@ -5,16 +5,16 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABAdditiveExpression extends PAdditiveExpression
+public final class ABExp extends PExp
 {
     private PTerm _term_;
 
-    public ABAdditiveExpression()
+    public ABExp()
     {
         // Constructor
     }
 
-    public ABAdditiveExpression(
+    public ABExp(
         @SuppressWarnings("hiding") PTerm _term_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class ABAdditiveExpression extends PAdditiveExpression
     @Override
     public Object clone()
     {
-        return new ABAdditiveExpression(
+        return new ABExp(
             cloneNode(this._term_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseABAdditiveExpression(this);
+        ((Analysis) sw).caseABExp(this);
     }
 
     public PTerm getTerm()

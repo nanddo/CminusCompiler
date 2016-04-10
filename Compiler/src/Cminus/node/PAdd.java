@@ -2,7 +2,7 @@
 
 package Cminus.node;
 
-public abstract class PAdditionOperator extends Node
+public abstract class PAdd extends Node
 {
     // Empty body
 }
