@@ -1787,13 +1787,13 @@ public class Parser
         {
             // Block
         TLeftBracket tleftbracketNode2;
-        PExpression pexpressionNode3;
+        PExp pexpNode3;
         TRightBracket trightbracketNode4;
         tleftbracketNode2 = (TLeftBracket)nodeArrayList1.get(0);
-        pexpressionNode3 = (PExpression)nodeArrayList2.get(0);
+        pexpNode3 = (PExp)nodeArrayList2.get(0);
         trightbracketNode4 = (TRightBracket)nodeArrayList3.get(0);
 
-        parrayexpressionNode1 = new AArrayExpression(tleftbracketNode2, pexpressionNode3, trightbracketNode4);
+        parrayexpressionNode1 = new AArrayExpression(tleftbracketNode2, pexpNode3, trightbracketNode4);
         }
 	nodeList.add(parrayexpressionNode1);
         return nodeList;
@@ -1814,12 +1814,12 @@ public class Parser
             // Block
         PVariable pvariableNode2;
         TAttribution tattributionNode3;
-        PExpression pexpressionNode4;
+        PExp pexpNode4;
         pvariableNode2 = (PVariable)nodeArrayList1.get(0);
         tattributionNode3 = (TAttribution)nodeArrayList2.get(0);
-        pexpressionNode4 = (PExpression)nodeArrayList3.get(0);
+        pexpNode4 = (PExp)nodeArrayList3.get(0);
 
-        pexpressionNode1 = new AAExpression(pvariableNode2, tattributionNode3, pexpressionNode4);
+        pexpressionNode1 = new AAExpression(pvariableNode2, tattributionNode3, pexpNode4);
         }
 	nodeList.add(pexpressionNode1);
         return nodeList;
@@ -2709,8 +2709,8 @@ public class Parser
 			{{-1, ERROR, 71}, {7, SHIFT, 47}, {8, SHIFT, 48}, {23, SHIFT, 50}, },
 			{{-1, REDUCE, 80}, },
 			{{-1, REDUCE, 43}, {25, SHIFT, 71}, },
-			{{-1, ERROR, 74}, {24, SHIFT, 99}, },
-			{{-1, ERROR, 75}, {7, SHIFT, 47}, {8, SHIFT, 48}, {9, SHIFT, 100}, {23, SHIFT, 50}, },
+			{{-1, ERROR, 74}, {24, SHIFT, 100}, },
+			{{-1, ERROR, 75}, {7, SHIFT, 47}, {8, SHIFT, 48}, {9, SHIFT, 101}, {23, SHIFT, 50}, },
 			{{-1, REDUCE, 30}, },
 			{{-1, REDUCE, 50}, },
 			{{-1, REDUCE, 51}, },
@@ -2732,12 +2732,12 @@ public class Parser
 			{{-1, REDUCE, 71}, {21, SHIFT, 108}, },
 			{{-1, ERROR, 95}, {24, SHIFT, 109}, },
 			{{-1, REDUCE, 72}, },
-			{{-1, ERROR, 97}, {26, SHIFT, 110}, },
+			{{-1, REDUCE, 65}, },
+			{{-1, ERROR, 98}, {10, SHIFT, 84}, {11, SHIFT, 85}, {26, SHIFT, 110}, },
 			{{-1, REDUCE, 81}, },
 			{{-1, REDUCE, 64}, },
 			{{-1, REDUCE, 46}, },
-			{{-1, REDUCE, 45}, },
-			{{-1, REDUCE, 65}, },
+			{{-1, REDUCE, 45}, {10, SHIFT, 84}, {11, SHIFT, 85}, },
 			{{-1, REDUCE, 48}, {10, SHIFT, 84}, {11, SHIFT, 85}, },
 			{{-1, REDUCE, 56}, {12, SHIFT, 87}, {13, SHIFT, 88}, },
 			{{-1, REDUCE, 60}, },
@@ -2794,12 +2794,12 @@ public class Parser
 			{{-1, 57}, },
 			{{-1, 118}, },
 			{{-1, 119}, {41, 58}, {107, 58}, {124, 58}, },
-			{{-1, 59}, {83, 102}, {86, 102}, {89, 102}, },
-			{{-1, 72}, {73, 98}, },
-			{{-1, 60}, {45, 68}, {50, 74}, {66, 90}, {69, 92}, {70, 93}, {71, 97}, {75, 101}, {108, 121}, {122, 125}, {123, 126}, },
+			{{-1, 59}, {71, 97}, {75, 97}, {83, 97}, {86, 97}, {89, 97}, },
+			{{-1, 72}, {73, 99}, },
+			{{-1, 60}, {45, 68}, {50, 74}, {66, 90}, {69, 92}, {70, 93}, {108, 121}, {122, 125}, {123, 126}, },
 			{{-1, 61}, },
 			{{-1, 83}, },
-			{{-1, 62}, {83, 103}, },
+			{{-1, 62}, {71, 98}, {75, 102}, {83, 103}, },
 			{{-1, 86}, },
 			{{-1, 63}, {86, 104}, },
 			{{-1, 89}, },
@@ -2838,20 +2838,22 @@ public class Parser
 			"expecting: 'else', 'if', 'return', 'while', id, num, ';', '(', '{', '}'",
 			"expecting: id, num, '('",
 			"expecting: 'else', 'if', 'int', 'string', 'return', 'void', 'while', id, num, ';', '(', '{', '}', EOF",
-			"expecting: '+', '-', '/', '*', '<', '<=', '>', '>=', '==', '!=', '=', ',', ';', ')', ']'",
+			"expecting: '+', '-', '/', '*', '<', '<=', '>', '>=', '==', '!=', '=', ',', ';', ')'",
 			"expecting: ';'",
-			"expecting: '<', '<=', '>', '>=', '==', '!=', ',', ';', ')', ']'",
-			"expecting: '+', '-', '<', '<=', '>', '>=', '==', '!=', ',', ';', ')', ']'",
+			"expecting: '<', '<=', '>', '>=', '==', '!=', ',', ';', ')'",
+			"expecting: '+', '-', '<', '<=', '>', '>=', '==', '!=', ',', ';', ')'",
 			"expecting: id, num, '(', ')'",
 			"expecting: '+', '-', '/', '*', '<', '<=', '>', '>=', '==', '!=', '=', ',', ';', ')', '[', ']'",
 			"expecting: id, num, string value, '('",
-			"expecting: ',', ';', ')', ']'",
+			"expecting: '+', '-', ']'",
+			"expecting: ',', ';', ')'",
+			"expecting: '+', '-', ',', ';', ')'",
 			"expecting: 'if', 'return', 'while', id, num, ';', '(', '{'",
 			"expecting: 'else'",
         };*/
     private static int[] errors;
 /*      {
-			0, 1, 1, 1, 2, 3, 3, 1, 3, 3, 4, 3, 5, 0, 6, 7, 7, 8, 1, 9, 10, 10, 11, 5, 7, 12, 13, 0, 7, 11, 12, 12, 14, 3, 10, 12, 12, 14, 14, 14, 1, 15, 15, 7, 16, 17, 16, 18, 19, 20, 21, 22, 15, 15, 15, 15, 15, 15, 15, 23, 24, 25, 26, 19, 19, 19, 21, 20, 24, 21, 27, 21, 28, 28, 9, 29, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 9, 20, 9, 10, 10, 9, 9, 11, 28, 19, 30, 30, 19, 26, 19, 19, 31, 31, 21, 19, 28, 16, 16, 15, 32, 20, 20, 32, 32, 20, 15, 10, 21, 21, 31, 9, 9, 15, 31, 31, 32, 32, 31, 32, 
+			0, 1, 1, 1, 2, 3, 3, 1, 3, 3, 4, 3, 5, 0, 6, 7, 7, 8, 1, 9, 10, 10, 11, 5, 7, 12, 13, 0, 7, 11, 12, 12, 14, 3, 10, 12, 12, 14, 14, 14, 1, 15, 15, 7, 16, 17, 16, 18, 19, 20, 21, 22, 15, 15, 15, 15, 15, 15, 15, 23, 24, 25, 26, 19, 19, 19, 21, 20, 24, 21, 27, 21, 28, 28, 9, 29, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 9, 20, 9, 10, 10, 9, 9, 19, 30, 28, 19, 31, 32, 26, 19, 19, 33, 33, 21, 19, 28, 16, 16, 15, 34, 20, 20, 34, 34, 20, 15, 10, 21, 21, 33, 9, 9, 15, 33, 33, 34, 34, 33, 34, 
         };*/
 
     static 

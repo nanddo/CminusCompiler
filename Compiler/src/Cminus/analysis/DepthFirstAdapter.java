@@ -1123,9 +1123,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getLeftBracket().apply(this);
         }
-        if(node.getExpression() != null)
+        if(node.getExp() != null)
         {
-            node.getExpression().apply(this);
+            node.getExp().apply(this);
         }
         if(node.getRightBracket() != null)
         {
@@ -1156,9 +1156,9 @@ public class DepthFirstAdapter extends AnalysisAdapter
         {
             node.getAttribution().apply(this);
         }
-        if(node.getExpression() != null)
+        if(node.getExp() != null)
         {
-            node.getExpression().apply(this);
+            node.getExp().apply(this);
         }
         outAAExpression(node);
     }

@@ -45,6 +45,9 @@ public class NewLexer extends Lexer {
 					this.counter++;
 				} else if (token instanceof TCloseComment) {
 					this.counter--;
+				} else if (token instanceof EOF) {
+					/* If the input finished, throw a lexer exception */
+					throw new LexerException(null, "[" + token.getLine() + ", " + token.getPos() + "]Finished programm without close a opened block comment.");
 				}
 				
 				/* If there is an unclosed OpenComment keep scanning the input */

@@ -23,8 +23,6 @@ Tokens
 	return = 'return';
 	void   = 'void';
 	while  = 'while';
-	//input  = 'input';
-	//output = 'output';
 	
 	/* IDs AND NUMBERS */
 	id           = letter+;
@@ -106,19 +104,16 @@ Productions
 	iteration_statement_else = while left_par expression right_par statement_with_else;
 	
 	return_statement         = {a} return semicolon | {b} return expression semicolon;
-
-	//input_functions          = {a} int input left_par void right_par | {b} string input left_par void right_par;
-	//output_functions         = {a} void output left_par int id right_par | {b} void output left_par string id right_par;
 	
 	variable                 = id array_expression*;
-	array_expression         = left_bracket expression right_bracket;
+	array_expression         = left_bracket exp right_bracket;
 	
-	expression               = {a} variable attribution expression | {b} variable attribution string_value | {c} simple_expression;
+	expression               = {a} variable attribution exp | {b} variable attribution string_value | {c} simple_expression;
 	
 	simple_expression        = {a} simple_expression relational_operator exp | {b} exp;
 	relational_operator      = {a} less_than | {b} less_equal | {c} great_than | {d} great_equal | {e} equal | {f} different;
 	
-	/* Expression, Term, Factor grammar */
+	/* Exp, Term, Factor grammar */
 	exp                      = {a} exp add term | {b} term;
 	add                      = {a} plus | {b} minus;
 	term                     = {a} term mult factor | {b} factor;
@@ -129,8 +124,37 @@ Productions
 	arguments_list           = {a} arguments_list comma expression | {b} expression;
 	arguments                = {a} arguments_list | {b} epsilon;
 	epsilon                  = ;
-
-
-
-//Abstract Syntax Tree
 	
+	
+	/*
+	exp             = {plus} exp plus term   {-> New exp.plus(exp, term.exp)}
+                    | {minus} exp minus term {-> New exp.minus(exp, term.exp)}
+                    | {term} term            {-> term.exp}
+                    ;
+							 
+	term   {-> exp} = {mult} term asterisk factor {-> New exp.mult(term.exp, factor.exp)}
+	                | {div} term slash factor     {-> New exp.div(term.exp, factor.exp)}
+	                | {factor} factor             {-> factor.exp}
+	                ;
+	                
+	factor {-> exp} = {exp} left_par exp right_par {-> exp}
+	                | {variable} variable          {-> variable}
+	                | {call} call                  {-> exp}
+	                | {num} num                    {-> New exp.num(num)}
+	                ;
+
+Abstract Syntax Tree
+	program = declaration+;
+	
+	declaration = {variable} type id array*
+				| {function} type id statement*
+				| {function} type id parameter* statement*
+				;
+
+	exp = {plus} [left]:exp [right]:exp
+		| {minus} [left]:exp [right]:exp
+		| {mult} [left]:exp [right]:exp
+		| {div} [left]:exp [right]:exp
+		| {num} num
+		;
+	*/

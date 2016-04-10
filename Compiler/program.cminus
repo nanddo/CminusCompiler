@@ -5,7 +5,7 @@ void teste(void) {
 	return;
 }
 
-int main (void) {
+void main (void) {
 	int a[52][10];
 	a[52-50][1*5-2] = 2;
 	teste();

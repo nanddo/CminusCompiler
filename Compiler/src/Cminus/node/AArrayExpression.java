@@ -8,7 +8,7 @@ import Cminus.analysis.*;
 public final class AArrayExpression extends PArrayExpression
 {
     private TLeftBracket _leftBracket_;
-    private PExpression _expression_;
+    private PExp _exp_;
     private TRightBracket _rightBracket_;
 
     public AArrayExpression()
@@ -18,13 +18,13 @@ public final class AArrayExpression extends PArrayExpression
 
     public AArrayExpression(
         @SuppressWarnings("hiding") TLeftBracket _leftBracket_,
-        @SuppressWarnings("hiding") PExpression _expression_,
+        @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TRightBracket _rightBracket_)
     {
         // Constructor
         setLeftBracket(_leftBracket_);
 
-        setExpression(_expression_);
+        setExp(_exp_);
 
         setRightBracket(_rightBracket_);
 
@@ -35,7 +35,7 @@ public final class AArrayExpression extends PArrayExpression
     {
         return new AArrayExpression(
             cloneNode(this._leftBracket_),
-            cloneNode(this._expression_),
+            cloneNode(this._exp_),
             cloneNode(this._rightBracket_));
     }
 
@@ -70,16 +70,16 @@ public final class AArrayExpression extends PArrayExpression
         this._leftBracket_ = node;
     }
 
-    public PExpression getExpression()
+    public PExp getExp()
     {
-        return this._expression_;
+        return this._exp_;
     }
 
-    public void setExpression(PExpression node)
+    public void setExp(PExp node)
     {
-        if(this._expression_ != null)
+        if(this._exp_ != null)
         {
-            this._expression_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class AArrayExpression extends PArrayExpression
             node.parent(this);
         }
 
-        this._expression_ = node;
+        this._exp_ = node;
     }
 
     public TRightBracket getRightBracket()
@@ -125,7 +125,7 @@ public final class AArrayExpression extends PArrayExpression
     {
         return ""
             + toString(this._leftBracket_)
-            + toString(this._expression_)
+            + toString(this._exp_)
             + toString(this._rightBracket_);
     }
 
@@ -139,9 +139,9 @@ public final class AArrayExpression extends PArrayExpression
             return;
         }
 
-        if(this._expression_ == child)
+        if(this._exp_ == child)
         {
-            this._expression_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class AArrayExpression extends PArrayExpression
             return;
         }
 
-        if(this._expression_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpression((PExpression) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

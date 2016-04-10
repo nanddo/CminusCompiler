@@ -9,7 +9,7 @@ public final class AAExpression extends PExpression
 {
     private PVariable _variable_;
     private TAttribution _attribution_;
-    private PExpression _expression_;
+    private PExp _exp_;
 
     public AAExpression()
     {
@@ -19,14 +19,14 @@ public final class AAExpression extends PExpression
     public AAExpression(
         @SuppressWarnings("hiding") PVariable _variable_,
         @SuppressWarnings("hiding") TAttribution _attribution_,
-        @SuppressWarnings("hiding") PExpression _expression_)
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
         setVariable(_variable_);
 
         setAttribution(_attribution_);
 
-        setExpression(_expression_);
+        setExp(_exp_);
 
     }
 
@@ -36,7 +36,7 @@ public final class AAExpression extends PExpression
         return new AAExpression(
             cloneNode(this._variable_),
             cloneNode(this._attribution_),
-            cloneNode(this._expression_));
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -95,16 +95,16 @@ public final class AAExpression extends PExpression
         this._attribution_ = node;
     }
 
-    public PExpression getExpression()
+    public PExp getExp()
     {
-        return this._expression_;
+        return this._exp_;
     }
 
-    public void setExpression(PExpression node)
+    public void setExp(PExp node)
     {
-        if(this._expression_ != null)
+        if(this._exp_ != null)
         {
-            this._expression_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -117,7 +117,7 @@ public final class AAExpression extends PExpression
             node.parent(this);
         }
 
-        this._expression_ = node;
+        this._exp_ = node;
     }
 
     @Override
@@ -126,7 +126,7 @@ public final class AAExpression extends PExpression
         return ""
             + toString(this._variable_)
             + toString(this._attribution_)
-            + toString(this._expression_);
+            + toString(this._exp_);
     }
 
     @Override
@@ -145,9 +145,9 @@ public final class AAExpression extends PExpression
             return;
         }
 
-        if(this._expression_ == child)
+        if(this._exp_ == child)
         {
-            this._expression_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AAExpression extends PExpression
             return;
         }
 
-        if(this._expression_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpression((PExpression) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

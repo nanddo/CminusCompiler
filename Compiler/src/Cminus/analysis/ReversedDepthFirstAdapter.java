@@ -1127,9 +1127,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getRightBracket().apply(this);
         }
-        if(node.getExpression() != null)
+        if(node.getExp() != null)
         {
-            node.getExpression().apply(this);
+            node.getExp().apply(this);
         }
         if(node.getLeftBracket() != null)
         {
@@ -1152,9 +1152,9 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAAExpression(AAExpression node)
     {
         inAAExpression(node);
-        if(node.getExpression() != null)
+        if(node.getExp() != null)
         {
-            node.getExpression().apply(this);
+            node.getExp().apply(this);
         }
         if(node.getAttribution() != null)
         {
