@@ -9,7 +9,7 @@ public final class AIterationStatement extends PIterationStatement
 {
     private TWhile _while_;
     private TLeftPar _leftPar_;
-    private PExpression _expression_;
+    private PRelationalExpression _relationalExpression_;
     private TRightPar _rightPar_;
     private PStatement _statement_;
 
@@ -21,7 +21,7 @@ public final class AIterationStatement extends PIterationStatement
     public AIterationStatement(
         @SuppressWarnings("hiding") TWhile _while_,
         @SuppressWarnings("hiding") TLeftPar _leftPar_,
-        @SuppressWarnings("hiding") PExpression _expression_,
+        @SuppressWarnings("hiding") PRelationalExpression _relationalExpression_,
         @SuppressWarnings("hiding") TRightPar _rightPar_,
         @SuppressWarnings("hiding") PStatement _statement_)
     {
@@ -30,7 +30,7 @@ public final class AIterationStatement extends PIterationStatement
 
         setLeftPar(_leftPar_);
 
-        setExpression(_expression_);
+        setRelationalExpression(_relationalExpression_);
 
         setRightPar(_rightPar_);
 
@@ -44,7 +44,7 @@ public final class AIterationStatement extends PIterationStatement
         return new AIterationStatement(
             cloneNode(this._while_),
             cloneNode(this._leftPar_),
-            cloneNode(this._expression_),
+            cloneNode(this._relationalExpression_),
             cloneNode(this._rightPar_),
             cloneNode(this._statement_));
     }
@@ -105,16 +105,16 @@ public final class AIterationStatement extends PIterationStatement
         this._leftPar_ = node;
     }
 
-    public PExpression getExpression()
+    public PRelationalExpression getRelationalExpression()
     {
-        return this._expression_;
+        return this._relationalExpression_;
     }
 
-    public void setExpression(PExpression node)
+    public void setRelationalExpression(PRelationalExpression node)
     {
-        if(this._expression_ != null)
+        if(this._relationalExpression_ != null)
         {
-            this._expression_.parent(null);
+            this._relationalExpression_.parent(null);
         }
 
         if(node != null)
@@ -127,7 +127,7 @@ public final class AIterationStatement extends PIterationStatement
             node.parent(this);
         }
 
-        this._expression_ = node;
+        this._relationalExpression_ = node;
     }
 
     public TRightPar getRightPar()
@@ -186,7 +186,7 @@ public final class AIterationStatement extends PIterationStatement
         return ""
             + toString(this._while_)
             + toString(this._leftPar_)
-            + toString(this._expression_)
+            + toString(this._relationalExpression_)
             + toString(this._rightPar_)
             + toString(this._statement_);
     }
@@ -207,9 +207,9 @@ public final class AIterationStatement extends PIterationStatement
             return;
         }
 
-        if(this._expression_ == child)
+        if(this._relationalExpression_ == child)
         {
-            this._expression_ = null;
+            this._relationalExpression_ = null;
             return;
         }
 
@@ -244,9 +244,9 @@ public final class AIterationStatement extends PIterationStatement
             return;
         }
 
-        if(this._expression_ == oldChild)
+        if(this._relationalExpression_ == oldChild)
         {
-            setExpression((PExpression) newChild);
+            setRelationalExpression((PRelationalExpression) newChild);
             return;
         }
 

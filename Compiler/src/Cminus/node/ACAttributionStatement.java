@@ -5,19 +5,23 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABExpressionStatement extends PExpressionStatement
+public final class ACAttributionStatement extends PAttributionStatement
 {
+    private PCall _call_;
     private TSemicolon _semicolon_;
 
-    public ABExpressionStatement()
+    public ACAttributionStatement()
     {
         // Constructor
     }
 
-    public ABExpressionStatement(
+    public ACAttributionStatement(
+        @SuppressWarnings("hiding") PCall _call_,
         @SuppressWarnings("hiding") TSemicolon _semicolon_)
     {
         // Constructor
+        setCall(_call_);
+
         setSemicolon(_semicolon_);
 
     }
@@ -25,14 +29,40 @@ public final class ABExpressionStatement extends PExpressionStatement
     @Override
     public Object clone()
     {
-        return new ABExpressionStatement(
+        return new ACAttributionStatement(
+            cloneNode(this._call_),
             cloneNode(this._semicolon_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseABExpressionStatement(this);
+        ((Analysis) sw).caseACAttributionStatement(this);
+    }
+
+    public PCall getCall()
+    {
+        return this._call_;
+    }
+
+    public void setCall(PCall node)
+    {
+        if(this._call_ != null)
+        {
+            this._call_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._call_ = node;
     }
 
     public TSemicolon getSemicolon()
@@ -64,6 +94,7 @@ public final class ABExpressionStatement extends PExpressionStatement
     public String toString()
     {
         return ""
+            + toString(this._call_)
             + toString(this._semicolon_);
     }
 
@@ -71,6 +102,12 @@ public final class ABExpressionStatement extends PExpressionStatement
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._call_ == child)
+        {
+            this._call_ = null;
+            return;
+        }
+
         if(this._semicolon_ == child)
         {
             this._semicolon_ = null;
@@ -84,6 +121,12 @@ public final class ABExpressionStatement extends PExpressionStatement
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._call_ == oldChild)
+        {
+            setCall((PCall) newChild);
+            return;
+        }
+
         if(this._semicolon_ == oldChild)
         {
             setSemicolon((TSemicolon) newChild);

@@ -5,56 +5,56 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AASimpleExpression extends PSimpleExpression
+public final class AARelationalExpression extends PRelationalExpression
 {
-    private PSimpleExpression _simpleExpression_;
+    private PExp _left_;
     private PRelationalOperator _relationalOperator_;
-    private PExp _exp_;
+    private PExp _right_;
 
-    public AASimpleExpression()
+    public AARelationalExpression()
     {
         // Constructor
     }
 
-    public AASimpleExpression(
-        @SuppressWarnings("hiding") PSimpleExpression _simpleExpression_,
+    public AARelationalExpression(
+        @SuppressWarnings("hiding") PExp _left_,
         @SuppressWarnings("hiding") PRelationalOperator _relationalOperator_,
-        @SuppressWarnings("hiding") PExp _exp_)
+        @SuppressWarnings("hiding") PExp _right_)
     {
         // Constructor
-        setSimpleExpression(_simpleExpression_);
+        setLeft(_left_);
 
         setRelationalOperator(_relationalOperator_);
 
-        setExp(_exp_);
+        setRight(_right_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AASimpleExpression(
-            cloneNode(this._simpleExpression_),
+        return new AARelationalExpression(
+            cloneNode(this._left_),
             cloneNode(this._relationalOperator_),
-            cloneNode(this._exp_));
+            cloneNode(this._right_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAASimpleExpression(this);
+        ((Analysis) sw).caseAARelationalExpression(this);
     }
 
-    public PSimpleExpression getSimpleExpression()
+    public PExp getLeft()
     {
-        return this._simpleExpression_;
+        return this._left_;
     }
 
-    public void setSimpleExpression(PSimpleExpression node)
+    public void setLeft(PExp node)
     {
-        if(this._simpleExpression_ != null)
+        if(this._left_ != null)
         {
-            this._simpleExpression_.parent(null);
+            this._left_.parent(null);
         }
 
         if(node != null)
@@ -67,7 +67,7 @@ public final class AASimpleExpression extends PSimpleExpression
             node.parent(this);
         }
 
-        this._simpleExpression_ = node;
+        this._left_ = node;
     }
 
     public PRelationalOperator getRelationalOperator()
@@ -95,16 +95,16 @@ public final class AASimpleExpression extends PSimpleExpression
         this._relationalOperator_ = node;
     }
 
-    public PExp getExp()
+    public PExp getRight()
     {
-        return this._exp_;
+        return this._right_;
     }
 
-    public void setExp(PExp node)
+    public void setRight(PExp node)
     {
-        if(this._exp_ != null)
+        if(this._right_ != null)
         {
-            this._exp_.parent(null);
+            this._right_.parent(null);
         }
 
         if(node != null)
@@ -117,25 +117,25 @@ public final class AASimpleExpression extends PSimpleExpression
             node.parent(this);
         }
 
-        this._exp_ = node;
+        this._right_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._simpleExpression_)
+            + toString(this._left_)
             + toString(this._relationalOperator_)
-            + toString(this._exp_);
+            + toString(this._right_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._simpleExpression_ == child)
+        if(this._left_ == child)
         {
-            this._simpleExpression_ = null;
+            this._left_ = null;
             return;
         }
 
@@ -145,9 +145,9 @@ public final class AASimpleExpression extends PSimpleExpression
             return;
         }
 
-        if(this._exp_ == child)
+        if(this._right_ == child)
         {
-            this._exp_ = null;
+            this._right_ = null;
             return;
         }
 
@@ -158,9 +158,9 @@ public final class AASimpleExpression extends PSimpleExpression
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._simpleExpression_ == oldChild)
+        if(this._left_ == oldChild)
         {
-            setSimpleExpression((PSimpleExpression) newChild);
+            setLeft((PExp) newChild);
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AASimpleExpression extends PSimpleExpression
             return;
         }
 
-        if(this._exp_ == oldChild)
+        if(this._right_ == oldChild)
         {
-            setExp((PExp) newChild);
+            setRight((PExp) newChild);
             return;
         }
 

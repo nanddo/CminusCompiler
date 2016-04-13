@@ -5,16 +5,16 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ABSimpleExpression extends PSimpleExpression
+public final class ABRelationalExpression extends PRelationalExpression
 {
     private PExp _exp_;
 
-    public ABSimpleExpression()
+    public ABRelationalExpression()
     {
         // Constructor
     }
 
-    public ABSimpleExpression(
+    public ABRelationalExpression(
         @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
@@ -25,14 +25,14 @@ public final class ABSimpleExpression extends PSimpleExpression
     @Override
     public Object clone()
     {
-        return new ABSimpleExpression(
+        return new ABRelationalExpression(
             cloneNode(this._exp_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseABSimpleExpression(this);
+        ((Analysis) sw).caseABRelationalExpression(this);
     }
 
     public PExp getExp()

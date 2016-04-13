@@ -9,7 +9,7 @@ public final class AIfElseStatement extends PIfElseStatement
 {
     private TIf _if_;
     private TLeftPar _leftPar_;
-    private PExpression _expression_;
+    private PRelationalExpression _relationalExpression_;
     private TRightPar _rightPar_;
     private PStatementWithElse _true_;
     private TElse _else_;
@@ -23,7 +23,7 @@ public final class AIfElseStatement extends PIfElseStatement
     public AIfElseStatement(
         @SuppressWarnings("hiding") TIf _if_,
         @SuppressWarnings("hiding") TLeftPar _leftPar_,
-        @SuppressWarnings("hiding") PExpression _expression_,
+        @SuppressWarnings("hiding") PRelationalExpression _relationalExpression_,
         @SuppressWarnings("hiding") TRightPar _rightPar_,
         @SuppressWarnings("hiding") PStatementWithElse _true_,
         @SuppressWarnings("hiding") TElse _else_,
@@ -34,7 +34,7 @@ public final class AIfElseStatement extends PIfElseStatement
 
         setLeftPar(_leftPar_);
 
-        setExpression(_expression_);
+        setRelationalExpression(_relationalExpression_);
 
         setRightPar(_rightPar_);
 
@@ -52,7 +52,7 @@ public final class AIfElseStatement extends PIfElseStatement
         return new AIfElseStatement(
             cloneNode(this._if_),
             cloneNode(this._leftPar_),
-            cloneNode(this._expression_),
+            cloneNode(this._relationalExpression_),
             cloneNode(this._rightPar_),
             cloneNode(this._true_),
             cloneNode(this._else_),
@@ -115,16 +115,16 @@ public final class AIfElseStatement extends PIfElseStatement
         this._leftPar_ = node;
     }
 
-    public PExpression getExpression()
+    public PRelationalExpression getRelationalExpression()
     {
-        return this._expression_;
+        return this._relationalExpression_;
     }
 
-    public void setExpression(PExpression node)
+    public void setRelationalExpression(PRelationalExpression node)
     {
-        if(this._expression_ != null)
+        if(this._relationalExpression_ != null)
         {
-            this._expression_.parent(null);
+            this._relationalExpression_.parent(null);
         }
 
         if(node != null)
@@ -137,7 +137,7 @@ public final class AIfElseStatement extends PIfElseStatement
             node.parent(this);
         }
 
-        this._expression_ = node;
+        this._relationalExpression_ = node;
     }
 
     public TRightPar getRightPar()
@@ -246,7 +246,7 @@ public final class AIfElseStatement extends PIfElseStatement
         return ""
             + toString(this._if_)
             + toString(this._leftPar_)
-            + toString(this._expression_)
+            + toString(this._relationalExpression_)
             + toString(this._rightPar_)
             + toString(this._true_)
             + toString(this._else_)
@@ -269,9 +269,9 @@ public final class AIfElseStatement extends PIfElseStatement
             return;
         }
 
-        if(this._expression_ == child)
+        if(this._relationalExpression_ == child)
         {
-            this._expression_ = null;
+            this._relationalExpression_ = null;
             return;
         }
 
@@ -318,9 +318,9 @@ public final class AIfElseStatement extends PIfElseStatement
             return;
         }
 
-        if(this._expression_ == oldChild)
+        if(this._relationalExpression_ == oldChild)
         {
-            setExpression((PExpression) newChild);
+            setRelationalExpression((PRelationalExpression) newChild);
             return;
         }
 

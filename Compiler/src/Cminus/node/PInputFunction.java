@@ -2,7 +2,7 @@
 
 package Cminus.node;
 
-public abstract class PExpression extends Node
+public abstract class PInputFunction extends Node
 {
     // Empty body
 }

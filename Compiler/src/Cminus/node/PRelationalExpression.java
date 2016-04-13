@@ -2,7 +2,7 @@
 
 package Cminus.node;
 
-public abstract class PExpressionStatement extends Node
+public abstract class PRelationalExpression extends Node
 {
     // Empty body
 }

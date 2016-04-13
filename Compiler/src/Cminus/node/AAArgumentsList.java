@@ -9,7 +9,7 @@ public final class AAArgumentsList extends PArgumentsList
 {
     private PArgumentsList _argumentsList_;
     private TComma _comma_;
-    private PExpression _expression_;
+    private PExp _exp_;
 
     public AAArgumentsList()
     {
@@ -19,14 +19,14 @@ public final class AAArgumentsList extends PArgumentsList
     public AAArgumentsList(
         @SuppressWarnings("hiding") PArgumentsList _argumentsList_,
         @SuppressWarnings("hiding") TComma _comma_,
-        @SuppressWarnings("hiding") PExpression _expression_)
+        @SuppressWarnings("hiding") PExp _exp_)
     {
         // Constructor
         setArgumentsList(_argumentsList_);
 
         setComma(_comma_);
 
-        setExpression(_expression_);
+        setExp(_exp_);
 
     }
 
@@ -36,7 +36,7 @@ public final class AAArgumentsList extends PArgumentsList
         return new AAArgumentsList(
             cloneNode(this._argumentsList_),
             cloneNode(this._comma_),
-            cloneNode(this._expression_));
+            cloneNode(this._exp_));
     }
 
     @Override
@@ -95,16 +95,16 @@ public final class AAArgumentsList extends PArgumentsList
         this._comma_ = node;
     }
 
-    public PExpression getExpression()
+    public PExp getExp()
     {
-        return this._expression_;
+        return this._exp_;
     }
 
-    public void setExpression(PExpression node)
+    public void setExp(PExp node)
     {
-        if(this._expression_ != null)
+        if(this._exp_ != null)
         {
-            this._expression_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -117,7 +117,7 @@ public final class AAArgumentsList extends PArgumentsList
             node.parent(this);
         }
 
-        this._expression_ = node;
+        this._exp_ = node;
     }
 
     @Override
@@ -126,7 +126,7 @@ public final class AAArgumentsList extends PArgumentsList
         return ""
             + toString(this._argumentsList_)
             + toString(this._comma_)
-            + toString(this._expression_);
+            + toString(this._exp_);
     }
 
     @Override
@@ -145,9 +145,9 @@ public final class AAArgumentsList extends PArgumentsList
             return;
         }
 
-        if(this._expression_ == child)
+        if(this._exp_ == child)
         {
-            this._expression_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -170,9 +170,9 @@ public final class AAArgumentsList extends PArgumentsList
             return;
         }
 
-        if(this._expression_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpression((PExpression) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class AAStatementWithElse extends PStatementWithElse
 {
-    private PExpressionStatement _expressionStatement_;
+    private PAttributionStatement _attributionStatement_;
 
     public AAStatementWithElse()
     {
@@ -15,10 +15,10 @@ public final class AAStatementWithElse extends PStatementWithElse
     }
 
     public AAStatementWithElse(
-        @SuppressWarnings("hiding") PExpressionStatement _expressionStatement_)
+        @SuppressWarnings("hiding") PAttributionStatement _attributionStatement_)
     {
         // Constructor
-        setExpressionStatement(_expressionStatement_);
+        setAttributionStatement(_attributionStatement_);
 
     }
 
@@ -26,7 +26,7 @@ public final class AAStatementWithElse extends PStatementWithElse
     public Object clone()
     {
         return new AAStatementWithElse(
-            cloneNode(this._expressionStatement_));
+            cloneNode(this._attributionStatement_));
     }
 
     @Override
@@ -35,16 +35,16 @@ public final class AAStatementWithElse extends PStatementWithElse
         ((Analysis) sw).caseAAStatementWithElse(this);
     }
 
-    public PExpressionStatement getExpressionStatement()
+    public PAttributionStatement getAttributionStatement()
     {
-        return this._expressionStatement_;
+        return this._attributionStatement_;
     }
 
-    public void setExpressionStatement(PExpressionStatement node)
+    public void setAttributionStatement(PAttributionStatement node)
     {
-        if(this._expressionStatement_ != null)
+        if(this._attributionStatement_ != null)
         {
-            this._expressionStatement_.parent(null);
+            this._attributionStatement_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class AAStatementWithElse extends PStatementWithElse
             node.parent(this);
         }
 
-        this._expressionStatement_ = node;
+        this._attributionStatement_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._expressionStatement_);
+            + toString(this._attributionStatement_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._expressionStatement_ == child)
+        if(this._attributionStatement_ == child)
         {
-            this._expressionStatement_ = null;
+            this._attributionStatement_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class AAStatementWithElse extends PStatementWithElse
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._expressionStatement_ == oldChild)
+        if(this._attributionStatement_ == oldChild)
         {
-            setExpressionStatement((PExpressionStatement) newChild);
+            setAttributionStatement((PAttributionStatement) newChild);
             return;
         }
 

@@ -5,66 +5,71 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AIterationStatementElse extends PIterationStatementElse
+public final class AMainDeclaration extends PMainDeclaration
 {
-    private TWhile _while_;
+    private PTypeSpecifier _typeSpecifier_;
+    private TMain _main_;
     private TLeftPar _leftPar_;
-    private PRelationalExpression _relationalExpression_;
+    private TVoid _void_;
     private TRightPar _rightPar_;
-    private PStatementWithElse _statementWithElse_;
+    private PCompoundStatement _compoundStatement_;
 
-    public AIterationStatementElse()
+    public AMainDeclaration()
     {
         // Constructor
     }
 
-    public AIterationStatementElse(
-        @SuppressWarnings("hiding") TWhile _while_,
+    public AMainDeclaration(
+        @SuppressWarnings("hiding") PTypeSpecifier _typeSpecifier_,
+        @SuppressWarnings("hiding") TMain _main_,
         @SuppressWarnings("hiding") TLeftPar _leftPar_,
-        @SuppressWarnings("hiding") PRelationalExpression _relationalExpression_,
+        @SuppressWarnings("hiding") TVoid _void_,
         @SuppressWarnings("hiding") TRightPar _rightPar_,
-        @SuppressWarnings("hiding") PStatementWithElse _statementWithElse_)
+        @SuppressWarnings("hiding") PCompoundStatement _compoundStatement_)
     {
         // Constructor
-        setWhile(_while_);
+        setTypeSpecifier(_typeSpecifier_);
+
+        setMain(_main_);
 
         setLeftPar(_leftPar_);
 
-        setRelationalExpression(_relationalExpression_);
+        setVoid(_void_);
 
         setRightPar(_rightPar_);
 
-        setStatementWithElse(_statementWithElse_);
+        setCompoundStatement(_compoundStatement_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AIterationStatementElse(
-            cloneNode(this._while_),
+        return new AMainDeclaration(
+            cloneNode(this._typeSpecifier_),
+            cloneNode(this._main_),
             cloneNode(this._leftPar_),
-            cloneNode(this._relationalExpression_),
+            cloneNode(this._void_),
             cloneNode(this._rightPar_),
-            cloneNode(this._statementWithElse_));
+            cloneNode(this._compoundStatement_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAIterationStatementElse(this);
+        ((Analysis) sw).caseAMainDeclaration(this);
     }
 
-    public TWhile getWhile()
+    public PTypeSpecifier getTypeSpecifier()
     {
-        return this._while_;
+        return this._typeSpecifier_;
     }
 
-    public void setWhile(TWhile node)
+    public void setTypeSpecifier(PTypeSpecifier node)
     {
-        if(this._while_ != null)
+        if(this._typeSpecifier_ != null)
         {
-            this._while_.parent(null);
+            this._typeSpecifier_.parent(null);
         }
 
         if(node != null)
@@ -77,7 +82,32 @@ public final class AIterationStatementElse extends PIterationStatementElse
             node.parent(this);
         }
 
-        this._while_ = node;
+        this._typeSpecifier_ = node;
+    }
+
+    public TMain getMain()
+    {
+        return this._main_;
+    }
+
+    public void setMain(TMain node)
+    {
+        if(this._main_ != null)
+        {
+            this._main_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._main_ = node;
     }
 
     public TLeftPar getLeftPar()
@@ -105,16 +135,16 @@ public final class AIterationStatementElse extends PIterationStatementElse
         this._leftPar_ = node;
     }
 
-    public PRelationalExpression getRelationalExpression()
+    public TVoid getVoid()
     {
-        return this._relationalExpression_;
+        return this._void_;
     }
 
-    public void setRelationalExpression(PRelationalExpression node)
+    public void setVoid(TVoid node)
     {
-        if(this._relationalExpression_ != null)
+        if(this._void_ != null)
         {
-            this._relationalExpression_.parent(null);
+            this._void_.parent(null);
         }
 
         if(node != null)
@@ -127,7 +157,7 @@ public final class AIterationStatementElse extends PIterationStatementElse
             node.parent(this);
         }
 
-        this._relationalExpression_ = node;
+        this._void_ = node;
     }
 
     public TRightPar getRightPar()
@@ -155,16 +185,16 @@ public final class AIterationStatementElse extends PIterationStatementElse
         this._rightPar_ = node;
     }
 
-    public PStatementWithElse getStatementWithElse()
+    public PCompoundStatement getCompoundStatement()
     {
-        return this._statementWithElse_;
+        return this._compoundStatement_;
     }
 
-    public void setStatementWithElse(PStatementWithElse node)
+    public void setCompoundStatement(PCompoundStatement node)
     {
-        if(this._statementWithElse_ != null)
+        if(this._compoundStatement_ != null)
         {
-            this._statementWithElse_.parent(null);
+            this._compoundStatement_.parent(null);
         }
 
         if(node != null)
@@ -177,27 +207,34 @@ public final class AIterationStatementElse extends PIterationStatementElse
             node.parent(this);
         }
 
-        this._statementWithElse_ = node;
+        this._compoundStatement_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._while_)
+            + toString(this._typeSpecifier_)
+            + toString(this._main_)
             + toString(this._leftPar_)
-            + toString(this._relationalExpression_)
+            + toString(this._void_)
             + toString(this._rightPar_)
-            + toString(this._statementWithElse_);
+            + toString(this._compoundStatement_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._while_ == child)
+        if(this._typeSpecifier_ == child)
         {
-            this._while_ = null;
+            this._typeSpecifier_ = null;
+            return;
+        }
+
+        if(this._main_ == child)
+        {
+            this._main_ = null;
             return;
         }
 
@@ -207,9 +244,9 @@ public final class AIterationStatementElse extends PIterationStatementElse
             return;
         }
 
-        if(this._relationalExpression_ == child)
+        if(this._void_ == child)
         {
-            this._relationalExpression_ = null;
+            this._void_ = null;
             return;
         }
 
@@ -219,9 +256,9 @@ public final class AIterationStatementElse extends PIterationStatementElse
             return;
         }
 
-        if(this._statementWithElse_ == child)
+        if(this._compoundStatement_ == child)
         {
-            this._statementWithElse_ = null;
+            this._compoundStatement_ = null;
             return;
         }
 
@@ -232,9 +269,15 @@ public final class AIterationStatementElse extends PIterationStatementElse
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._while_ == oldChild)
+        if(this._typeSpecifier_ == oldChild)
         {
-            setWhile((TWhile) newChild);
+            setTypeSpecifier((PTypeSpecifier) newChild);
+            return;
+        }
+
+        if(this._main_ == oldChild)
+        {
+            setMain((TMain) newChild);
             return;
         }
 
@@ -244,9 +287,9 @@ public final class AIterationStatementElse extends PIterationStatementElse
             return;
         }
 
-        if(this._relationalExpression_ == oldChild)
+        if(this._void_ == oldChild)
         {
-            setRelationalExpression((PRelationalExpression) newChild);
+            setVoid((TVoid) newChild);
             return;
         }
 
@@ -256,9 +299,9 @@ public final class AIterationStatementElse extends PIterationStatementElse
             return;
         }
 
-        if(this._statementWithElse_ == oldChild)
+        if(this._compoundStatement_ == oldChild)
         {
-            setStatementWithElse((PStatementWithElse) newChild);
+            setCompoundStatement((PCompoundStatement) newChild);
             return;
         }
 

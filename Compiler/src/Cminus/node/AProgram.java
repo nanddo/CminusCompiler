@@ -9,6 +9,7 @@ import Cminus.analysis.*;
 public final class AProgram extends PProgram
 {
     private final LinkedList<PDeclaration> _declaration_ = new LinkedList<PDeclaration>();
+    private PMainDeclaration _mainDeclaration_;
 
     public AProgram()
     {
@@ -16,10 +17,13 @@ public final class AProgram extends PProgram
     }
 
     public AProgram(
-        @SuppressWarnings("hiding") List<?> _declaration_)
+        @SuppressWarnings("hiding") List<?> _declaration_,
+        @SuppressWarnings("hiding") PMainDeclaration _mainDeclaration_)
     {
         // Constructor
         setDeclaration(_declaration_);
+
+        setMainDeclaration(_mainDeclaration_);
 
     }
 
@@ -27,7 +31,8 @@ public final class AProgram extends PProgram
     public Object clone()
     {
         return new AProgram(
-            cloneList(this._declaration_));
+            cloneList(this._declaration_),
+            cloneNode(this._mainDeclaration_));
     }
 
     @Override
@@ -62,11 +67,37 @@ public final class AProgram extends PProgram
         }
     }
 
+    public PMainDeclaration getMainDeclaration()
+    {
+        return this._mainDeclaration_;
+    }
+
+    public void setMainDeclaration(PMainDeclaration node)
+    {
+        if(this._mainDeclaration_ != null)
+        {
+            this._mainDeclaration_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._mainDeclaration_ = node;
+    }
+
     @Override
     public String toString()
     {
         return ""
-            + toString(this._declaration_);
+            + toString(this._declaration_)
+            + toString(this._mainDeclaration_);
     }
 
     @Override
@@ -75,6 +106,12 @@ public final class AProgram extends PProgram
         // Remove child
         if(this._declaration_.remove(child))
         {
+            return;
+        }
+
+        if(this._mainDeclaration_ == child)
+        {
+            this._mainDeclaration_ = null;
             return;
         }
 
@@ -101,6 +138,12 @@ public final class AProgram extends PProgram
                 oldChild.parent(null);
                 return;
             }
+        }
+
+        if(this._mainDeclaration_ == oldChild)
+        {
+            setMainDeclaration((PMainDeclaration) newChild);
+            return;
         }
 
         throw new RuntimeException("Not a child.");

@@ -8,7 +8,7 @@ import Cminus.analysis.*;
 public final class ABReturnStatement extends PReturnStatement
 {
     private TReturn _return_;
-    private PExpression _expression_;
+    private PExp _exp_;
     private TSemicolon _semicolon_;
 
     public ABReturnStatement()
@@ -18,13 +18,13 @@ public final class ABReturnStatement extends PReturnStatement
 
     public ABReturnStatement(
         @SuppressWarnings("hiding") TReturn _return_,
-        @SuppressWarnings("hiding") PExpression _expression_,
+        @SuppressWarnings("hiding") PExp _exp_,
         @SuppressWarnings("hiding") TSemicolon _semicolon_)
     {
         // Constructor
         setReturn(_return_);
 
-        setExpression(_expression_);
+        setExp(_exp_);
 
         setSemicolon(_semicolon_);
 
@@ -35,7 +35,7 @@ public final class ABReturnStatement extends PReturnStatement
     {
         return new ABReturnStatement(
             cloneNode(this._return_),
-            cloneNode(this._expression_),
+            cloneNode(this._exp_),
             cloneNode(this._semicolon_));
     }
 
@@ -70,16 +70,16 @@ public final class ABReturnStatement extends PReturnStatement
         this._return_ = node;
     }
 
-    public PExpression getExpression()
+    public PExp getExp()
     {
-        return this._expression_;
+        return this._exp_;
     }
 
-    public void setExpression(PExpression node)
+    public void setExp(PExp node)
     {
-        if(this._expression_ != null)
+        if(this._exp_ != null)
         {
-            this._expression_.parent(null);
+            this._exp_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +92,7 @@ public final class ABReturnStatement extends PReturnStatement
             node.parent(this);
         }
 
-        this._expression_ = node;
+        this._exp_ = node;
     }
 
     public TSemicolon getSemicolon()
@@ -125,7 +125,7 @@ public final class ABReturnStatement extends PReturnStatement
     {
         return ""
             + toString(this._return_)
-            + toString(this._expression_)
+            + toString(this._exp_)
             + toString(this._semicolon_);
     }
 
@@ -139,9 +139,9 @@ public final class ABReturnStatement extends PReturnStatement
             return;
         }
 
-        if(this._expression_ == child)
+        if(this._exp_ == child)
         {
-            this._expression_ = null;
+            this._exp_ = null;
             return;
         }
 
@@ -164,9 +164,9 @@ public final class ABReturnStatement extends PReturnStatement
             return;
         }
 
-        if(this._expression_ == oldChild)
+        if(this._exp_ == oldChild)
         {
-            setExpression((PExpression) newChild);
+            setExp((PExp) newChild);
             return;
         }
 

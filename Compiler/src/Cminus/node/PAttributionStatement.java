@@ -2,7 +2,7 @@
 
 package Cminus.node;
 
-public abstract class PSimpleExpression extends Node
+public abstract class PAttributionStatement extends Node
 {
     // Empty body
 }

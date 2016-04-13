@@ -93,6 +93,12 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseAMainDeclaration(AMainDeclaration node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAVariableDeclaration(AVariableDeclaration node)
     {
         defaultCase(node);
@@ -243,13 +249,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAExpressionStatement(AAExpressionStatement node)
+    public void caseAAAttributionStatement(AAAttributionStatement node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABExpressionStatement(ABExpressionStatement node)
+    public void caseABAttributionStatement(ABAttributionStatement node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseACAttributionStatement(ACAttributionStatement node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseADAttributionStatement(ADAttributionStatement node)
     {
         defaultCase(node);
     }
@@ -327,31 +345,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAExpression(AAExpression node)
+    public void caseAARelationalExpression(AARelationalExpression node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABExpression(ABExpression node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseACExpression(ACExpression node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAASimpleExpression(AASimpleExpression node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABSimpleExpression(ABSimpleExpression node)
+    public void caseABRelationalExpression(ABRelationalExpression node)
     {
         defaultCase(node);
     }
@@ -388,6 +388,30 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseAFRelationalOperator(AFRelationalOperator node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAInputFunction(AAInputFunction node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABInputFunction(ABInputFunction node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAAOutputFunction(AAOutputFunction node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseABOutputFunction(ABOutputFunction node)
     {
         defaultCase(node);
     }
@@ -538,6 +562,24 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTWhile(TWhile node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTMain(TMain node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTInput(TInput node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTOutput(TOutput node)
     {
         defaultCase(node);
     }

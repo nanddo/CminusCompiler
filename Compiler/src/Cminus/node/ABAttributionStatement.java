@@ -5,44 +5,49 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAExpression extends PExpression
+public final class ABAttributionStatement extends PAttributionStatement
 {
     private PVariable _variable_;
     private TAttribution _attribution_;
-    private PExp _exp_;
+    private TStringValue _stringValue_;
+    private TSemicolon _semicolon_;
 
-    public AAExpression()
+    public ABAttributionStatement()
     {
         // Constructor
     }
 
-    public AAExpression(
+    public ABAttributionStatement(
         @SuppressWarnings("hiding") PVariable _variable_,
         @SuppressWarnings("hiding") TAttribution _attribution_,
-        @SuppressWarnings("hiding") PExp _exp_)
+        @SuppressWarnings("hiding") TStringValue _stringValue_,
+        @SuppressWarnings("hiding") TSemicolon _semicolon_)
     {
         // Constructor
         setVariable(_variable_);
 
         setAttribution(_attribution_);
 
-        setExp(_exp_);
+        setStringValue(_stringValue_);
+
+        setSemicolon(_semicolon_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AAExpression(
+        return new ABAttributionStatement(
             cloneNode(this._variable_),
             cloneNode(this._attribution_),
-            cloneNode(this._exp_));
+            cloneNode(this._stringValue_),
+            cloneNode(this._semicolon_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAExpression(this);
+        ((Analysis) sw).caseABAttributionStatement(this);
     }
 
     public PVariable getVariable()
@@ -95,16 +100,16 @@ public final class AAExpression extends PExpression
         this._attribution_ = node;
     }
 
-    public PExp getExp()
+    public TStringValue getStringValue()
     {
-        return this._exp_;
+        return this._stringValue_;
     }
 
-    public void setExp(PExp node)
+    public void setStringValue(TStringValue node)
     {
-        if(this._exp_ != null)
+        if(this._stringValue_ != null)
         {
-            this._exp_.parent(null);
+            this._stringValue_.parent(null);
         }
 
         if(node != null)
@@ -117,7 +122,32 @@ public final class AAExpression extends PExpression
             node.parent(this);
         }
 
-        this._exp_ = node;
+        this._stringValue_ = node;
+    }
+
+    public TSemicolon getSemicolon()
+    {
+        return this._semicolon_;
+    }
+
+    public void setSemicolon(TSemicolon node)
+    {
+        if(this._semicolon_ != null)
+        {
+            this._semicolon_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._semicolon_ = node;
     }
 
     @Override
@@ -126,7 +156,8 @@ public final class AAExpression extends PExpression
         return ""
             + toString(this._variable_)
             + toString(this._attribution_)
-            + toString(this._exp_);
+            + toString(this._stringValue_)
+            + toString(this._semicolon_);
     }
 
     @Override
@@ -145,9 +176,15 @@ public final class AAExpression extends PExpression
             return;
         }
 
-        if(this._exp_ == child)
+        if(this._stringValue_ == child)
         {
-            this._exp_ = null;
+            this._stringValue_ = null;
+            return;
+        }
+
+        if(this._semicolon_ == child)
+        {
+            this._semicolon_ = null;
             return;
         }
 
@@ -170,9 +207,15 @@ public final class AAExpression extends PExpression
             return;
         }
 
-        if(this._exp_ == oldChild)
+        if(this._stringValue_ == oldChild)
         {
-            setExp((PExp) newChild);
+            setStringValue((TStringValue) newChild);
+            return;
+        }
+
+        if(this._semicolon_ == oldChild)
+        {
+            setSemicolon((TSemicolon) newChild);
             return;
         }
 

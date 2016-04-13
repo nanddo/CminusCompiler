@@ -5,66 +5,71 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AIterationStatementElse extends PIterationStatementElse
+public final class AAOutputFunction extends POutputFunction
 {
-    private TWhile _while_;
+    private TVoid _void_;
+    private TInput _input_;
     private TLeftPar _leftPar_;
-    private PRelationalExpression _relationalExpression_;
+    private TInt _int_;
+    private TId _id_;
     private TRightPar _rightPar_;
-    private PStatementWithElse _statementWithElse_;
 
-    public AIterationStatementElse()
+    public AAOutputFunction()
     {
         // Constructor
     }
 
-    public AIterationStatementElse(
-        @SuppressWarnings("hiding") TWhile _while_,
+    public AAOutputFunction(
+        @SuppressWarnings("hiding") TVoid _void_,
+        @SuppressWarnings("hiding") TInput _input_,
         @SuppressWarnings("hiding") TLeftPar _leftPar_,
-        @SuppressWarnings("hiding") PRelationalExpression _relationalExpression_,
-        @SuppressWarnings("hiding") TRightPar _rightPar_,
-        @SuppressWarnings("hiding") PStatementWithElse _statementWithElse_)
+        @SuppressWarnings("hiding") TInt _int_,
+        @SuppressWarnings("hiding") TId _id_,
+        @SuppressWarnings("hiding") TRightPar _rightPar_)
     {
         // Constructor
-        setWhile(_while_);
+        setVoid(_void_);
+
+        setInput(_input_);
 
         setLeftPar(_leftPar_);
 
-        setRelationalExpression(_relationalExpression_);
+        setInt(_int_);
+
+        setId(_id_);
 
         setRightPar(_rightPar_);
-
-        setStatementWithElse(_statementWithElse_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AIterationStatementElse(
-            cloneNode(this._while_),
+        return new AAOutputFunction(
+            cloneNode(this._void_),
+            cloneNode(this._input_),
             cloneNode(this._leftPar_),
-            cloneNode(this._relationalExpression_),
-            cloneNode(this._rightPar_),
-            cloneNode(this._statementWithElse_));
+            cloneNode(this._int_),
+            cloneNode(this._id_),
+            cloneNode(this._rightPar_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAIterationStatementElse(this);
+        ((Analysis) sw).caseAAOutputFunction(this);
     }
 
-    public TWhile getWhile()
+    public TVoid getVoid()
     {
-        return this._while_;
+        return this._void_;
     }
 
-    public void setWhile(TWhile node)
+    public void setVoid(TVoid node)
     {
-        if(this._while_ != null)
+        if(this._void_ != null)
         {
-            this._while_.parent(null);
+            this._void_.parent(null);
         }
 
         if(node != null)
@@ -77,7 +82,32 @@ public final class AIterationStatementElse extends PIterationStatementElse
             node.parent(this);
         }
 
-        this._while_ = node;
+        this._void_ = node;
+    }
+
+    public TInput getInput()
+    {
+        return this._input_;
+    }
+
+    public void setInput(TInput node)
+    {
+        if(this._input_ != null)
+        {
+            this._input_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._input_ = node;
     }
 
     public TLeftPar getLeftPar()
@@ -105,16 +135,16 @@ public final class AIterationStatementElse extends PIterationStatementElse
         this._leftPar_ = node;
     }
 
-    public PRelationalExpression getRelationalExpression()
+    public TInt getInt()
     {
-        return this._relationalExpression_;
+        return this._int_;
     }
 
-    public void setRelationalExpression(PRelationalExpression node)
+    public void setInt(TInt node)
     {
-        if(this._relationalExpression_ != null)
+        if(this._int_ != null)
         {
-            this._relationalExpression_.parent(null);
+            this._int_.parent(null);
         }
 
         if(node != null)
@@ -127,7 +157,32 @@ public final class AIterationStatementElse extends PIterationStatementElse
             node.parent(this);
         }
 
-        this._relationalExpression_ = node;
+        this._int_ = node;
+    }
+
+    public TId getId()
+    {
+        return this._id_;
+    }
+
+    public void setId(TId node)
+    {
+        if(this._id_ != null)
+        {
+            this._id_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._id_ = node;
     }
 
     public TRightPar getRightPar()
@@ -155,49 +210,31 @@ public final class AIterationStatementElse extends PIterationStatementElse
         this._rightPar_ = node;
     }
 
-    public PStatementWithElse getStatementWithElse()
-    {
-        return this._statementWithElse_;
-    }
-
-    public void setStatementWithElse(PStatementWithElse node)
-    {
-        if(this._statementWithElse_ != null)
-        {
-            this._statementWithElse_.parent(null);
-        }
-
-        if(node != null)
-        {
-            if(node.parent() != null)
-            {
-                node.parent().removeChild(node);
-            }
-
-            node.parent(this);
-        }
-
-        this._statementWithElse_ = node;
-    }
-
     @Override
     public String toString()
     {
         return ""
-            + toString(this._while_)
+            + toString(this._void_)
+            + toString(this._input_)
             + toString(this._leftPar_)
-            + toString(this._relationalExpression_)
-            + toString(this._rightPar_)
-            + toString(this._statementWithElse_);
+            + toString(this._int_)
+            + toString(this._id_)
+            + toString(this._rightPar_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._while_ == child)
+        if(this._void_ == child)
         {
-            this._while_ = null;
+            this._void_ = null;
+            return;
+        }
+
+        if(this._input_ == child)
+        {
+            this._input_ = null;
             return;
         }
 
@@ -207,21 +244,21 @@ public final class AIterationStatementElse extends PIterationStatementElse
             return;
         }
 
-        if(this._relationalExpression_ == child)
+        if(this._int_ == child)
         {
-            this._relationalExpression_ = null;
+            this._int_ = null;
+            return;
+        }
+
+        if(this._id_ == child)
+        {
+            this._id_ = null;
             return;
         }
 
         if(this._rightPar_ == child)
         {
             this._rightPar_ = null;
-            return;
-        }
-
-        if(this._statementWithElse_ == child)
-        {
-            this._statementWithElse_ = null;
             return;
         }
 
@@ -232,9 +269,15 @@ public final class AIterationStatementElse extends PIterationStatementElse
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._while_ == oldChild)
+        if(this._void_ == oldChild)
         {
-            setWhile((TWhile) newChild);
+            setVoid((TVoid) newChild);
+            return;
+        }
+
+        if(this._input_ == oldChild)
+        {
+            setInput((TInput) newChild);
             return;
         }
 
@@ -244,21 +287,21 @@ public final class AIterationStatementElse extends PIterationStatementElse
             return;
         }
 
-        if(this._relationalExpression_ == oldChild)
+        if(this._int_ == oldChild)
         {
-            setRelationalExpression((PRelationalExpression) newChild);
+            setInt((TInt) newChild);
+            return;
+        }
+
+        if(this._id_ == oldChild)
+        {
+            setId((TId) newChild);
             return;
         }
 
         if(this._rightPar_ == oldChild)
         {
             setRightPar((TRightPar) newChild);
-            return;
-        }
-
-        if(this._statementWithElse_ == oldChild)
-        {
-            setStatementWithElse((PStatementWithElse) newChild);
             return;
         }
 

@@ -43,7 +43,6 @@ public class NewParser extends Parser {
 	@Override
 	public Start parse() throws ParserException, LexerException, IOException {
 		try {
-			checkMainFunction();
 			return super.parse();
 		} catch (ParserException e) {
 			Token token = e.getToken();
@@ -52,93 +51,21 @@ public class NewParser extends Parser {
 				"Parser error at [" + 
 				token.getLine() +
 				"," +
-				token.getPos() + "].\n" +
-				"Token found: " + 
-				token.getText() +
-				"\n" +
-				"Expecting:" +
-				oldMessage.substring(oldMessage.indexOf(":") + 1).replace(", ", " or ").replace("'", "");
+				token.getPos() + "].\n";
+			if (e.getToken() instanceof EOF) {
+				message += 
+					"Missing main declaration like:\n" + 
+					"TYPE main (void) { }";
+			} else {
+				message +=
+					"Token found: " + 
+					token.getText() +
+					"\n" +
+					"Expecting:" +
+					oldMessage.substring(oldMessage.indexOf(":") + 1).replace(", ", " or ").replace("'", "");
+			}
 			throw new ParserException(e.getToken(), message);
 			
 		}
-	}
-	
-	private void checkMainFunction() throws LexerException, IOException, ParserException {
-		Token token = lexer.peek();
-		
-		if (this.stateMain == 0 && token instanceof TVoid) {
-			this.stateMain = 1;
-		}
-		
-		if (this.stateMain == 1) {
-			if (token instanceof TId && token.getText() == "main") {
-				this.stateMain = 2; 
-			} else if (!isIgnoredToken(token)) {
-				this.stateMain = 0;
-			}
-		}
-		
-		if (this.stateMain == 2) {
-			if (token instanceof TLeftPar) {
-				this.stateMain = 3;
-			} else if (!isIgnoredToken(token)) {
-				this.stateMain = 0;
-			}
-		}
-		
-		if (this.stateMain == 3) { 
-			if (token instanceof TVoid) {
-				this.stateMain = 4;
-			} else if (!isIgnoredToken(token)) {
-				this.stateMain = 0;
-			}
-		} 
-		
-		if (this.stateMain == 4) {
-			if (token instanceof TRightPar) {
-				this.stateMain = 5;
-			} else if (!isIgnoredToken(token)) {
-				this.stateMain = 0;
-			}
-		}
-		
-		if (this.stateMain == 5) {
-			if (token instanceof TLeftBrace) {
-				this.stateMain = 6;
-				this.count = 1;
-			} else if (!isIgnoredToken(token)) {
-				this.stateMain = 0;
-			}
-		}
-		
-		if (this.stateMain == 6) {
-			if (this.count == 0) {
-				if (!isIgnoredToken(token) && !(token instanceof EOF)) {
-					throw new ParserException(token, "There should not be any declaration after main function.");
-				}
-			} else if (token instanceof TLeftBrace) {
-				this.count++;
-			} else if (token instanceof TRightBrace) {
-				this.count--;
-			}
-		} 
-
-		if (token instanceof EOF) {
-			if ((this.count != 0) || (this.stateMain != 6)) {
-				throw new ParserException(token, "No main function call as \"void main(void){ ... }\" founded.");
-			}
-		}
-	}
-	
-	private boolean isIgnoredToken(Token token) {
-		if (!(token instanceof TSpace) && 
-				!(token instanceof TEndLine) &&
-				!(token instanceof TLineComment) &&
-				!(token instanceof TOpenComment) &&
-				!(token instanceof TCloseComment) &&
-				!(token instanceof TBlockComment)) {
-			return false;
-		}
-		return true;
 	}
 }

@@ -5,46 +5,46 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ACExpression extends PExpression
+public final class ADAttributionStatement extends PAttributionStatement
 {
-    private PSimpleExpression _simpleExpression_;
+    private TSemicolon _semicolon_;
 
-    public ACExpression()
+    public ADAttributionStatement()
     {
         // Constructor
     }
 
-    public ACExpression(
-        @SuppressWarnings("hiding") PSimpleExpression _simpleExpression_)
+    public ADAttributionStatement(
+        @SuppressWarnings("hiding") TSemicolon _semicolon_)
     {
         // Constructor
-        setSimpleExpression(_simpleExpression_);
+        setSemicolon(_semicolon_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ACExpression(
-            cloneNode(this._simpleExpression_));
+        return new ADAttributionStatement(
+            cloneNode(this._semicolon_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseACExpression(this);
+        ((Analysis) sw).caseADAttributionStatement(this);
     }
 
-    public PSimpleExpression getSimpleExpression()
+    public TSemicolon getSemicolon()
     {
-        return this._simpleExpression_;
+        return this._semicolon_;
     }
 
-    public void setSimpleExpression(PSimpleExpression node)
+    public void setSemicolon(TSemicolon node)
     {
-        if(this._simpleExpression_ != null)
+        if(this._semicolon_ != null)
         {
-            this._simpleExpression_.parent(null);
+            this._semicolon_.parent(null);
         }
 
         if(node != null)
@@ -57,23 +57,23 @@ public final class ACExpression extends PExpression
             node.parent(this);
         }
 
-        this._simpleExpression_ = node;
+        this._semicolon_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._simpleExpression_);
+            + toString(this._semicolon_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._simpleExpression_ == child)
+        if(this._semicolon_ == child)
         {
-            this._simpleExpression_ = null;
+            this._semicolon_ = null;
             return;
         }
 
@@ -84,9 +84,9 @@ public final class ACExpression extends PExpression
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._simpleExpression_ == oldChild)
+        if(this._semicolon_ == oldChild)
         {
-            setSimpleExpression((PSimpleExpression) newChild);
+            setSemicolon((TSemicolon) newChild);
             return;
         }
 

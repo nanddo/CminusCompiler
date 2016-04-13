@@ -5,26 +5,34 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AAFactor extends PFactor
+public final class ABInputFunction extends PInputFunction
 {
+    private TString _string_;
+    private TInput _input_;
     private TLeftPar _leftPar_;
-    private PExp _exp_;
+    private TVoid _void_;
     private TRightPar _rightPar_;
 
-    public AAFactor()
+    public ABInputFunction()
     {
         // Constructor
     }
 
-    public AAFactor(
+    public ABInputFunction(
+        @SuppressWarnings("hiding") TString _string_,
+        @SuppressWarnings("hiding") TInput _input_,
         @SuppressWarnings("hiding") TLeftPar _leftPar_,
-        @SuppressWarnings("hiding") PExp _exp_,
+        @SuppressWarnings("hiding") TVoid _void_,
         @SuppressWarnings("hiding") TRightPar _rightPar_)
     {
         // Constructor
+        setString(_string_);
+
+        setInput(_input_);
+
         setLeftPar(_leftPar_);
 
-        setExp(_exp_);
+        setVoid(_void_);
 
         setRightPar(_rightPar_);
 
@@ -33,16 +41,68 @@ public final class AAFactor extends PFactor
     @Override
     public Object clone()
     {
-        return new AAFactor(
+        return new ABInputFunction(
+            cloneNode(this._string_),
+            cloneNode(this._input_),
             cloneNode(this._leftPar_),
-            cloneNode(this._exp_),
+            cloneNode(this._void_),
             cloneNode(this._rightPar_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAAFactor(this);
+        ((Analysis) sw).caseABInputFunction(this);
+    }
+
+    public TString getString()
+    {
+        return this._string_;
+    }
+
+    public void setString(TString node)
+    {
+        if(this._string_ != null)
+        {
+            this._string_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._string_ = node;
+    }
+
+    public TInput getInput()
+    {
+        return this._input_;
+    }
+
+    public void setInput(TInput node)
+    {
+        if(this._input_ != null)
+        {
+            this._input_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._input_ = node;
     }
 
     public TLeftPar getLeftPar()
@@ -70,16 +130,16 @@ public final class AAFactor extends PFactor
         this._leftPar_ = node;
     }
 
-    public PExp getExp()
+    public TVoid getVoid()
     {
-        return this._exp_;
+        return this._void_;
     }
 
-    public void setExp(PExp node)
+    public void setVoid(TVoid node)
     {
-        if(this._exp_ != null)
+        if(this._void_ != null)
         {
-            this._exp_.parent(null);
+            this._void_.parent(null);
         }
 
         if(node != null)
@@ -92,7 +152,7 @@ public final class AAFactor extends PFactor
             node.parent(this);
         }
 
-        this._exp_ = node;
+        this._void_ = node;
     }
 
     public TRightPar getRightPar()
@@ -124,8 +184,10 @@ public final class AAFactor extends PFactor
     public String toString()
     {
         return ""
+            + toString(this._string_)
+            + toString(this._input_)
             + toString(this._leftPar_)
-            + toString(this._exp_)
+            + toString(this._void_)
             + toString(this._rightPar_);
     }
 
@@ -133,15 +195,27 @@ public final class AAFactor extends PFactor
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
+        if(this._string_ == child)
+        {
+            this._string_ = null;
+            return;
+        }
+
+        if(this._input_ == child)
+        {
+            this._input_ = null;
+            return;
+        }
+
         if(this._leftPar_ == child)
         {
             this._leftPar_ = null;
             return;
         }
 
-        if(this._exp_ == child)
+        if(this._void_ == child)
         {
-            this._exp_ = null;
+            this._void_ = null;
             return;
         }
 
@@ -158,15 +232,27 @@ public final class AAFactor extends PFactor
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
+        if(this._string_ == oldChild)
+        {
+            setString((TString) newChild);
+            return;
+        }
+
+        if(this._input_ == oldChild)
+        {
+            setInput((TInput) newChild);
+            return;
+        }
+
         if(this._leftPar_ == oldChild)
         {
             setLeftPar((TLeftPar) newChild);
             return;
         }
 
-        if(this._exp_ == oldChild)
+        if(this._void_ == oldChild)
         {
-            setExp((PExp) newChild);
+            setVoid((TVoid) newChild);
             return;
         }
 
