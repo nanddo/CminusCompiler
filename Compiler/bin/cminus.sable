@@ -76,91 +76,210 @@ Ignored Tokens
 
 	
 Productions
-	program                  = declaration+ main_declaration;
-	declaration              = {a} variable_declaration | {b} function_declaration;
-	
-	main_declaration         = type_specifier main left_par void right_par compound_statement;
-	
-	variable_declaration     = type_specifier id array_declaration* semicolon;
-	array_declaration        = left_bracket num right_bracket;
-	type_specifier           = {a} int | {b} string | {c} void;
+	program
+		= declaration* main_declaration
+		;
 
-	function_declaration     = type_specifier id left_par parameters right_par compound_statement;
-	parameters               = {a} parameters_list | {b} void;
-	parameters_list          = {a} parameters_list comma single_parameter | {b} single_parameter;
-	single_parameter         = type_specifier id array_parameter*;
-	array_parameter          = left_bracket right_bracket;
+	declaration //{-> declaration} 
+		= {var} [var]:variable_declaration   //{-> New var.declaration()}
+		| {func} [func]:function_declaration //{-> New func.declaration()}
+		;
+	main_declaration //{-> declaration} 
+		= {main} [type]:implicit_type_specifier [id]:main left_par void right_par [statement]:compound_statement //{-> New declaration.function(type.type, id, statement.statement)}
+		;
+
+	variable_declaration
+		= {variable} type_specifier id array_declaration* semicolon
+		;
+	array_declaration
+		= left_bracket num right_bracket
+		;
+	type_specifier //{-> type}
+		= {int} int 
+		| {string} string
+		;
+	implicit_type_specifier
+		= {type} type_specifier
+		| {void} void
+		;
+
+	function_declaration
+		= implicit_type_specifier id left_par parameters right_par compound_statement
+		;
+	parameters
+		= {list} parameters_list
+		| {void} void
+		;
+	parameters_list
+		= {list} parameters_list comma single_parameter
+		| {single} single_parameter
+		;
+	single_parameter
+		= type_specifier id array_parameter*
+		;
+	array_parameter
+		= left_bracket right_bracket
+		;
+
 
 	/* Based on p.69 of Appel - Modern Compiler Implementation in Java - 2nd Edition*/
-	statement_list           = {a} statement_list statement | {b} epsilon;
-	statement                = {a} attribution_statement | {b} compound_statement | {c} return_statement | {d} if_statement | {e} if_else_statement | {f} iteration_statement;
-	statement_with_else      = {a} attribution_statement | {b} compound_statement | {c} return_statement | {d} if_else_statement2 | {e} iteration_statement_else;
+	statement_list
+		= {a} statement_list statement 
+		| {b} epsilon
+		;
+	statement
+		= {a} attribution_statement
+		| {b} compound_statement
+		| {c} return_statement
+		| {d} if_statement
+		| {e} if_else_statement 
+		| {f} iteration_statement
+		;
+	statement_with_else
+		= {a} attribution_statement
+		| {b} compound_statement
+		| {c} return_statement
+		| {d} if_else_statement2
+		| {e} iteration_statement_else
+		;
 	
-	attribution_statement    = {a} variable attribution exp semicolon | {b} variable attribution string_value semicolon | {c} call semicolon | {d} semicolon;
+	attribution_statement 
+		= {a} variable attribution exp semicolon
+		| {b} variable attribution string_value semicolon
+		| {c} call semicolon
+		| {d} semicolon
+		;
 	
-	compound_statement       = left_brace local_declarations statement_list right_brace;
-	local_declarations       = {a} local_declarations variable_declaration | {b} epsilon;
+	compound_statement
+		= left_brace variable_declaration* statement_list right_brace
+		;
 	
-	if_statement             = if left_par relational_expression right_par statement;
-	if_else_statement        = if left_par relational_expression right_par [true]:statement_with_else else [false]:statement;
-	if_else_statement2       = if left_par relational_expression right_par [true]:statement_with_else else [false]:statement_with_else;
+	if_statement
+		= if left_par relational_expression right_par statement
+		;
+	if_else_statement
+		= if left_par relational_expression right_par [true]:statement_with_else else [false]:statement
+		;
+	if_else_statement2
+		= if left_par relational_expression right_par [true]:statement_with_else else [false]:statement_with_else
+		;
 	
-	iteration_statement      = while left_par relational_expression right_par statement;
-	iteration_statement_else = while left_par relational_expression right_par statement_with_else;
+	iteration_statement
+		= while left_par relational_expression right_par statement
+		;
+	iteration_statement_else
+		= while left_par relational_expression right_par statement_with_else
+		;
 	
-	return_statement         = {a} return semicolon | {b} return exp semicolon;
+	return_statement
+		= {a} return semicolon 
+		| {b} return exp semicolon
+		;
 	
-	variable                 = id array_expression*;
-	array_expression         = left_bracket exp right_bracket;
+	variable
+		= id array_expression*
+		;
+	array_expression
+		= left_bracket exp right_bracket
+		;
 	
-	relational_expression    = {a} [left]:exp relational_operator [right]:exp | {b} exp;
-	relational_operator      = {a} less_than | {b} less_equal | {c} great_than | {d} great_equal | {e} equal | {f} different;
+	relational_expression
+		= {less_than}   [left]:exp less_than   [right]:exp
+		| {less_equal}  [left]:exp less_equal  [right]:exp
+		| {great_than}  [left]:exp great_than  [right]:exp
+		| {great_equal} [left]:exp great_equal [right]:exp 
+		| {equal}       [left]:exp equal       [right]:exp 
+		| {different}   [left]:exp different   [right]:exp
+		;
 	
-	input_function           = {a} int input left_par void right_par | {b} string input left_par void right_par;
-	output_function          = {a} void input left_par int id right_par | {b} void input left_par string id right_par;
+	input_function
+		= type_specifier input left_par void right_par
+		;
+	output_function
+		= void output left_par type_specifier id right_par
+		;
 	
-	/* Exp, Term, Factor grammar */
-	exp                      = {a} exp add term | {b} term;
-	add                      = {a} plus | {b} minus;
-	term                     = {a} term mult factor | {b} factor;
-	mult                     = {a} asterisk | {b} slash;
-	factor                   = {a} left_par exp right_par | {b} variable | {c} call | {d} num;
-	
-	call                     = id left_par arguments right_par;
-	arguments_list           = {a} arguments_list comma exp | {b} exp;
-	arguments                = {a} arguments_list | {b} epsilon;
-	epsilon                  = ;
-	
-	
-	/*
-	exp             = {plus} exp plus term   {-> New exp.plus(exp, term.exp)}
-                    | {minus} exp minus term {-> New exp.minus(exp, term.exp)}
-                    | {term} term            {-> term.exp}
-                    ;
-							 
-	term   {-> exp} = {mult} term asterisk factor {-> New exp.mult(term.exp, factor.exp)}
-	                | {div} term slash factor     {-> New exp.div(term.exp, factor.exp)}
-	                | {factor} factor             {-> factor.exp}
-	                ;
-	                
-	factor {-> exp} = {exp} left_par exp right_par {-> exp}
-	                | {variable} variable          {-> variable}
-	                | {call} call                  {-> exp}
-	                | {num} num                    {-> New exp.num(num)}
-	                ;
+	exp 
+		= {plus}  exp plus term  //{-> New exp.plus(exp, term.exp)}
+		| {minus} exp minus term //{-> New exp.minus(exp, term.exp)}
+		| {term}  term           //{-> term.exp}
+		;
 
+	term //{-> exp}
+		= {mult}   term asterisk factor //{-> New exp.mult(term.exp, factor.exp)}
+		| {div}    term slash factor    //{-> New exp.div(term.exp, factor.exp)}
+		| {factor} factor               //{-> factor.exp}
+		;
+ 
+	factor //{-> exp} 
+		= {exp} left_par exp right_par //{-> exp}
+		| {var} variable               //{-> variable}
+		| {call} call                  //{-> exp}
+		| {num} num                    //{-> New exp.num(num)}
+		;
+	
+	call
+		= id left_par arguments right_par
+		;
+	arguments_list
+		= {a} arguments_list comma exp 
+		| {b} exp
+		;
+	arguments
+		= {a} arguments_list 
+		| {b} epsilon
+		;
+	epsilon
+		=
+		;
+
+
+
+/*
 Abstract Syntax Tree
 	program = declaration+;
 	
-	declaration = {variable} type id array*
+	declaration = {variable} type id
 				| {function} type id statement*
-				| {function} type id parameter* statement*
+				| {function_arg} type id arg* statement*
 				;
 
-	exp = {plus} [left]:exp [right]:exp
+	type = {int} int
+		 | {string} string
+		 | {void} void
+		 ;
+		 
+	arg = type id;
+	
+	id  = {single} id
+		| {array}  id array*;
+		 
+	array = {empty} 
+		  | {dim} num;
+	
+	statement = {attribution} [left]:id [right]:exp
+			  | {block} statement*
+			  | {declaration} dec
+			  | {call} id
+			  | {if} rel_exp statement*
+			  | {ifelse} rel_exp [right]:statement* [left]:statement*
+			  | {while} rel_exp statement*
+			  | {return} exp
+			  | {empty_return}
+			  ;
+	
+	rel_exp = {less_than}   [left]:exp [right]:exp
+			| {less_equal}  [left]:exp [right]:exp
+			| {great_than}  [left]:exp [right]:exp
+			| {great_equal} [left]:exp [right]:exp
+			| {equal}       [left]:exp [right]:exp
+			| {different}   [left]:exp [right]:exp
+			;
+	
+	exp = {plus}  [left]:exp [right]:exp
 		| {minus} [left]:exp [right]:exp
-		| {mult} [left]:exp [right]:exp
-		| {div} [left]:exp [right]:exp
-		| {num} num
+		| {mult}  [left]:exp [right]:exp
+		| {div}   [left]:exp [right]:exp
+		| {num}   num
 		;
-	*/
+*/

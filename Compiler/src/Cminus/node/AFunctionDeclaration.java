@@ -7,7 +7,7 @@ import Cminus.analysis.*;
 @SuppressWarnings("nls")
 public final class AFunctionDeclaration extends PFunctionDeclaration
 {
-    private PTypeSpecifier _typeSpecifier_;
+    private PImplicitTypeSpecifier _implicitTypeSpecifier_;
     private TId _id_;
     private TLeftPar _leftPar_;
     private PParameters _parameters_;
@@ -20,7 +20,7 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
     }
 
     public AFunctionDeclaration(
-        @SuppressWarnings("hiding") PTypeSpecifier _typeSpecifier_,
+        @SuppressWarnings("hiding") PImplicitTypeSpecifier _implicitTypeSpecifier_,
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TLeftPar _leftPar_,
         @SuppressWarnings("hiding") PParameters _parameters_,
@@ -28,7 +28,7 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
         @SuppressWarnings("hiding") PCompoundStatement _compoundStatement_)
     {
         // Constructor
-        setTypeSpecifier(_typeSpecifier_);
+        setImplicitTypeSpecifier(_implicitTypeSpecifier_);
 
         setId(_id_);
 
@@ -46,7 +46,7 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
     public Object clone()
     {
         return new AFunctionDeclaration(
-            cloneNode(this._typeSpecifier_),
+            cloneNode(this._implicitTypeSpecifier_),
             cloneNode(this._id_),
             cloneNode(this._leftPar_),
             cloneNode(this._parameters_),
@@ -60,16 +60,16 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
         ((Analysis) sw).caseAFunctionDeclaration(this);
     }
 
-    public PTypeSpecifier getTypeSpecifier()
+    public PImplicitTypeSpecifier getImplicitTypeSpecifier()
     {
-        return this._typeSpecifier_;
+        return this._implicitTypeSpecifier_;
     }
 
-    public void setTypeSpecifier(PTypeSpecifier node)
+    public void setImplicitTypeSpecifier(PImplicitTypeSpecifier node)
     {
-        if(this._typeSpecifier_ != null)
+        if(this._implicitTypeSpecifier_ != null)
         {
-            this._typeSpecifier_.parent(null);
+            this._implicitTypeSpecifier_.parent(null);
         }
 
         if(node != null)
@@ -82,7 +82,7 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
             node.parent(this);
         }
 
-        this._typeSpecifier_ = node;
+        this._implicitTypeSpecifier_ = node;
     }
 
     public TId getId()
@@ -214,7 +214,7 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
     public String toString()
     {
         return ""
-            + toString(this._typeSpecifier_)
+            + toString(this._implicitTypeSpecifier_)
             + toString(this._id_)
             + toString(this._leftPar_)
             + toString(this._parameters_)
@@ -226,9 +226,9 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._typeSpecifier_ == child)
+        if(this._implicitTypeSpecifier_ == child)
         {
-            this._typeSpecifier_ = null;
+            this._implicitTypeSpecifier_ = null;
             return;
         }
 
@@ -269,9 +269,9 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._typeSpecifier_ == oldChild)
+        if(this._implicitTypeSpecifier_ == oldChild)
         {
-            setTypeSpecifier((PTypeSpecifier) newChild);
+            setImplicitTypeSpecifier((PImplicitTypeSpecifier) newChild);
             return;
         }
 

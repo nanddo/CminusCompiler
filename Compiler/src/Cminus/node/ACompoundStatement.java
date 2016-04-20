@@ -2,13 +2,14 @@
 
 package Cminus.node;
 
+import java.util.*;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
 public final class ACompoundStatement extends PCompoundStatement
 {
     private TLeftBrace _leftBrace_;
-    private PLocalDeclarations _localDeclarations_;
+    private final LinkedList<PVariableDeclaration> _variableDeclaration_ = new LinkedList<PVariableDeclaration>();
     private PStatementList _statementList_;
     private TRightBrace _rightBrace_;
 
@@ -19,14 +20,14 @@ public final class ACompoundStatement extends PCompoundStatement
 
     public ACompoundStatement(
         @SuppressWarnings("hiding") TLeftBrace _leftBrace_,
-        @SuppressWarnings("hiding") PLocalDeclarations _localDeclarations_,
+        @SuppressWarnings("hiding") List<?> _variableDeclaration_,
         @SuppressWarnings("hiding") PStatementList _statementList_,
         @SuppressWarnings("hiding") TRightBrace _rightBrace_)
     {
         // Constructor
         setLeftBrace(_leftBrace_);
 
-        setLocalDeclarations(_localDeclarations_);
+        setVariableDeclaration(_variableDeclaration_);
 
         setStatementList(_statementList_);
 
@@ -39,7 +40,7 @@ public final class ACompoundStatement extends PCompoundStatement
     {
         return new ACompoundStatement(
             cloneNode(this._leftBrace_),
-            cloneNode(this._localDeclarations_),
+            cloneList(this._variableDeclaration_),
             cloneNode(this._statementList_),
             cloneNode(this._rightBrace_));
     }
@@ -75,29 +76,30 @@ public final class ACompoundStatement extends PCompoundStatement
         this._leftBrace_ = node;
     }
 
-    public PLocalDeclarations getLocalDeclarations()
+    public LinkedList<PVariableDeclaration> getVariableDeclaration()
     {
-        return this._localDeclarations_;
+        return this._variableDeclaration_;
     }
 
-    public void setLocalDeclarations(PLocalDeclarations node)
+    public void setVariableDeclaration(List<?> list)
     {
-        if(this._localDeclarations_ != null)
+        for(PVariableDeclaration e : this._variableDeclaration_)
         {
-            this._localDeclarations_.parent(null);
+            e.parent(null);
         }
+        this._variableDeclaration_.clear();
 
-        if(node != null)
+        for(Object obj_e : list)
         {
-            if(node.parent() != null)
+            PVariableDeclaration e = (PVariableDeclaration) obj_e;
+            if(e.parent() != null)
             {
-                node.parent().removeChild(node);
+                e.parent().removeChild(e);
             }
 
-            node.parent(this);
+            e.parent(this);
+            this._variableDeclaration_.add(e);
         }
-
-        this._localDeclarations_ = node;
     }
 
     public PStatementList getStatementList()
@@ -155,7 +157,7 @@ public final class ACompoundStatement extends PCompoundStatement
     {
         return ""
             + toString(this._leftBrace_)
-            + toString(this._localDeclarations_)
+            + toString(this._variableDeclaration_)
             + toString(this._statementList_)
             + toString(this._rightBrace_);
     }
@@ -170,9 +172,8 @@ public final class ACompoundStatement extends PCompoundStatement
             return;
         }
 
-        if(this._localDeclarations_ == child)
+        if(this._variableDeclaration_.remove(child))
         {
-            this._localDeclarations_ = null;
             return;
         }
 
@@ -201,10 +202,22 @@ public final class ACompoundStatement extends PCompoundStatement
             return;
         }
 
-        if(this._localDeclarations_ == oldChild)
+        for(ListIterator<PVariableDeclaration> i = this._variableDeclaration_.listIterator(); i.hasNext();)
         {
-            setLocalDeclarations((PLocalDeclarations) newChild);
-            return;
+            if(i.next() == oldChild)
+            {
+                if(newChild != null)
+                {
+                    i.set((PVariableDeclaration) newChild);
+                    newChild.parent(this);
+                    oldChild.parent(null);
+                    return;
+                }
+
+                i.remove();
+                oldChild.parent(null);
+                return;
+            }
         }
 
         if(this._statementList_ == oldChild)

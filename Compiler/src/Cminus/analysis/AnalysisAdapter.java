@@ -81,25 +81,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAADeclaration(AADeclaration node)
+    public void caseAVarDeclaration(AVarDeclaration node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABDeclaration(ABDeclaration node)
+    public void caseAFuncDeclaration(AFuncDeclaration node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAMainDeclaration(AMainDeclaration node)
+    public void caseAMainMainDeclaration(AMainMainDeclaration node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAVariableDeclaration(AVariableDeclaration node)
+    public void caseAVariableVariableDeclaration(AVariableVariableDeclaration node)
     {
         defaultCase(node);
     }
@@ -111,19 +111,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAATypeSpecifier(AATypeSpecifier node)
+    public void caseAIntTypeSpecifier(AIntTypeSpecifier node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABTypeSpecifier(ABTypeSpecifier node)
+    public void caseAStringTypeSpecifier(AStringTypeSpecifier node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseACTypeSpecifier(ACTypeSpecifier node)
+    public void caseATypeImplicitTypeSpecifier(ATypeImplicitTypeSpecifier node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAVoidImplicitTypeSpecifier(AVoidImplicitTypeSpecifier node)
     {
         defaultCase(node);
     }
@@ -135,25 +141,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAAParameters(AAParameters node)
+    public void caseAListParameters(AListParameters node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABParameters(ABParameters node)
+    public void caseAVoidParameters(AVoidParameters node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAParametersList(AAParametersList node)
+    public void caseAListParametersList(AListParametersList node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABParametersList(ABParametersList node)
+    public void caseASingleParametersList(ASingleParametersList node)
     {
         defaultCase(node);
     }
@@ -279,18 +285,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAALocalDeclarations(AALocalDeclarations node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABLocalDeclarations(ABLocalDeclarations node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseAIfStatement(AIfStatement node)
     {
         defaultCase(node);
@@ -345,145 +339,109 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAARelationalExpression(AARelationalExpression node)
+    public void caseALessThanRelationalExpression(ALessThanRelationalExpression node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABRelationalExpression(ABRelationalExpression node)
+    public void caseALessEqualRelationalExpression(ALessEqualRelationalExpression node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAARelationalOperator(AARelationalOperator node)
+    public void caseAGreatThanRelationalExpression(AGreatThanRelationalExpression node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABRelationalOperator(ABRelationalOperator node)
+    public void caseAGreatEqualRelationalExpression(AGreatEqualRelationalExpression node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseACRelationalOperator(ACRelationalOperator node)
+    public void caseAEqualRelationalExpression(AEqualRelationalExpression node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseADRelationalOperator(ADRelationalOperator node)
+    public void caseADifferentRelationalExpression(ADifferentRelationalExpression node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAERelationalOperator(AERelationalOperator node)
+    public void caseAInputFunction(AInputFunction node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAFRelationalOperator(AFRelationalOperator node)
+    public void caseAOutputFunction(AOutputFunction node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAInputFunction(AAInputFunction node)
+    public void caseAPlusExp(APlusExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABInputFunction(ABInputFunction node)
+    public void caseAMinusExp(AMinusExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAOutputFunction(AAOutputFunction node)
+    public void caseATermExp(ATermExp node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABOutputFunction(ABOutputFunction node)
+    public void caseAMultTerm(AMultTerm node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAExp(AAExp node)
+    public void caseADivTerm(ADivTerm node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABExp(ABExp node)
+    public void caseAFactorTerm(AFactorTerm node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAAAdd(AAAdd node)
+    public void caseAExpFactor(AExpFactor node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABAdd(ABAdd node)
+    public void caseAVarFactor(AVarFactor node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseAATerm(AATerm node)
+    public void caseACallFactor(ACallFactor node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseABTerm(ABTerm node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAMult(AAMult node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABMult(ABMult node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAAFactor(AAFactor node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseABFactor(ABFactor node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseACFactor(ACFactor node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseADFactor(ADFactor node)
+    public void caseANumFactor(ANumFactor node)
     {
         defaultCase(node);
     }
