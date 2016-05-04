@@ -77,48 +77,55 @@ Ignored Tokens
 	
 Productions
 	program
-		= declaration* main_declaration
+		= declaration* main_declaration //{-> New program([declaration.declaration, main_declaration.declaration])}
 		;
 
-	declaration //{-> declaration} 
-		= {var} [var]:variable_declaration   //{-> New var.declaration()}
-		| {func} [func]:function_declaration //{-> New func.declaration()}
+	declaration //{-> declaration}
+		= {var} [var]:variable_declaration   //{-> var.declaration}
+		| {func} [func]:function_declaration //{-> func.declaration}
 		;
 	main_declaration //{-> declaration} 
-		= {main} [type]:implicit_type_specifier [id]:main left_par void right_par [statement]:compound_statement //{-> New declaration.function(type.type, id, statement.statement)}
+		= {main} [type]:implicit_type_specifier [id]:main left_par void right_par [statement]:compound_statement //{-> New declaration.function(type.type, id, [statement.statement])}
 		;
 
-	variable_declaration
-		= {variable} type_specifier id array_declaration* semicolon
+	variable_declaration //{-> declaration}
+		= {variable} [type]:type_specifier [var]:var_dec semicolon //{-> New declaration.variable(type.type, var.id)}
 		;
-	array_declaration
-		= left_bracket num right_bracket
+	var_dec //{-> id}	
+		= {single} id                            //{-> New id.single(id)}
+		| {array}  id [array]:array_declaration+ //{-> New id.array(id, [array.array])}
 		;
+	array_declaration //{-> array}
+		= left_bracket num right_bracket //{-> New array.num(num)}
+		;
+
 	type_specifier //{-> type}
-		= {int} int 
-		| {string} string
+		= {int} int       //{-> New type.int(int)}
+		| {string} string //{-> New type.string(string)}
 		;
-	implicit_type_specifier
-		= {type} type_specifier
-		| {void} void
+	implicit_type_specifier //{-> type}
+		= {int} int       //{-> New type.int(int)}
+		| {string} string //{-> New type.string(string)}
+		| {void} void     //{-> New type.void(void)}
 		;
 
-	function_declaration
-		= implicit_type_specifier id left_par parameters right_par compound_statement
+	function_declaration //{-> declaration}
+		= {void} [type]:implicit_type_specifier id left_par void right_par [statement]:compound_statement //{-> New declaration.function(type.type, id, [statement.statement])}
+		| {args} [type]:implicit_type_specifier id left_par parameters right_par [statement]:compound_statement //{-> New declaration.function_arg(type.type, id, [parameters.arg], [statement.statement])}
 		;
-	parameters
-		= {list} parameters_list
-		| {void} void
+	parameters //{-> arg*}
+		= {list} [list]:parameters comma [single]:single_parameter //{-> [parameters.arg, single.arg]}
+		| {single} [single]:single_parameter                       //{-> [single.arg]}
 		;
-	parameters_list
-		= {list} parameters_list comma single_parameter
-		| {single} single_parameter
+	single_parameter //{-> arg}
+		= [type]:type_specifier [par]:par_dec //{-> New arg(type.type, par.id)}
 		;
-	single_parameter
-		= type_specifier id array_parameter*
+	par_dec //{-> id}
+		= {single} id                  //{-> New id.single(id)}
+		| {array}  id array_parameter+ //{-> New id.array(id, [array.array])}
 		;
-	array_parameter
-		= left_bracket right_bracket
+	array_parameter //{-> array}
+		= left_bracket right_bracket //{-> New array.empty()}
 		;
 
 
@@ -183,13 +190,13 @@ Productions
 		= left_bracket exp right_bracket
 		;
 	
-	relational_expression
-		= {less_than}   [left]:exp less_than   [right]:exp
-		| {less_equal}  [left]:exp less_equal  [right]:exp
-		| {great_than}  [left]:exp great_than  [right]:exp
-		| {great_equal} [left]:exp great_equal [right]:exp 
-		| {equal}       [left]:exp equal       [right]:exp 
-		| {different}   [left]:exp different   [right]:exp
+	relational_expression //{-> rel_exp}
+		= {less_than}   [left]:exp less_than   [right]:exp //{-> New rel_exp.less_than(left.exp, right.exp)}
+		| {less_equal}  [left]:exp less_equal  [right]:exp //{-> New rel_exp.less_equal(left.exp, right.exp)}
+		| {great_than}  [left]:exp great_than  [right]:exp //{-> New rel_exp.great_than(left.exp, right.exp)}
+		| {great_equal} [left]:exp great_equal [right]:exp //{-> New rel_exp.great_equal(left.exp, right.exp)}
+		| {equal}       [left]:exp equal       [right]:exp //{-> New rel_exp.equal(left.exp, right.exp)}
+		| {different}   [left]:exp different   [right]:exp //{-> New rel_exp.different(left.exp, right.exp)}
 		;
 	
 	input_function

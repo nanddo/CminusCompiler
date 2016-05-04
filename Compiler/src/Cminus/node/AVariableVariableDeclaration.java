@@ -5,39 +5,44 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class ASingleParameter extends PSingleParameter
+public final class AVariableVariableDeclaration extends PVariableDeclaration
 {
     private PTypeSpecifier _type_;
-    private PParDec _par_;
+    private PVarDec _var_;
+    private TSemicolon _semicolon_;
 
-    public ASingleParameter()
+    public AVariableVariableDeclaration()
     {
         // Constructor
     }
 
-    public ASingleParameter(
+    public AVariableVariableDeclaration(
         @SuppressWarnings("hiding") PTypeSpecifier _type_,
-        @SuppressWarnings("hiding") PParDec _par_)
+        @SuppressWarnings("hiding") PVarDec _var_,
+        @SuppressWarnings("hiding") TSemicolon _semicolon_)
     {
         // Constructor
         setType(_type_);
 
-        setPar(_par_);
+        setVar(_var_);
+
+        setSemicolon(_semicolon_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new ASingleParameter(
+        return new AVariableVariableDeclaration(
             cloneNode(this._type_),
-            cloneNode(this._par_));
+            cloneNode(this._var_),
+            cloneNode(this._semicolon_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseASingleParameter(this);
+        ((Analysis) sw).caseAVariableVariableDeclaration(this);
     }
 
     public PTypeSpecifier getType()
@@ -65,16 +70,16 @@ public final class ASingleParameter extends PSingleParameter
         this._type_ = node;
     }
 
-    public PParDec getPar()
+    public PVarDec getVar()
     {
-        return this._par_;
+        return this._var_;
     }
 
-    public void setPar(PParDec node)
+    public void setVar(PVarDec node)
     {
-        if(this._par_ != null)
+        if(this._var_ != null)
         {
-            this._par_.parent(null);
+            this._var_.parent(null);
         }
 
         if(node != null)
@@ -87,7 +92,32 @@ public final class ASingleParameter extends PSingleParameter
             node.parent(this);
         }
 
-        this._par_ = node;
+        this._var_ = node;
+    }
+
+    public TSemicolon getSemicolon()
+    {
+        return this._semicolon_;
+    }
+
+    public void setSemicolon(TSemicolon node)
+    {
+        if(this._semicolon_ != null)
+        {
+            this._semicolon_.parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.parent() != null)
+            {
+                node.parent().removeChild(node);
+            }
+
+            node.parent(this);
+        }
+
+        this._semicolon_ = node;
     }
 
     @Override
@@ -95,7 +125,8 @@ public final class ASingleParameter extends PSingleParameter
     {
         return ""
             + toString(this._type_)
-            + toString(this._par_);
+            + toString(this._var_)
+            + toString(this._semicolon_);
     }
 
     @Override
@@ -108,9 +139,15 @@ public final class ASingleParameter extends PSingleParameter
             return;
         }
 
-        if(this._par_ == child)
+        if(this._var_ == child)
         {
-            this._par_ = null;
+            this._var_ = null;
+            return;
+        }
+
+        if(this._semicolon_ == child)
+        {
+            this._semicolon_ = null;
             return;
         }
 
@@ -127,9 +164,15 @@ public final class ASingleParameter extends PSingleParameter
             return;
         }
 
-        if(this._par_ == oldChild)
+        if(this._var_ == oldChild)
         {
-            setPar((PParDec) newChild);
+            setVar((PVarDec) newChild);
+            return;
+        }
+
+        if(this._semicolon_ == oldChild)
+        {
+            setSemicolon((TSemicolon) newChild);
             return;
         }
 

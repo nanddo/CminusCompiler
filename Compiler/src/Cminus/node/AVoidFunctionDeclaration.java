@@ -5,71 +5,71 @@ package Cminus.node;
 import Cminus.analysis.*;
 
 @SuppressWarnings("nls")
-public final class AFunctionDeclaration extends PFunctionDeclaration
+public final class AVoidFunctionDeclaration extends PFunctionDeclaration
 {
-    private PImplicitTypeSpecifier _implicitTypeSpecifier_;
+    private PImplicitTypeSpecifier _type_;
     private TId _id_;
     private TLeftPar _leftPar_;
-    private PParameters _parameters_;
+    private TVoid _void_;
     private TRightPar _rightPar_;
-    private PCompoundStatement _compoundStatement_;
+    private PCompoundStatement _statement_;
 
-    public AFunctionDeclaration()
+    public AVoidFunctionDeclaration()
     {
         // Constructor
     }
 
-    public AFunctionDeclaration(
-        @SuppressWarnings("hiding") PImplicitTypeSpecifier _implicitTypeSpecifier_,
+    public AVoidFunctionDeclaration(
+        @SuppressWarnings("hiding") PImplicitTypeSpecifier _type_,
         @SuppressWarnings("hiding") TId _id_,
         @SuppressWarnings("hiding") TLeftPar _leftPar_,
-        @SuppressWarnings("hiding") PParameters _parameters_,
+        @SuppressWarnings("hiding") TVoid _void_,
         @SuppressWarnings("hiding") TRightPar _rightPar_,
-        @SuppressWarnings("hiding") PCompoundStatement _compoundStatement_)
+        @SuppressWarnings("hiding") PCompoundStatement _statement_)
     {
         // Constructor
-        setImplicitTypeSpecifier(_implicitTypeSpecifier_);
+        setType(_type_);
 
         setId(_id_);
 
         setLeftPar(_leftPar_);
 
-        setParameters(_parameters_);
+        setVoid(_void_);
 
         setRightPar(_rightPar_);
 
-        setCompoundStatement(_compoundStatement_);
+        setStatement(_statement_);
 
     }
 
     @Override
     public Object clone()
     {
-        return new AFunctionDeclaration(
-            cloneNode(this._implicitTypeSpecifier_),
+        return new AVoidFunctionDeclaration(
+            cloneNode(this._type_),
             cloneNode(this._id_),
             cloneNode(this._leftPar_),
-            cloneNode(this._parameters_),
+            cloneNode(this._void_),
             cloneNode(this._rightPar_),
-            cloneNode(this._compoundStatement_));
+            cloneNode(this._statement_));
     }
 
     @Override
     public void apply(Switch sw)
     {
-        ((Analysis) sw).caseAFunctionDeclaration(this);
+        ((Analysis) sw).caseAVoidFunctionDeclaration(this);
     }
 
-    public PImplicitTypeSpecifier getImplicitTypeSpecifier()
+    public PImplicitTypeSpecifier getType()
     {
-        return this._implicitTypeSpecifier_;
+        return this._type_;
     }
 
-    public void setImplicitTypeSpecifier(PImplicitTypeSpecifier node)
+    public void setType(PImplicitTypeSpecifier node)
     {
-        if(this._implicitTypeSpecifier_ != null)
+        if(this._type_ != null)
         {
-            this._implicitTypeSpecifier_.parent(null);
+            this._type_.parent(null);
         }
 
         if(node != null)
@@ -82,7 +82,7 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
             node.parent(this);
         }
 
-        this._implicitTypeSpecifier_ = node;
+        this._type_ = node;
     }
 
     public TId getId()
@@ -135,16 +135,16 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
         this._leftPar_ = node;
     }
 
-    public PParameters getParameters()
+    public TVoid getVoid()
     {
-        return this._parameters_;
+        return this._void_;
     }
 
-    public void setParameters(PParameters node)
+    public void setVoid(TVoid node)
     {
-        if(this._parameters_ != null)
+        if(this._void_ != null)
         {
-            this._parameters_.parent(null);
+            this._void_.parent(null);
         }
 
         if(node != null)
@@ -157,7 +157,7 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
             node.parent(this);
         }
 
-        this._parameters_ = node;
+        this._void_ = node;
     }
 
     public TRightPar getRightPar()
@@ -185,16 +185,16 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
         this._rightPar_ = node;
     }
 
-    public PCompoundStatement getCompoundStatement()
+    public PCompoundStatement getStatement()
     {
-        return this._compoundStatement_;
+        return this._statement_;
     }
 
-    public void setCompoundStatement(PCompoundStatement node)
+    public void setStatement(PCompoundStatement node)
     {
-        if(this._compoundStatement_ != null)
+        if(this._statement_ != null)
         {
-            this._compoundStatement_.parent(null);
+            this._statement_.parent(null);
         }
 
         if(node != null)
@@ -207,28 +207,28 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
             node.parent(this);
         }
 
-        this._compoundStatement_ = node;
+        this._statement_ = node;
     }
 
     @Override
     public String toString()
     {
         return ""
-            + toString(this._implicitTypeSpecifier_)
+            + toString(this._type_)
             + toString(this._id_)
             + toString(this._leftPar_)
-            + toString(this._parameters_)
+            + toString(this._void_)
             + toString(this._rightPar_)
-            + toString(this._compoundStatement_);
+            + toString(this._statement_);
     }
 
     @Override
     void removeChild(@SuppressWarnings("unused") Node child)
     {
         // Remove child
-        if(this._implicitTypeSpecifier_ == child)
+        if(this._type_ == child)
         {
-            this._implicitTypeSpecifier_ = null;
+            this._type_ = null;
             return;
         }
 
@@ -244,9 +244,9 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
             return;
         }
 
-        if(this._parameters_ == child)
+        if(this._void_ == child)
         {
-            this._parameters_ = null;
+            this._void_ = null;
             return;
         }
 
@@ -256,9 +256,9 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
             return;
         }
 
-        if(this._compoundStatement_ == child)
+        if(this._statement_ == child)
         {
-            this._compoundStatement_ = null;
+            this._statement_ = null;
             return;
         }
 
@@ -269,9 +269,9 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
     void replaceChild(@SuppressWarnings("unused") Node oldChild, @SuppressWarnings("unused") Node newChild)
     {
         // Replace child
-        if(this._implicitTypeSpecifier_ == oldChild)
+        if(this._type_ == oldChild)
         {
-            setImplicitTypeSpecifier((PImplicitTypeSpecifier) newChild);
+            setType((PImplicitTypeSpecifier) newChild);
             return;
         }
 
@@ -287,9 +287,9 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
             return;
         }
 
-        if(this._parameters_ == oldChild)
+        if(this._void_ == oldChild)
         {
-            setParameters((PParameters) newChild);
+            setVoid((TVoid) newChild);
             return;
         }
 
@@ -299,9 +299,9 @@ public final class AFunctionDeclaration extends PFunctionDeclaration
             return;
         }
 
-        if(this._compoundStatement_ == oldChild)
+        if(this._statement_ == oldChild)
         {
-            setCompoundStatement((PCompoundStatement) newChild);
+            setStatement((PCompoundStatement) newChild);
             return;
         }
 

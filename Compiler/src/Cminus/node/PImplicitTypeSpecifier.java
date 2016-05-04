@@ -2,7 +2,7 @@
 
 package Cminus.node;
 
-public abstract class PParametersList extends Node
+public abstract class PImplicitTypeSpecifier extends Node
 {
     // Empty body
 }

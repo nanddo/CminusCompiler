@@ -105,6 +105,18 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseASingleVarDec(ASingleVarDec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAArrayVarDec(AArrayVarDec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseAArrayDeclaration(AArrayDeclaration node)
     {
         defaultCase(node);
@@ -123,7 +135,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseATypeImplicitTypeSpecifier(ATypeImplicitTypeSpecifier node)
+    public void caseAIntImplicitTypeSpecifier(AIntImplicitTypeSpecifier node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAStringImplicitTypeSpecifier(AStringImplicitTypeSpecifier node)
     {
         defaultCase(node);
     }
@@ -135,7 +153,13 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAFunctionDeclaration(AFunctionDeclaration node)
+    public void caseAVoidFunctionDeclaration(AVoidFunctionDeclaration node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAArgsFunctionDeclaration(AArgsFunctionDeclaration node)
     {
         defaultCase(node);
     }
@@ -147,25 +171,25 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseAVoidParameters(AVoidParameters node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseAListParametersList(AListParametersList node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseASingleParametersList(ASingleParametersList node)
+    public void caseASingleParameters(ASingleParameters node)
     {
         defaultCase(node);
     }
 
     @Override
     public void caseASingleParameter(ASingleParameter node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseASingleParDec(ASingleParDec node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseAArrayParDec(AArrayParDec node)
     {
         defaultCase(node);
     }

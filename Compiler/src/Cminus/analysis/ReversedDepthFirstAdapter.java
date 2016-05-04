@@ -166,8 +166,54 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getSemicolon().apply(this);
         }
+        if(node.getVar() != null)
         {
-            List<PArrayDeclaration> copy = new ArrayList<PArrayDeclaration>(node.getArrayDeclaration());
+            node.getVar().apply(this);
+        }
+        if(node.getType() != null)
+        {
+            node.getType().apply(this);
+        }
+        outAVariableVariableDeclaration(node);
+    }
+
+    public void inASingleVarDec(ASingleVarDec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASingleVarDec(ASingleVarDec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASingleVarDec(ASingleVarDec node)
+    {
+        inASingleVarDec(node);
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        outASingleVarDec(node);
+    }
+
+    public void inAArrayVarDec(AArrayVarDec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAArrayVarDec(AArrayVarDec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAArrayVarDec(AArrayVarDec node)
+    {
+        inAArrayVarDec(node);
+        {
+            List<PArrayDeclaration> copy = new ArrayList<PArrayDeclaration>(node.getArray());
             Collections.reverse(copy);
             for(PArrayDeclaration e : copy)
             {
@@ -178,11 +224,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getId().apply(this);
         }
-        if(node.getTypeSpecifier() != null)
-        {
-            node.getTypeSpecifier().apply(this);
-        }
-        outAVariableVariableDeclaration(node);
+        outAArrayVarDec(node);
     }
 
     public void inAArrayDeclaration(AArrayDeclaration node)
@@ -256,25 +298,46 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAStringTypeSpecifier(node);
     }
 
-    public void inATypeImplicitTypeSpecifier(ATypeImplicitTypeSpecifier node)
+    public void inAIntImplicitTypeSpecifier(AIntImplicitTypeSpecifier node)
     {
         defaultIn(node);
     }
 
-    public void outATypeImplicitTypeSpecifier(ATypeImplicitTypeSpecifier node)
+    public void outAIntImplicitTypeSpecifier(AIntImplicitTypeSpecifier node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseATypeImplicitTypeSpecifier(ATypeImplicitTypeSpecifier node)
+    public void caseAIntImplicitTypeSpecifier(AIntImplicitTypeSpecifier node)
     {
-        inATypeImplicitTypeSpecifier(node);
-        if(node.getTypeSpecifier() != null)
+        inAIntImplicitTypeSpecifier(node);
+        if(node.getInt() != null)
         {
-            node.getTypeSpecifier().apply(this);
+            node.getInt().apply(this);
         }
-        outATypeImplicitTypeSpecifier(node);
+        outAIntImplicitTypeSpecifier(node);
+    }
+
+    public void inAStringImplicitTypeSpecifier(AStringImplicitTypeSpecifier node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAStringImplicitTypeSpecifier(AStringImplicitTypeSpecifier node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAStringImplicitTypeSpecifier(AStringImplicitTypeSpecifier node)
+    {
+        inAStringImplicitTypeSpecifier(node);
+        if(node.getString() != null)
+        {
+            node.getString().apply(this);
+        }
+        outAStringImplicitTypeSpecifier(node);
     }
 
     public void inAVoidImplicitTypeSpecifier(AVoidImplicitTypeSpecifier node)
@@ -298,23 +361,64 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         outAVoidImplicitTypeSpecifier(node);
     }
 
-    public void inAFunctionDeclaration(AFunctionDeclaration node)
+    public void inAVoidFunctionDeclaration(AVoidFunctionDeclaration node)
     {
         defaultIn(node);
     }
 
-    public void outAFunctionDeclaration(AFunctionDeclaration node)
+    public void outAVoidFunctionDeclaration(AVoidFunctionDeclaration node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseAFunctionDeclaration(AFunctionDeclaration node)
+    public void caseAVoidFunctionDeclaration(AVoidFunctionDeclaration node)
     {
-        inAFunctionDeclaration(node);
-        if(node.getCompoundStatement() != null)
+        inAVoidFunctionDeclaration(node);
+        if(node.getStatement() != null)
         {
-            node.getCompoundStatement().apply(this);
+            node.getStatement().apply(this);
+        }
+        if(node.getRightPar() != null)
+        {
+            node.getRightPar().apply(this);
+        }
+        if(node.getVoid() != null)
+        {
+            node.getVoid().apply(this);
+        }
+        if(node.getLeftPar() != null)
+        {
+            node.getLeftPar().apply(this);
+        }
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        if(node.getType() != null)
+        {
+            node.getType().apply(this);
+        }
+        outAVoidFunctionDeclaration(node);
+    }
+
+    public void inAArgsFunctionDeclaration(AArgsFunctionDeclaration node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAArgsFunctionDeclaration(AArgsFunctionDeclaration node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAArgsFunctionDeclaration(AArgsFunctionDeclaration node)
+    {
+        inAArgsFunctionDeclaration(node);
+        if(node.getStatement() != null)
+        {
+            node.getStatement().apply(this);
         }
         if(node.getRightPar() != null)
         {
@@ -332,11 +436,11 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getId().apply(this);
         }
-        if(node.getImplicitTypeSpecifier() != null)
+        if(node.getType() != null)
         {
-            node.getImplicitTypeSpecifier().apply(this);
+            node.getType().apply(this);
         }
-        outAFunctionDeclaration(node);
+        outAArgsFunctionDeclaration(node);
     }
 
     public void inAListParameters(AListParameters node)
@@ -353,82 +457,40 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseAListParameters(AListParameters node)
     {
         inAListParameters(node);
-        if(node.getParametersList() != null)
+        if(node.getSingle() != null)
         {
-            node.getParametersList().apply(this);
-        }
-        outAListParameters(node);
-    }
-
-    public void inAVoidParameters(AVoidParameters node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAVoidParameters(AVoidParameters node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAVoidParameters(AVoidParameters node)
-    {
-        inAVoidParameters(node);
-        if(node.getVoid() != null)
-        {
-            node.getVoid().apply(this);
-        }
-        outAVoidParameters(node);
-    }
-
-    public void inAListParametersList(AListParametersList node)
-    {
-        defaultIn(node);
-    }
-
-    public void outAListParametersList(AListParametersList node)
-    {
-        defaultOut(node);
-    }
-
-    @Override
-    public void caseAListParametersList(AListParametersList node)
-    {
-        inAListParametersList(node);
-        if(node.getSingleParameter() != null)
-        {
-            node.getSingleParameter().apply(this);
+            node.getSingle().apply(this);
         }
         if(node.getComma() != null)
         {
             node.getComma().apply(this);
         }
-        if(node.getParametersList() != null)
+        if(node.getList() != null)
         {
-            node.getParametersList().apply(this);
+            node.getList().apply(this);
         }
-        outAListParametersList(node);
+        outAListParameters(node);
     }
 
-    public void inASingleParametersList(ASingleParametersList node)
+    public void inASingleParameters(ASingleParameters node)
     {
         defaultIn(node);
     }
 
-    public void outASingleParametersList(ASingleParametersList node)
+    public void outASingleParameters(ASingleParameters node)
     {
         defaultOut(node);
     }
 
     @Override
-    public void caseASingleParametersList(ASingleParametersList node)
+    public void caseASingleParameters(ASingleParameters node)
     {
-        inASingleParametersList(node);
-        if(node.getSingleParameter() != null)
+        inASingleParameters(node);
+        if(node.getSingle() != null)
         {
-            node.getSingleParameter().apply(this);
+            node.getSingle().apply(this);
         }
-        outASingleParametersList(node);
+        outASingleParameters(node);
     }
 
     public void inASingleParameter(ASingleParameter node)
@@ -445,6 +507,52 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
     public void caseASingleParameter(ASingleParameter node)
     {
         inASingleParameter(node);
+        if(node.getPar() != null)
+        {
+            node.getPar().apply(this);
+        }
+        if(node.getType() != null)
+        {
+            node.getType().apply(this);
+        }
+        outASingleParameter(node);
+    }
+
+    public void inASingleParDec(ASingleParDec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outASingleParDec(ASingleParDec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseASingleParDec(ASingleParDec node)
+    {
+        inASingleParDec(node);
+        if(node.getId() != null)
+        {
+            node.getId().apply(this);
+        }
+        outASingleParDec(node);
+    }
+
+    public void inAArrayParDec(AArrayParDec node)
+    {
+        defaultIn(node);
+    }
+
+    public void outAArrayParDec(AArrayParDec node)
+    {
+        defaultOut(node);
+    }
+
+    @Override
+    public void caseAArrayParDec(AArrayParDec node)
+    {
+        inAArrayParDec(node);
         {
             List<PArrayParameter> copy = new ArrayList<PArrayParameter>(node.getArrayParameter());
             Collections.reverse(copy);
@@ -457,11 +565,7 @@ public class ReversedDepthFirstAdapter extends AnalysisAdapter
         {
             node.getId().apply(this);
         }
-        if(node.getTypeSpecifier() != null)
-        {
-            node.getTypeSpecifier().apply(this);
-        }
-        outASingleParameter(node);
+        outAArrayParDec(node);
     }
 
     public void inAArrayParameter(AArrayParameter node)
