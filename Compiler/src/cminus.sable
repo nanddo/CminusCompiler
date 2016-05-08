@@ -77,216 +77,224 @@ Ignored Tokens
 	
 Productions
 	program
-		= declaration* main_declaration //{-> New program([declaration.declaration, main_declaration.declaration])}
+		= declaration* main_declaration {-> New program([declaration.declaration, main_declaration.declaration])}
 		;
 
-	declaration //{-> declaration}
-		= {var} [var]:variable_declaration   //{-> var.declaration}
-		| {func} [func]:function_declaration //{-> func.declaration}
+	declaration {-> declaration}
+		= {var} [var]:variable_declaration   {-> var.declaration}
+		| {func} [func]:function_declaration {-> func.declaration}
 		;
-	main_declaration //{-> declaration} 
-		= {main} [type]:implicit_type_specifier [id]:main left_par void right_par [statement]:compound_statement //{-> New declaration.function(type.type, id, [statement.statement])}
-		;
-
-	variable_declaration //{-> declaration}
-		= {variable} [type]:type_specifier [var]:var_dec semicolon //{-> New declaration.variable(type.type, var.id)}
-		;
-	var_dec //{-> id}	
-		= {single} id                            //{-> New id.single(id)}
-		| {array}  id [array]:array_declaration+ //{-> New id.array(id, [array.array])}
-		;
-	array_declaration //{-> array}
-		= left_bracket num right_bracket //{-> New array.num(num)}
+	main_declaration {-> declaration} 
+		= {main} [type]:implicit_type_specifier [id]:main left_par void right_par [statement]:compound_statement {-> New declaration.function_main(type.type, id, [statement.statement])}
 		;
 
-	type_specifier //{-> type}
-		= {int} int       //{-> New type.int(int)}
-		| {string} string //{-> New type.string(string)}
+	variable_declaration {-> declaration}
+		= {variable} [type]:type_specifier [var]:var_dec semicolon {-> New declaration.variable(type.type, var.name)}
 		;
-	implicit_type_specifier //{-> type}
-		= {int} int       //{-> New type.int(int)}
-		| {string} string //{-> New type.string(string)}
-		| {void} void     //{-> New type.void(void)}
+	var_dec {-> name}	
+		= {single} id                            {-> New name.single(id)}
+		| {array}  id [array]:array_declaration+ {-> New name.array(id, [array.array])}
+		;
+	array_declaration {-> array}
+		= left_bracket num right_bracket {-> New array.dim(num)}
 		;
 
-	function_declaration //{-> declaration}
-		= {void} [type]:implicit_type_specifier id left_par void right_par [statement]:compound_statement //{-> New declaration.function(type.type, id, [statement.statement])}
-		| {args} [type]:implicit_type_specifier id left_par parameters right_par [statement]:compound_statement //{-> New declaration.function_arg(type.type, id, [parameters.arg], [statement.statement])}
+	type_specifier {-> type}
+		= {int} int       {-> New type.int(int)}
+		| {string} string {-> New type.string(string)}
 		;
-	parameters //{-> arg*}
-		= {list} [list]:parameters comma [single]:single_parameter //{-> [parameters.arg, single.arg]}
-		| {single} [single]:single_parameter                       //{-> [single.arg]}
+	implicit_type_specifier {-> type}
+		= {int} int       {-> New type.int(int)}
+		| {string} string {-> New type.string(string)}
+		| {void} void     {-> New type.void(void)}
 		;
-	single_parameter //{-> arg}
-		= [type]:type_specifier [par]:par_dec //{-> New arg(type.type, par.id)}
+
+	function_declaration {-> declaration}
+		= {void} [type]:implicit_type_specifier id left_par void right_par [statement]:compound_statement       {-> New declaration.function(type.type, id, [statement.statement])}
+		| {args} [type]:implicit_type_specifier id left_par parameters right_par [statement]:compound_statement {-> New declaration.function_arg(type.type, id, [parameters.arg], [statement.statement])}
 		;
-	par_dec //{-> id}
-		= {single} id                  //{-> New id.single(id)}
-		| {array}  id array_parameter+ //{-> New id.array(id, [array.array])}
+	parameters {-> arg*}
+		= {list} [list]:parameters comma [single]:single_parameter {-> [list.arg, single.arg]}
+		| {single} [single]:single_parameter                       {-> [single.arg]}
 		;
-	array_parameter //{-> array}
-		= left_bracket right_bracket //{-> New array.empty()}
+	single_parameter {-> arg}
+		= [type]:type_specifier [par]:par_dec {-> New arg(type.type, par.id)}
+		;
+	par_dec {-> id}
+		= {single} id                  {-> id}
+		| {array}  id array_parameter+ {-> id}
+		;
+	array_parameter {-> array}
+		= left_bracket right_bracket {-> New array.empty()}
 		;
 
 
 	/* Based on p.69 of Appel - Modern Compiler Implementation in Java - 2nd Edition*/
-	statement_list
-		= {a} statement_list statement 
-		| {b} epsilon
+	statement_list {-> statement*}
+		= {list} statement_list statement {-> [statement_list.statement, statement.statement]}
+		| {empty} epsilon                 {-> New statement.empty()}
 		;
-	statement
-		= {a} attribution_statement
-		| {b} compound_statement
-		| {c} return_statement
-		| {d} if_statement
-		| {e} if_else_statement 
-		| {f} iteration_statement
+	statement {-> statement}
+		= {attribution} attribution_statement {-> attribution_statement.statement}
+		| {compound_stm} compound_statement   {-> compound_statement.statement}
+		| {return} return_statement           {-> return_statement.statement}
+		| {if_stm} if_statement               {-> if_statement.statement}
+		| {if_else_stm} if_else_statement     {-> if_else_statement.statement}
+		| {iteration_stm} iteration_statement {-> iteration_statement.statement}
 		;
-	statement_with_else
-		= {a} attribution_statement
-		| {b} compound_statement
-		| {c} return_statement
-		| {d} if_else_statement2
-		| {e} iteration_statement_else
-		;
-	
-	attribution_statement 
-		= {a} variable attribution exp semicolon
-		| {b} variable attribution string_value semicolon
-		| {c} call semicolon
-		| {d} semicolon
+	statement_with_else {-> statement}
+		= {attribution} attribution_statement      {-> attribution_statement.statement}
+		| {compound_stm} compound_statement        {-> compound_statement.statement}
+		| {return} return_statement                {-> return_statement.statement}
+		| {if_else_stm} if_else_statement2         {-> if_else_statement2.statement}
+		| {iteration_stm} iteration_statement_else {-> iteration_statement_else.statement}
 		;
 	
-	compound_statement
-		= left_brace variable_declaration* statement_list right_brace
+	attribution_statement {-> statement}
+		= {int} variable attribution exp semicolon             {-> New statement.attribution(variable.name, exp)}
+		| {string} variable attribution string_value semicolon {-> New statement.attribution_string(variable.name, string_value)}
+		| {call} call semicolon                                {-> call.statement}
+		| {empty} semicolon                                    {-> New statement.empty()}
 		;
 	
-	if_statement
-		= if left_par relational_expression right_par statement
-		;
-	if_else_statement
-		= if left_par relational_expression right_par [true]:statement_with_else else [false]:statement
-		;
-	if_else_statement2
-		= if left_par relational_expression right_par [true]:statement_with_else else [false]:statement_with_else
+	compound_statement {-> statement}
+		= left_brace [var]:variable_declaration* [stm]:statement_list right_brace {-> New statement.block([var.declaration], [stm.statement])}
 		;
 	
-	iteration_statement
-		= while left_par relational_expression right_par statement
+	if_statement {-> statement}
+		= if left_par [rel_exp]:relational_expression right_par [stm]:statement {-> New statement.if(rel_exp.rel_exp, stm.statement)}
 		;
-	iteration_statement_else
-		= while left_par relational_expression right_par statement_with_else
+	if_else_statement {-> statement}
+		= if left_par [rel_exp]:relational_expression right_par [true]:statement_with_else else [false]:statement {-> New statement.ifelse(rel_exp.rel_exp, true.statement, false.statement)}
 		;
-	
-	return_statement
-		= {a} return semicolon 
-		| {b} return exp semicolon
+	if_else_statement2 {-> statement}
+		= if left_par [rel_exp]:relational_expression right_par [true]:statement_with_else else [false]:statement_with_else {-> New statement.ifelse(rel_exp.rel_exp, true.statement, false.statement)}
 		;
 	
-	variable
-		= id array_expression*
+	iteration_statement {-> statement}
+		= while left_par [rel_exp]:relational_expression right_par [stm]:statement {-> New statement.while(rel_exp.rel_exp, stm.statement)}
 		;
-	array_expression
-		= left_bracket exp right_bracket
-		;
-	
-	relational_expression //{-> rel_exp}
-		= {less_than}   [left]:exp less_than   [right]:exp //{-> New rel_exp.less_than(left.exp, right.exp)}
-		| {less_equal}  [left]:exp less_equal  [right]:exp //{-> New rel_exp.less_equal(left.exp, right.exp)}
-		| {great_than}  [left]:exp great_than  [right]:exp //{-> New rel_exp.great_than(left.exp, right.exp)}
-		| {great_equal} [left]:exp great_equal [right]:exp //{-> New rel_exp.great_equal(left.exp, right.exp)}
-		| {equal}       [left]:exp equal       [right]:exp //{-> New rel_exp.equal(left.exp, right.exp)}
-		| {different}   [left]:exp different   [right]:exp //{-> New rel_exp.different(left.exp, right.exp)}
+	iteration_statement_else {-> statement}
+		= while left_par [rel_exp]:relational_expression right_par [stm]:statement_with_else {-> New statement.while(rel_exp.rel_exp, stm.statement)}
 		;
 	
+	return_statement {-> statement}
+		= {empty} return semicolon      {-> New statement.empty()}
+		| {return} return exp semicolon {-> New statement.return(exp)}
+		;
+	
+	relational_expression {-> rel_exp}
+		= {less_than}   [left]:exp less_than   [right]:exp {-> New rel_exp.less_than(left.exp, right.exp)}
+		| {less_equal}  [left]:exp less_equal  [right]:exp {-> New rel_exp.less_equal(left.exp, right.exp)}
+		| {great_than}  [left]:exp great_than  [right]:exp {-> New rel_exp.great_than(left.exp, right.exp)}
+		| {great_equal} [left]:exp great_equal [right]:exp {-> New rel_exp.great_equal(left.exp, right.exp)}
+		| {equal}       [left]:exp equal       [right]:exp {-> New rel_exp.equal(left.exp, right.exp)}
+		| {different}   [left]:exp different   [right]:exp {-> New rel_exp.different(left.exp, right.exp)}
+		;
+	/*
 	input_function
 		= type_specifier input left_par void right_par
 		;
 	output_function
 		= void output left_par type_specifier id right_par
 		;
-	
-	exp 
-		= {plus}  exp plus term  //{-> New exp.plus(exp, term.exp)}
-		| {minus} exp minus term //{-> New exp.minus(exp, term.exp)}
-		| {term}  term           //{-> term.exp}
+	*/
+	exp {-> exp}
+		= {plus}  exp plus term  {-> New exp.plus(exp, term.exp)}
+		| {minus} exp minus term {-> New exp.minus(exp, term.exp)}
+		| {term}  term           {-> term.exp}
 		;
 
-	term //{-> exp}
-		= {mult}   term asterisk factor //{-> New exp.mult(term.exp, factor.exp)}
-		| {div}    term slash factor    //{-> New exp.div(term.exp, factor.exp)}
-		| {factor} factor               //{-> factor.exp}
+	term {-> exp}
+		= {mult}   term asterisk factor {-> New exp.mult(term.exp, factor.exp)}
+		| {div}    term slash factor    {-> New exp.div(term.exp, factor.exp)}
+		| {factor} factor               {-> factor.exp}
 		;
  
-	factor //{-> exp} 
-		= {exp} left_par exp right_par //{-> exp}
-		| {var} variable               //{-> variable}
-		| {call} call                  //{-> exp}
-		| {num} num                    //{-> New exp.num(num)}
+	factor {-> exp} 
+		= {exp} left_par exp right_par {-> exp}
+		| {var} variable               {-> variable.name}
+		//| {call} call                  {-> }
+		| {num} num                    {-> New exp.num(num)}
 		;
-	
-	call
-		= id left_par arguments right_par
+
+	variable {-> name}
+		= id array_expression* {-> New name.array(id, [array_expression.array])}
 		;
-	arguments_list
-		= {a} arguments_list comma exp 
-		| {b} exp
+	array_expression {-> array}
+		= left_bracket num right_bracket {-> New array.dim(num)}
 		;
-	arguments
-		= {a} arguments_list 
-		| {b} epsilon
+		
+	call {-> statement}
+		= id left_par arguments right_par {-> New statement.call(id, [arguments.arg])}
+		;
+	arguments {-> arg*}
+		= {list} arguments_list {-> [arguments_list.arg]}
+		| {empty} epsilon       {-> []}
+		;
+	arguments_list {-> arg*}
+		= {list} arguments_list comma exp {-> [arguments_list.arg, exp.id]}
+		| {single} exp                    {-> exp.id}
 		;
 	epsilon
 		=
 		;
 
-
-
-/*
+		
+		
+		
 Abstract Syntax Tree
 	program = declaration+;
 	
-	declaration = {variable} type id
-				| {function} type id statement*
-				| {function_arg} type id arg* statement*
-				;
+	declaration 
+		= {variable} type name
+		| {function} type id statement*
+		| {function_main} type main statement*
+		| {function_arg} type id arg* statement*
+		;
 
-	type = {int} int
-		 | {string} string
-		 | {void} void
-		 ;
+	type 
+		= {int} int
+		| {string} string
+		| {void} void
+		;
 		 
 	arg = type id;
 	
-	id  = {single} id
+	name
+		= {single} id
 		| {array}  id array*;
 		 
-	array = {empty} 
-		  | {dim} num;
+	array 
+		= {empty} 
+		| {dim} num;
 	
-	statement = {attribution} [left]:id [right]:exp
-			  | {block} statement*
-			  | {declaration} dec
-			  | {call} id
-			  | {if} rel_exp statement*
-			  | {ifelse} rel_exp [right]:statement* [left]:statement*
-			  | {while} rel_exp statement*
-			  | {return} exp
-			  | {empty_return}
-			  ;
+	statement 
+		= {attribution} name exp
+		| {attribution_string} name string_value
+		| {block} declaration* statement*
+		| {declaration} declaration
+		| {call} id arg*
+		| {if} rel_exp statement
+		| {ifelse} rel_exp [right]:statement [left]:statement
+		| {while} rel_exp statement
+		| {return} exp
+		| {empty}
+		;
 	
-	rel_exp = {less_than}   [left]:exp [right]:exp
-			| {less_equal}  [left]:exp [right]:exp
-			| {great_than}  [left]:exp [right]:exp
-			| {great_equal} [left]:exp [right]:exp
-			| {equal}       [left]:exp [right]:exp
-			| {different}   [left]:exp [right]:exp
-			;
+	rel_exp 
+		= {less_than}   [left]:exp [right]:exp
+		| {less_equal}  [left]:exp [right]:exp
+		| {great_than}  [left]:exp [right]:exp
+		| {great_equal} [left]:exp [right]:exp
+		| {equal}       [left]:exp [right]:exp
+		| {different}   [left]:exp [right]:exp
+		;
 	
 	exp = {plus}  [left]:exp [right]:exp
 		| {minus} [left]:exp [right]:exp
 		| {mult}  [left]:exp [right]:exp
 		| {div}   [left]:exp [right]:exp
 		| {num}   num
+		| {id}    id
 		;
-*/
