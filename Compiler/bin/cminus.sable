@@ -96,7 +96,7 @@ Productions
 		| {array}  id [array]:array_declaration+ {-> New name.array(id, [array.array])}
 		;
 	array_declaration {-> array}
-		= left_bracket num right_bracket {-> New array.dim(num)}
+		= left_bracket exp right_bracket {-> New array.dim(exp)}
 		;
 
 	type_specifier {-> type}
@@ -132,7 +132,7 @@ Productions
 	/* Based on p.69 of Appel - Modern Compiler Implementation in Java - 2nd Edition*/
 	statement_list {-> statement*}
 		= {list} statement_list statement {-> [statement_list.statement, statement.statement]}
-		| {empty} epsilon                 {-> New statement.empty()}
+		| {empty} epsilon                 {-> [New statement.empty()]}
 		;
 	statement {-> statement}
 		= {attribution} attribution_statement {-> attribution_statement.statement}
@@ -191,14 +191,14 @@ Productions
 		| {equal}       [left]:exp equal       [right]:exp {-> New rel_exp.equal(left.exp, right.exp)}
 		| {different}   [left]:exp different   [right]:exp {-> New rel_exp.different(left.exp, right.exp)}
 		;
-	/*
+
 	input_function
 		= type_specifier input left_par void right_par
 		;
 	output_function
 		= void output left_par type_specifier id right_par
 		;
-	*/
+
 	exp {-> exp}
 		= {plus}  exp plus term  {-> New exp.plus(exp, term.exp)}
 		| {minus} exp minus term {-> New exp.minus(exp, term.exp)}
@@ -213,7 +213,7 @@ Productions
  
 	factor {-> exp} 
 		= {exp} left_par exp right_par {-> exp}
-		| {var} variable               {-> variable.name}
+		| {var} variable               {-> New exp.name(variable.name)}
 		//| {call} call                  {-> }
 		| {num} num                    {-> New exp.num(num)}
 		;
@@ -222,19 +222,19 @@ Productions
 		= id array_expression* {-> New name.array(id, [array_expression.array])}
 		;
 	array_expression {-> array}
-		= left_bracket num right_bracket {-> New array.dim(num)}
+		= left_bracket exp right_bracket {-> New array.dim(exp)}
 		;
 		
 	call {-> statement}
-		= id left_par arguments right_par {-> New statement.call(id, [arguments.arg])}
+		= id left_par arguments right_par {-> New statement.call(id, [arguments.exp])}
 		;
-	arguments {-> arg*}
-		= {list} arguments_list {-> [arguments_list.arg]}
+	arguments {-> exp*}
+		= {list} arguments_list {-> [arguments_list.exp]}
 		| {empty} epsilon       {-> []}
 		;
-	arguments_list {-> arg*}
-		= {list} arguments_list comma id {-> [arguments_list.arg, id]}
-		| {single} exp                    {-> exp.id}
+	arguments_list {-> exp*}
+		= {list} arguments_list comma exp {-> [arguments_list.exp, exp]}
+		| {single} exp                    {-> [exp]}
 		;
 	epsilon
 		=
@@ -267,14 +267,14 @@ Abstract Syntax Tree
 		 
 	array 
 		= {empty} 
-		| {dim} num;
+		| {dim} exp;
 	
 	statement 
 		= {attribution} name exp
 		| {attribution_string} name string_value
 		| {block} declaration* statement*
 		| {declaration} declaration
-		| {call} id arg*
+		| {call} id exp*
 		| {if} rel_exp statement
 		| {ifelse} rel_exp [right]:statement [left]:statement
 		| {while} rel_exp statement
@@ -297,4 +297,5 @@ Abstract Syntax Tree
 		| {div}   [left]:exp [right]:exp
 		| {num}   num
 		| {id}    id
+		| {name}  name
 		;

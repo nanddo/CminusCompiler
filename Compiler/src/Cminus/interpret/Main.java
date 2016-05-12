@@ -33,6 +33,7 @@ public class Main {
 		} 
 	}
 	
+	@SuppressWarnings("unused")
 	private static void printTokens(NewLexer lexer) throws LexerException, IOException {
 		Token token;
 		do {
